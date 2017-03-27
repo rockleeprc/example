@@ -32,13 +32,13 @@ public class Person {
 			return new Person(this);
 		}
 
-		public Builder setHeight(double height) {
-			this.height = height;
+		public Builder setName(String name) {
+			this.name = name;
 			return this;
 		}
 
-		public Builder setWeight(double weight) {
-			this.weight = weight;
+		public Builder setAge(int age) {
+			this.age = age;
 			return this;
 		}
 	}
@@ -75,13 +75,4 @@ public class Person {
 		this.weight = weight;
 	}
 
-	@Override
-	public String toString() {
-		return "Person [name=" + name + ", age=" + age + ", height=" + height + ", weight=" + weight + "]";
-	}
-
-	public static void main(String[] args) {
-		Person p = new Person.Builder("Lee", 18).setHeight(183).setWeight(70).build();
-		System.out.println(p);
-	}
 }
