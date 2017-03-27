@@ -551,3 +551,7 @@ org.apache.maven.archetype.exception.UnknownArchetype: The desired archetype doe
 2017-03-27 17:59:29,103 [Worker-25] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2017-03-27 17:59:29,104 [Worker-25] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
 2017-03-27 17:59:29,105 [Worker-25] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory E:\git\example\effective\src\test\resources
+2017-03-27 18:12:57,108 [Worker-9] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
+2017-03-27 18:12:57,109 [Worker-9] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2017-03-27 18:12:57,110 [Worker-9] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
+2017-03-27 18:12:57,110 [Worker-9] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory E:\git\example\effective\src\test\resources

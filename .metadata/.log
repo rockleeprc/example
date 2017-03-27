@@ -824,3 +824,9 @@ Caused by: java.net.SocketTimeoutException
 
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2017-03-27 17:59:29.105
 !MESSAGE Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-03-27 18:12:57.108
+!MESSAGE Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2017-03-27 18:12:57.110
+!MESSAGE Using platform encoding (GBK actually) to copy filtered resources, i.e. build is platform dependent!
