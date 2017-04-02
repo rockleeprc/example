@@ -1,0 +1,19 @@
+# 数据库连接设置  
+  
+jdbc.driverClassName=com.mysql.jdbc.Driver  
+jdbc.url=jdbc:mysql://192.168.33.11:3306/spark
+#初始化连接  
+jdbc.username=admin  
+jdbc.password=admin  
+jdbc.initialPoolSize=20    
+jdbc.maxPoolSize=100    
+jdbc.minPoolSize=10    
+jdbc.maxIdleTime=600    
+jdbc.acquireIncrement=5    
+jdbc.maxStatements=50  
+jdbc.idleConnectionTestPeriod=60  
+
+jdbc.initPoolSize=5
+jdbc.maxPoolSize=10
+  
+

@@ -1,0 +1,6 @@
+# 数据库连接设置  
+  
+jdbc.driverClassName=com.mysql.jdbc.Driver  
+jdbc.url=jdbc\:mysql\://192.168.33.11\:3306/spark
+jdbc.username=root
+jdbc.password=1234

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 在spring配置 数据库连接池 -->
+	<!-- c3p0数据源配置方式 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close" p:driverClass="${jdbc.driverClassName}"
+		p:jdbcUrl="${jdbc.url}" p:user="${jdbc.username}" p:password="${jdbc.password}"
+		p:maxPoolSize="${jdbc.maxPoolSize}" p:minPoolSize="${jdbc.minPoolSize}"
+		p:initialPoolSize="${jdbc.initialPoolSize}" p:maxIdleTime="${jdbc.maxIdleTime}"
+		p:acquireIncrement="${jdbc.acquireIncrement}" p:maxStatements="${jdbc.maxStatements}"
+		p:idleConnectionTestPeriod="${jdbc.idleConnectionTestPeriod}" />
+
+	<!-- 在spring配置文件中，通过SessionFactoryBean 将hibernate配置加载进来 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<!-- 1、引入连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 2、引入hibernate属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+
+	</bean>
+
+	<!-- 使用声明式事务管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 事务属性设置 -->
+	<tx:advice id="transactionAdvice">
+		<tx:attributes>
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="save*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 配置事务管理切面 -->
+	<aop:config proxy-target-class="true">
+		<aop:advisor advice-ref="transactionAdvice"
+			pointcut="execution(* exam.service..*.*(..))" />
+	</aop:config>
+
+</beans>

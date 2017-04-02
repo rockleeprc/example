@@ -8,6 +8,7 @@ public class Person {
 	private double height;
 	private double weight;
 
+	// Ë½ÓÐ»¯
 	private Person(Builder builder) {
 		this.name = builder.name;
 		this.age = builder.age;

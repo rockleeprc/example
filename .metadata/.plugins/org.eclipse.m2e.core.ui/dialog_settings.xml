@@ -19,6 +19,18 @@
 			<item value="0.0.1-SNAPSHOT"/>
 		</list>
 	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+		<list key="ciManagementUrl">
+		</list>
+		<list key="ciManagementSystem">
+		</list>
+		<list key="issueManagementSystem">
+		</list>
+		<list key="issueManagementUrl">
+		</list>
+	</section>
 	<section name="MavenProjectWizardArchetypePage">
 		<item value="All Catalogs" key="catalog"/>
 		<list key="projectNameTemplate">
@@ -44,12 +56,16 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
+			<item value="exam.spring"/>
+			<item value="exam.effective"/>
 			<item value="example.effective"/>
 		</list>
 		<list key="groupId">
+			<item value="exam"/>
 			<item value="example"/>
 		</list>
 		<list key="artifactId">
+			<item value="spring"/>
 			<item value="effective"/>
 		</list>
 		<list key="projectNameTemplate">

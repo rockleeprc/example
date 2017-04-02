@@ -3,6 +3,9 @@
 <workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1490606922189_1" label="Java" name="Java">
 <item elementID="=effective" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSet>
+<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1491089866442_3" label="framework" name="framework">
+<item elementID="=spring" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSet>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1490606608308_0" label="Window Working Set" name="Aggregate for window 1490606608307"/>
 <mruList name="Java"/>
 </workingSetManager>
