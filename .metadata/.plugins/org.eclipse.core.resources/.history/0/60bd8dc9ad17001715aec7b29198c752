@@ -1,0 +1,5 @@
+package exam.aop.proxy.interfaces;
+
+public interface IBusiness {
+
+}

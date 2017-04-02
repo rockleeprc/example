@@ -1,0 +1,11 @@
+package exam.aop.proxy.interfaces.impl;
+
+import exam.aop.proxy.interfaces.IBusiness;
+
+public class BusinessImpl implements IBusiness {
+
+	public void doSomething() {
+		System.out.println("BusinessImpl.doSomething()");
+	}
+
+}

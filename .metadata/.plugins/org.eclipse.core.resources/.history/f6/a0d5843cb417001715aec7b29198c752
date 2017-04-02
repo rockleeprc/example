@@ -1,0 +1,7 @@
+package exam.aop.advice.before;
+
+import org.springframework.aop.MethodBeforeAdvice;
+
+public class BusindessBeforeAdvice implements MethodBeforeAdvice {
+
+}

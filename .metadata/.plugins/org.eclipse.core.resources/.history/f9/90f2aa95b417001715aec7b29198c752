@@ -1,0 +1,12 @@
+package exam.aop.advice;
+
+import org.junit.Test;
+
+public class AdviceAOP {
+
+	
+	@Test
+	public void beforeAdvice(){
+		
+	}
+}

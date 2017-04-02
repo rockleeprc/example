@@ -1,0 +1,5 @@
+package exam.aop.advice.before;
+
+public class BusindessBeforeAdvice {
+
+}

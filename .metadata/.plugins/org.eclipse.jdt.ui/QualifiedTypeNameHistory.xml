@@ -11,4 +11,14 @@
 <fullyQualifiedTypeName name="java.sql.Connection"/>
 <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
 <fullyQualifiedTypeName name="java.sql.Statement"/>
+<fullyQualifiedTypeName name="java.sql.Types"/>
+<fullyQualifiedTypeName name="org.springframework.jdbc.core.PreparedStatementSetter"/>
+<fullyQualifiedTypeName name="org.springframework.jdbc.core.PreparedStatementCreator"/>
+<fullyQualifiedTypeName name="org.springframework.jdbc.support.KeyHolder"/>
+<fullyQualifiedTypeName name="org.springframework.jdbc.support.GeneratedKeyHolder"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.springframework.jdbc.core.BatchPreparedStatementSetter"/>
+<fullyQualifiedTypeName name="org.springframework.jdbc.core.RowCallbackHandler"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="org.springframework.jdbc.core.RowMapper"/>
 </qualifiedTypeNameHistroy>

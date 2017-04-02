@@ -1,0 +1,54 @@
+package exam.aop.proxy;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
+import org.junit.Test;
+
+import exam.aop.proxy.interfaces.IBusiness;
+import exam.aop.proxy.interfaces.impl.BusinessImpl;
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
+
+public class BusinessProxy {
+
+	@Test
+	public void cglibProxy() {
+		final IBusiness target = new BusinessImpl();
+		Enhancer enhancer = new Enhancer();
+		enhancer.setSuperclass(target.getClass());
+		enhancer.setCallback(new MethodInterceptor() {
+			public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
+				System.out.println("cglib proxy starting...");
+				System.out.println(obj.getClass().getName() + "." + method.getName());
+				// 通过代理调用父类中的方法
+				Object result = proxy.invokeSuper(obj, args);
+				return result;
+			}
+		});
+
+	}
+
+	/**
+	 * jdk动态代理，针对接口
+	 */
+	@Test
+	public void jdkProxy() {
+		final IBusiness target = new BusinessImpl();
+		IBusiness proxy = (IBusiness) Proxy.newProxyInstance(target.getClass().getClassLoader(),
+				target.getClass().getInterfaces(), new InvocationHandler() {
+
+					public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+						System.out.println("jdk proxy starting...");
+						System.out.println(target.getClass().getName() + "." + method.getName());
+						// invoke 调用被代理的对象
+						Object obj = method.invoke(target, args);
+						return obj;
+					}
+				});
+		proxy.doSomething();
+	}
+
+}

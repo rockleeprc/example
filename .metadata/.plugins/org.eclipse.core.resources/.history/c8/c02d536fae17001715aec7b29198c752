@@ -1,0 +1,10 @@
+package exam.aop.proxy;
+
+import org.junit.Test;
+
+public class BusinessProxy {
+	@Test
+	public void jdkProxy(){
+		
+	}
+}

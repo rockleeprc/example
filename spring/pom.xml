@@ -10,7 +10,7 @@
 
 
 	<properties>
-		<spring.version>3.2.0.RELEASE</spring.version>
+		<spring.version>3.2.5.RELEASE</spring.version>
 		<struts2.version>2.3.15.2</struts2.version>
 		<hibernate.version>3.6.10.Final</hibernate.version>
 	</properties>
@@ -85,6 +85,12 @@
 			<artifactId>jsp-api</artifactId>
 			<version>2.0</version>
 			<scope>provided</scope>
+		</dependency>
+		<!-- cglib -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>3.2.4</version>
 		</dependency>
 		<!-- junit -->
 		<dependency>

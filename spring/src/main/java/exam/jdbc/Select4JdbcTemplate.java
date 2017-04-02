@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import exam.jdbc.entity.Person;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:applicationContext-jdbc.xml")
+@ContextConfiguration(locations = "classpath:jdbc/applicationContext-jdbc.xml")
 public class Select4JdbcTemplate {
 	@Autowired
 	private JdbcTemplate jdbc;

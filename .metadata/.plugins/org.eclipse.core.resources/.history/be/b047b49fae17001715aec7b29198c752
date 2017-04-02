@@ -1,0 +1,13 @@
+package exam.aop.proxy;
+
+import org.junit.Test;
+
+import exam.aop.proxy.interfaces.IBusiness;
+import exam.aop.proxy.interfaces.impl.BusinessImpl;
+
+public class BusinessProxy {
+	@Test
+	public void jdkProxy(){
+		IBusiness business = new BusinessImpl();
+	}
+}

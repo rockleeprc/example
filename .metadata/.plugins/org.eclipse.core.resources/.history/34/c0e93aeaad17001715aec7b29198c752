@@ -1,0 +1,10 @@
+package exam.aop.proxy.interfaces;
+
+public class BusinessImpl implements IBusiness {
+
+	public void doSomething() {
+		// TODO Auto-generated method stub
+
+	}
+
+}
