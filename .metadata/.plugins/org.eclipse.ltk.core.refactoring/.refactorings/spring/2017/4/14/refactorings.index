@@ -5,3 +5,7 @@
 1491107437289	Rename resource 'applicationContext.xml'
 1491107477889	Rename type 'JdbcTemp'
 1491107494943	Rename package 'exam.dao'
+1491119945533	Rename type 'TestJdbcTemplate'
+1491119971841	Rename type 'InsertJdbcTemplate'
+1491119981788	Copy compilation unit
+1491123347340	Rename type 'Select4JdbcTemplate2'

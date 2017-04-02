@@ -1,0 +1,71 @@
+package exam.jdbc;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Types;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.PreparedStatementSetter;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:applicationContext-jdbc.xml")
+public class TestJdbcTemplate {
+	@Autowired
+	private JdbcTemplate jdbc;
+	
+	
+	@Test
+	public void insertParams4InnerClassCallback() {
+		final String sql = "insert into person (name,age) values (?,?)";
+		Object[] params = new Object[] { "c", 32 };
+	
+		jdbc.update( new PreparedStatementCreator() {
+			
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, "e");
+				ps.setInt(2, 18);
+				return ps;
+			}
+		});
+	}
+
+	@Test
+	public void insertParams4Callback() {
+		String sql = "insert into person (name,age) values (?,?)";
+		Object[] params = new Object[] { "c", 32 };
+		/**
+		 * 使用PreparedStatementSetter借口回调方式设置参数<br/>
+		 * 参数从1开始
+		 */
+		jdbc.update(sql, new PreparedStatementSetter() {
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, "d");
+				ps.setInt(2, 18);
+			}
+		});
+	}
+
+	@Test
+	public void insert() {
+		String sql = "insert into person (name,age) values (?,?)";
+		Object[] params = new Object[] { "c", 32 };
+		// 声明参数类型保证类型安全
+		int[] types = new int[] { Types.VARCHAR, Types.INTEGER };
+		// 参数类型通过PreparedStatement推测
+		// jdbc.update(sql, params);
+		jdbc.update(sql, params, types);
+	}
+
+	@Test
+	public void test() {
+		System.out.println(jdbc);
+	}
+}

@@ -1,0 +1,50 @@
+package exam.jdbc;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.PreparedStatementSetter;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import exam.jdbc.entity.Person;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:applicationContext-jdbc.xml")
+public class Select4JdbcTemplate2 {
+	@Autowired
+	private JdbcTemplate jdbc;
+
+	
+
+	/**
+	 * insert语句
+	 */
+	@Test
+	public void insert() {
+		String sql = "insert into person (name,age) values (?,?)";
+		Object[] params = new Object[] { "c", 32 };
+	
+	}
+
+	/**
+	 * 测试环境
+	 */
+	@Test
+	public void test() {
+		System.out.println(jdbc);
+	}
+}
