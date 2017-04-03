@@ -1,0 +1,9 @@
+package e41;
+
+public class CollectionClassifier {
+
+	public static void main(String[] args) {
+
+	}
+
+}

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import exam.aop.advice.before.BusindessBeforeAdvice;
 import exam.aop.interfaces.IBusiness;
 import exam.aop.interfaces.impl.BusinessImpl;
@@ -22,7 +21,7 @@ public class AdviceAOP {
 	IBusiness afterReturningAdviceProxy;
 
 	/**
-	 * BeforeAdvice 基于配置
+	 * AfterReturningAdvice 基于配置
 	 */
 	@Test
 	public void afterReturningAdviceProxy4Conf() {

@@ -5,7 +5,6 @@
 <fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
 <fullyQualifiedTypeName name="c2.Person"/>
 <fullyQualifiedTypeName name="c2.Person.Builder"/>
-<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="org.junit.Test"/>
 <fullyQualifiedTypeName name="org.springframework.jdbc.core.JdbcTemplate"/>
 <fullyQualifiedTypeName name="java.sql.Connection"/>
@@ -21,4 +20,26 @@
 <fullyQualifiedTypeName name="org.springframework.jdbc.core.RowCallbackHandler"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="org.springframework.jdbc.core.RowMapper"/>
+<fullyQualifiedTypeName name="exam.aop.proxy.interfaces.impl.BusinessImpl"/>
+<fullyQualifiedTypeName name="exam.aop.proxy.BusinessProxy"/>
+<fullyQualifiedTypeName name="java.lang.reflect.Proxy"/>
+<fullyQualifiedTypeName name="java.lang.reflect.InvocationHandler"/>
+<fullyQualifiedTypeName name="org.springframework.cglib.proxy.MethodInterceptor"/>
+<fullyQualifiedTypeName name="org.springframework.cglib.proxy.Enhancer"/>
+<fullyQualifiedTypeName name="org.aopalliance.intercept.MethodInterceptor"/>
+<fullyQualifiedTypeName name="net.sf.cglib.proxy.Enhancer"/>
+<fullyQualifiedTypeName name="net.sf.cglib.proxy.MethodInterceptor"/>
+<fullyQualifiedTypeName name="exam.aop.proxy.interfaces.IBusiness"/>
+<fullyQualifiedTypeName name="org.springframework.aop.MethodBeforeAdvice"/>
+<fullyQualifiedTypeName name="exam.aop.interfaces.impl.BusinessImpl"/>
+<fullyQualifiedTypeName name="org.springframework.aop.BeforeAdvice"/>
+<fullyQualifiedTypeName name="exam.aop.advice.before.BusindessBeforeAdvice"/>
+<fullyQualifiedTypeName name="org.springframework.aop.framework.ProxyFactory"/>
+<fullyQualifiedTypeName name="org.junit.runner.RunWith"/>
+<fullyQualifiedTypeName name="org.springframework.test.context.junit4.SpringJUnit4ClassRunner"/>
+<fullyQualifiedTypeName name="org.springframework.test.context.ContextConfiguration"/>
+<fullyQualifiedTypeName name="exam.aop.interfaces.IBusiness"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Qualifier"/>
+<fullyQualifiedTypeName name="org.springframework.aop.AfterReturningAdvice"/>
 </qualifiedTypeNameHistroy>

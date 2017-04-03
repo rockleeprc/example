@@ -1,0 +1,15 @@
+package e41;
+
+import java.util.Set;
+
+public class CollectionClassifier {
+	
+	public static String classify(Set<?> s){
+		return "Set";
+	}
+
+	public static void main(String[] args) {
+
+	}
+
+}

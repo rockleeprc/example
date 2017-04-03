@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-<typeInfo handle="=spring/E:\/MavenRepository\/org\/springframework\/spring-jdbc\/3.2.0.RELEASE\/spring-jdbc-3.2.0.RELEASE.jar&lt;org.springframework.jdbc.core(JdbcTemplate.class[JdbcTemplate" modifiers="33" timestamp="1490065974926"/>
 <typeInfo handle="=spring/E:\/MavenRepository\/mysql\/mysql-connector-java\/5.1.38\/mysql-connector-java-5.1.38.jar&lt;com.mysql.jdbc(Driver.class[Driver" modifiers="33" timestamp="1486701933758"/>
+<typeInfo handle="=spring/E:\/MavenRepository\/org\/springframework\/spring-aop\/3.2.5.RELEASE\/spring-aop-3.2.5.RELEASE.jar&lt;org.springframework.aop.framework(ProxyFactoryBean.class[ProxyFactoryBean" modifiers="33" timestamp="1491143443469"/>
+<typeInfo handle="=spring/E:\/MavenRepository\/org\/springframework\/spring-aop\/3.2.5.RELEASE\/spring-aop-3.2.5.RELEASE.jar&lt;org.springframework.aop.framework(JdkDynamicAopProxy.class[JdkDynamicAopProxy" modifiers="48" timestamp="1491143443469"/>
+<typeInfo handle="=spring/E:\/MavenRepository\/org\/springframework\/spring-aop\/3.2.5.RELEASE\/spring-aop-3.2.5.RELEASE.jar&lt;org.springframework.aop.framework(AopProxy.class[AopProxy" modifiers="1537" timestamp="1491143443469"/>
 </typeInfoHistroy>
