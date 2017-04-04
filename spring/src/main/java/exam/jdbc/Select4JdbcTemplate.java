@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
@@ -22,10 +23,22 @@ public class Select4JdbcTemplate {
 	private JdbcTemplate jdbc;
 
 	/**
-	 * select 查询一条数据，返回对象
+	 * select 查询一条数据，通过BeanPropertyRowMapper返回entity
 	 */
 	@Test
-	public void select4Object() {
+	public void select4ObjectByBeanPropertyRowMapper() {
+		String sql = "select id,name,age from person where id=?";
+		Object[] params = new Object[] { 1 };
+		RowMapper<Person> rowMapper = new BeanPropertyRowMapper<Person>(Person.class);
+		Person person = jdbc.queryForObject(sql, rowMapper, params);
+		System.out.println(person);
+	}
+
+	/**
+	 * select 查询一条数据，通过RowMapper返回对象
+	 */
+	@Test
+	public void select4ObjectByRowMapper() {
 		String sql = "select id,name,age from person where id=?";
 		Object[] params = new Object[] { 2 };
 		Person per = jdbc.queryForObject(sql, params, new RowMapper<Person>() {
@@ -44,7 +57,7 @@ public class Select4JdbcTemplate {
 	 * RowCallbackHandler：结果集较大时，可以把业务逻辑放在processRow()中处理
 	 */
 	@Test
-	public void select4RowMapper() {
+	public void selectByRowMapper() {
 		String sql = "select id,name,age from person";
 		// Object[] params = new Object[] { 2 };
 		// jdbc.query(sql, params, new RowMapper<Person>() {});
@@ -57,6 +70,19 @@ public class Select4JdbcTemplate {
 		});
 		for (Person p : pers) {
 			System.out.println(p);
+		}
+	}
+
+	/**
+	 * select语句，返回多条数据数据
+	 */
+	@Test
+	public void selectAllByBeanPropertyRowMapper() {
+		String sql = "select id,name,age from person";
+		RowMapper<Person> rowMapper = new BeanPropertyRowMapper<Person>(Person.class);
+		List<Person> list = jdbc.query(sql, rowMapper);
+		for (Person per : list) {
+			System.out.println(per);
 		}
 	}
 
@@ -85,6 +111,16 @@ public class Select4JdbcTemplate {
 		for (Person p : pers) {
 			System.out.println(p);
 		}
+	}
+
+	/**
+	 * 查询单列值
+	 */
+	@Test
+	public void select4column() {
+		String sql = "select age from person where id=?";
+		Integer age = jdbc.queryForObject(sql, new Object[] { 1 }, Integer.class);
+		System.out.println(age);
 	}
 
 	/**

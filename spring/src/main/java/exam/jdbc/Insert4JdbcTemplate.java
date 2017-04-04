@@ -127,7 +127,7 @@ public class Insert4JdbcTemplate {
 		 * 参数类型通过PreparedStatement推测<br/>
 		 * jdbc.update(sql, params);
 		 */
-		jdbc.update(sql, params, types);
+		int update = jdbc.update(sql, params, types);
 	}
 
 	/**
