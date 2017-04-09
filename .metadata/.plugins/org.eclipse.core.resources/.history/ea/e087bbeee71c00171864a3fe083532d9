@@ -1,0 +1,14 @@
+package decorator.io;
+
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
+import org.junit.Test;
+
+public class IODecoratorTest {
+	@Test
+	public void toLowerCase(){
+		InputStream is = new LoweerCaseInputStream(new BufferedInputStream(new FileInputStream(new File("G:\\uppercase.txt"))))
+	}
+}

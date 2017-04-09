@@ -1,0 +1,16 @@
+package decorator.io;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+import org.junit.Test;
+
+public class IODecoratorTest {
+	@Test
+	public void toLowerCase() throws FileNotFoundException{
+		InputStream is = new LoweerCaseInputStream(new BufferedInputStream(new FileInputStream(new File("G:\\uppercase.txt"))));
+	}
+}

@@ -1,0 +1,12 @@
+package decorator.io;
+
+import java.io.FilterInputStream;
+import java.io.InputStream;
+
+public class LoweerCaseInputStream extends FilterInputStream {
+
+	protected LoweerCaseInputStream(InputStream in) {
+		super(in);
+	}
+
+}
