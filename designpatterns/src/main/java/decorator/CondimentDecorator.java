@@ -3,8 +3,8 @@ package decorator;
 /**
  * 调料的装饰者类
  *
- * Decorator组件
- *
+ * Decorator组件 ，共同实现的抽象类（接口）
+ * 
  * @author Rock.Lee
  *
  */

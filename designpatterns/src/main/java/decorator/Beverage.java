@@ -3,7 +3,7 @@ package decorator;
 /**
  * 饮料的抽象类
  * 
- * Component组件
+ * Component组件，由抽象类、接口定义
  * 
  * @author Rock.Lee
  *

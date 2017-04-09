@@ -5,7 +5,7 @@ import decorator.Beverage;
 /**
  * 混合搅拌咖啡
  * 
- * ConcreateComponent
+ * ConcreateComponent，扩展Component，被装饰的对象
  *
  * @author Rock.Lee
  *

@@ -6,7 +6,8 @@ import decorator.CondimentDecorator;
 /**
  * 奶泡
  * 
- * 具体装饰者组件
+ * ConcreteComponent组件，每一个ConcreteComponent都有一个Component实例引用
+ * 扩展Component功能
  *
  * @author Rock.Lee
  *
