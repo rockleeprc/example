@@ -13,15 +13,20 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
 	<bean id="businessImpl" class="exam.aop.interfaces.impl.BusinessImpl"></bean>
 
+	<!-- MethodInterceptor 环绕通知 -->
+	<bean id="businessAroundAdvice" class="exam.aop.advice.around.BusinessAroundAdvice"></bean>
+	<bean id="businessAroundAdviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean"
+		p:proxyInterfaces="exam.aop.interfaces.IBusiness" p:interceptorNames="businessAroundAdvice"
+		p:target-ref="businessImpl"></bean>
 
 	<!-- AfterReturningAdvice 后置通知 -->
-	<bean id="buinessAfterReturningAdvice" class="exam.aop.advice.before.BusindessAfterAdvice"></bean>
+	<bean id="buinessAfterReturningAdvice" class="exam.aop.advice.after.BusinessAfterAdvice"></bean>
 	<bean id="afterReturningAdviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean"
 		p:proxyInterfaces="exam.aop.interfaces.IBusiness" p:interceptorNames="buinessAfterReturningAdvice"
 		p:target-ref="businessImpl"></bean>
 
 	<!-- BeforeAdvice 前置通知 -->
-	<bean id="buinessBeforeAdvice" class="exam.aop.advice.before.BusindessBeforeAdvice"></bean>
+	<bean id="buinessBeforeAdvice" class="exam.aop.advice.before.BusinessBeforeAdvice"></bean>
 	<bean id="beforeAdviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean"
 		p:proxyInterfaces="exam.aop.interfaces.IBusiness" p:interceptorNames="buinessBeforeAdvice"
 		p:target-ref="businessImpl"></bean>

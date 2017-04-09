@@ -1,2 +1,4 @@
 1491716667324	Rename type 'BusinessProxy'
 1491717062097	Rename type 'AdviceAOP'
+1491724405668	Rename type 'BusindessAfterAdvice'
+1491724412265	Rename type 'BusindessBeforeAdvice'

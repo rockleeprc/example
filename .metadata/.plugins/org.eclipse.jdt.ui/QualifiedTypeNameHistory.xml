@@ -47,4 +47,15 @@
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.TreeSet"/>
 <fullyQualifiedTypeName name="org.springframework.jdbc.core.BeanPropertyRowMapper"/>
+<fullyQualifiedTypeName name="decorator.Beverage"/>
+<fullyQualifiedTypeName name="decorator.coffee.Espresso"/>
+<fullyQualifiedTypeName name="decorator.coffee.DarkRoast"/>
+<fullyQualifiedTypeName name="decorator.condiment.Mocha"/>
+<fullyQualifiedTypeName name="decorator.CondimentDecorator"/>
+<fullyQualifiedTypeName name="java.lang.Character"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+<fullyQualifiedTypeName name="decorator.io.LoweerCaseInputStream"/>
+<fullyQualifiedTypeName name="java.io.BufferedInputStream"/>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="java.io.File"/>
 </qualifiedTypeNameHistroy>

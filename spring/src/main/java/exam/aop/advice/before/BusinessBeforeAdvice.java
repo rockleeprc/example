@@ -4,11 +4,11 @@ import java.lang.reflect.Method;
 
 import org.springframework.aop.MethodBeforeAdvice;
 
-public class BusindessBeforeAdvice implements MethodBeforeAdvice {
+public class BusinessBeforeAdvice implements MethodBeforeAdvice {
 
 	public void before(Method method, Object[] args, Object target) throws Throwable {
 		System.out.println("BusindessBeforeAdvice starting...");
-		System.out.println(target.getClass().getName() + "." + method.getName());
+		System.out.println("目标类："+target.getClass().getName() + "." + method.getName());
 	}
 
 }

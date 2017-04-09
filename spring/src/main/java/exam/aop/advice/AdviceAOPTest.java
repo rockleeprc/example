@@ -8,13 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import exam.aop.advice.before.BusindessBeforeAdvice;
+import exam.aop.advice.before.BusinessBeforeAdvice;
 import exam.aop.interfaces.IBusiness;
 import exam.aop.interfaces.impl.BusinessImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:aop/applicationContext-advice.xml")
 public class AdviceAOPTest {
+	@Autowired
+	@Qualifier("businessAroundAdviceProxy")
+	IBusiness businessAroundAdviceProxy;
+
+	@Test
+	public void aroundAdviceProxy4Conf() {
+		businessAroundAdviceProxy.hello("Rock.lee");
+	}
 
 	@Autowired
 	@Qualifier("afterReturningAdviceProxy")
@@ -46,7 +54,7 @@ public class AdviceAOPTest {
 	@Test
 	public void beforeAdvice4Jdk() {
 		IBusiness bus = new BusinessImpl();
-		BeforeAdvice advice = new BusindessBeforeAdvice();
+		BeforeAdvice advice = new BusinessBeforeAdvice();
 		ProxyFactory pf = new ProxyFactory();
 		pf.setTarget(bus);
 		pf.addAdvice(advice);
@@ -63,7 +71,7 @@ public class AdviceAOPTest {
 	@Test
 	public void beforeAdvice4Cglib() {
 		IBusiness bus = new BusinessImpl();
-		BeforeAdvice advice = new BusindessBeforeAdvice();
+		BeforeAdvice advice = new BusinessBeforeAdvice();
 		ProxyFactory pf = new ProxyFactory();
 		pf.setTarget(bus);
 		pf.addAdvice(advice);
