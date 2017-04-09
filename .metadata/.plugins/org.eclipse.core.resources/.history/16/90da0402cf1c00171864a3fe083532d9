@@ -1,0 +1,13 @@
+package decorator.condiment;
+
+import decorator.Beverage;
+
+public class Mocha extends Beverage {
+
+	@Override
+	public double cost() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

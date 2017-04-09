@@ -1,0 +1,16 @@
+package decorator.condiment;
+
+import decorator.Beverage;
+
+/**
+ * 调料的装饰者类
+ *
+ * Decorator组件
+ *
+ * @author Rock.Lee
+ *
+ */
+public abstract class CondimentDecorator extends Beverage {
+
+	public abstract String getDescription();
+}

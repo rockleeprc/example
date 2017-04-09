@@ -1,0 +1,33 @@
+package decorator.condiment;
+
+import decorator.Beverage;
+
+/**
+ * 奶泡
+ * 
+ * 具体装饰者组件
+ *
+ * @author Rock.Lee
+ *
+ */
+public class Whip extends Beverage {
+
+	Beverage beverage;
+
+	public Whip(Beverage beverage) {
+		super();
+		this.beverage = beverage;
+
+	}
+
+	@Override
+	public String getDescription() {
+		return beverage.getDescription() + ".Mocha";
+	}
+
+	@Override
+	public double cost() {
+
+		return 0.20 + beverage.cost();
+	}
+}
