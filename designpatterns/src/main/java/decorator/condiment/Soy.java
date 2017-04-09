@@ -4,7 +4,7 @@ import decorator.Beverage;
 import decorator.CondimentDecorator;
 
 /**
- * 豆浆
+ * 豆浆 
  * 
  * 具体装饰者组件
  *
