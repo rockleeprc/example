@@ -17,4 +17,9 @@ public class BusinessImpl implements IBusiness {
 		System.out.println("hello " + name);
 	}
 
+	@Override
+	public void thr0ws() {
+		throw new RuntimeException("ThrowsAdvice");
+	}
+
 }

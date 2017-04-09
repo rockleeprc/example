@@ -7,4 +7,6 @@ public interface IBusiness {
 	public String doReturn();
 	
 	public void hello(String name);
+	
+	public void thr0ws();
 }
