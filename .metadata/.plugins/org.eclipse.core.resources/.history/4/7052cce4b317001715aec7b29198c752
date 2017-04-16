@@ -1,6 +1,0 @@
-package exam.aop.proxy.interfaces;
-
-public interface IBusiness {
-
-	public void doSomething();
-}

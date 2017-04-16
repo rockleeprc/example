@@ -6,12 +6,13 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="targetName" key="selection"/>
+		<item value="ProxyTarget" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="proxytarget"/>
 			<item value="targetName"/>
 			<item value="spring-jdbc"/>
 			<item value="mysql.jdbc.driver"/>
@@ -19,7 +20,6 @@
 			<item value="idleConnectionTestPeriod"/>
 			<item value="acquireIncrement"/>
 			<item value="dataSource"/>
-			<item value="dataSource-ref"/>
 		</list>
 		<list key="replacehistory">
 		</list>

@@ -8,6 +8,11 @@ import exam.aop.interfaces.IIntroductionMethod;
 public class BusinessIntroductionAdvice extends DelegatingIntroductionInterceptor implements IIntroductionMethod {
 
 	/**
+	 * BusinessIntroductionAdvice创建代理时，cglib创建代理的时间较长，
+	 * 保持BusinessIntroductionAdvice为singleton，类中变量用ThreadLocal实现，效率更高
+	 */
+
+	/**
 	 * 通过实现接口方法，在目标类织入新的方法
 	 */
 	@Override

@@ -27,6 +27,7 @@ public class AdviceAOPTest {
 	@Test
 	public void businessIntroductionAdviceProxy4Conf() {
 		businessIntroductionAdviceProxy.thisMethod();
+		System.out.println(businessIntroductionAdviceProxy.getClass());
 		// businessAroundAdviceProxy.hello("Lee");
 	}
 

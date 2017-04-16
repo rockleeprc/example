@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.Date"/>
-<fullyQualifiedTypeName name="c39.Period"/>
 <fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
 <fullyQualifiedTypeName name="c2.Person"/>
 <fullyQualifiedTypeName name="c2.Person.Builder"/>
@@ -37,7 +35,6 @@
 <fullyQualifiedTypeName name="org.junit.runner.RunWith"/>
 <fullyQualifiedTypeName name="org.springframework.test.context.junit4.SpringJUnit4ClassRunner"/>
 <fullyQualifiedTypeName name="org.springframework.test.context.ContextConfiguration"/>
-<fullyQualifiedTypeName name="exam.aop.interfaces.IBusiness"/>
 <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Qualifier"/>
 <fullyQualifiedTypeName name="org.springframework.aop.AfterReturningAdvice"/>
@@ -58,4 +55,9 @@
 <fullyQualifiedTypeName name="java.io.BufferedInputStream"/>
 <fullyQualifiedTypeName name="java.io.FileInputStream"/>
 <fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="exam.aop.interfaces.IBusiness"/>
+<fullyQualifiedTypeName name="java.lang.reflect.Method"/>
+<fullyQualifiedTypeName name="java.lang.RuntimeException"/>
+<fullyQualifiedTypeName name="exam.aop.interfaces.impl.IntroductionMethod"/>
+<fullyQualifiedTypeName name="java.lang.ThreadLocal"/>
 </qualifiedTypeNameHistroy>
