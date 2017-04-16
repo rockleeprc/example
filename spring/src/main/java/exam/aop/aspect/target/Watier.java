@@ -6,6 +6,6 @@ public class Watier {
 	}
 
 	public void serveTo(String name) {
-		System.out.println("wwaiter serv to " + name);
+		System.out.println("waiter serv to " + name);
 	}
 }

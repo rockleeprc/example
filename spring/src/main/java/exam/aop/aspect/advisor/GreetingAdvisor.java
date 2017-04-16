@@ -5,6 +5,12 @@ import org.springframework.aop.ClassFilter;
 import org.springframework.aop.support.StaticMethodMatcherPointcutAdvisor;
 import exam.aop.aspect.target.Watier;
 
+/**
+ * 
+ * 根据类的方法签名匹配
+ * @author Rock.Lee
+ *
+ */
 public class GreetingAdvisor extends StaticMethodMatcherPointcutAdvisor {
 
 	/**

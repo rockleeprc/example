@@ -12,6 +12,25 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	<context:component-scan base-package="exam.aop"></context:component-scan>
 
 
+	<bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"
+		p:beanNames="seller,watier,*er" p:interceptorNames="greetingAdvisor"
+		p:optimize="true">
+	</bean>
+
+	<!-- 根据正则匹配类中的方法 -->
+	<bean id="regexpAdvisor"
+		class="org.springframework.aop.support.RegexpMethodPointcutAdvisor"
+		p:advice-ref="greetingAdvice">
+		<property name="patterns">
+			<list>
+				<value>.*greet.*</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="waiterRegexp" class="org.springframework.aop.framework.ProxyFactoryBean"
+		p:interceptorNames="regexpAdvisor" p:proxyTargetClass="true"
+		p:target-ref="watier"></bean>
 
 	<!-- target对象 -->
 	<bean id="seller" class="exam.aop.aspect.target.Seller"></bean>
