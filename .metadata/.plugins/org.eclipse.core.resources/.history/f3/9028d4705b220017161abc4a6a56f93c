@@ -1,0 +1,26 @@
+package exam.aop.aspect;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import exam.aop.aspect.target.Seller;
+import exam.aop.aspect.target.Watier;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:aop/applicationContext-advisor.xml")
+public class AspecctAOPTest {
+
+	@Qualifier("")
+	@Autowired
+	Watier waiter;
+	Seller seller;
+
+	@Test
+	public void staticMethodAspect() {
+
+	}
+}

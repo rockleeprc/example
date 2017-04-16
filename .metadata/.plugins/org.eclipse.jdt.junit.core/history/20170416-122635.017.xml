@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AspecctAOPTest.staticMethodAspect" project="spring" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testcase name="staticMethodAspect" classname="exam.aop.aspect.AspecctAOPTest" time="0.719"/>
+</testrun>

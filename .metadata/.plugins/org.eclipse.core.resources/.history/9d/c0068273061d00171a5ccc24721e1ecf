@@ -1,0 +1,6 @@
+package exam.aop.interfaces.impl;
+
+public interface IntroductionMethod {
+
+	public void thisMethod();
+}

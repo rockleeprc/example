@@ -1,0 +1,7 @@
+package exam.aop.advisor.target;
+
+public class Watier {
+	public void greetTo(String name){
+		System.out.println("waiter greet to "+name);
+	}
+}

@@ -1,0 +1,5 @@
+package exam.aop.interfaces.impl;
+
+public interface IntroductionMethod {
+
+}

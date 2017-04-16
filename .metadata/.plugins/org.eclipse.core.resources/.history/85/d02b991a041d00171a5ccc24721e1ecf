@@ -1,0 +1,7 @@
+package exam.aop.advice.introduction;
+
+import org.springframework.aop.support.DelegatingIntroductionInterceptor;
+
+public class BusinessIntroductionAdvice extends DelegatingIntroductionInterceptor {
+
+}

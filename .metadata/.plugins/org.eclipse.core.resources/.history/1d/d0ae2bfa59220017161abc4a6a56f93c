@@ -1,0 +1,6 @@
+package exam.aop.aspect;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:aop/applicationContext-advice.xml")
+public class AdviceAOPTest {
+}

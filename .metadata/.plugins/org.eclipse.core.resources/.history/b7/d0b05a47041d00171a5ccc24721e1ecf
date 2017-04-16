@@ -1,0 +1,22 @@
+package exam.aop.advice.introduction;
+
+import org.aopalliance.intercept.MethodInvocation;
+import org.springframework.aop.support.DelegatingIntroductionInterceptor;
+
+import exam.aop.interfaces.impl.IntroductionMethod;
+
+public class BusinessIntroductionAdvice extends DelegatingIntroductionInterceptor implements IntroductionMethod{
+
+	@Override
+	public void thisMethod() {
+		System.out.println("引介通知的方法");
+	}
+	@Override
+	public Object invoke(MethodInvocation mi) throws Throwable {
+		// TODO Auto-generated method stub
+		return super.invoke(mi);
+	}
+
+
+
+}

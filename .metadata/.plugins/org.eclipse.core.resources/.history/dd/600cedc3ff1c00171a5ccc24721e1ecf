@@ -1,0 +1,13 @@
+package exam.aop.advice.thr0ws;
+
+import org.springframework.aop.ThrowsAdvice;
+
+/**
+ * ThrowsAdvice 没有定义任何方法，只是一个标识接口
+ *
+ * @author Rock.Lee
+ *
+ */
+public class BusinessThrowsAdvice implements ThrowsAdvice {
+
+}

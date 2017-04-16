@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<context:component-scan base-package="exam.aop"></context:component-scan>
+
+
+
+	<!-- target对象 -->
+	<bean id="seller" class="exam.aop.aspect.target.Seller"></bean>
+	<bean id="watier" class="exam.aop.aspect.target.Watier"></bean>
+	<!-- advice -->
+	<bean id="greetingAdvice" class="exam.aop.aspect.advice.GreetingBeforeAdvice"></bean>
+	<!-- 配置切面，注入前置通知 -->
+	<bean id="greetingAdvisor" class="exam.aop.aspect.advisor.GreetingAdvisor"
+		p:advice-ref="greetingAdvice"></bean>
+	<!-- 通过parent bean设置公共配置信息 -->
+	<bean id="parent" abstract="true"
+		class="org.springframework.aop.framework.ProxyFactoryBean"
+		p:interceptorNames="greetingAdvisor" p:proxyTargetClass="true"></bean>
+	<bean id="waiterProxy" parent="parent" p:target-ref="seller"></bean>
+	<bean id="sellerProxy" parent="parent" p:target-ref="watier"></bean>
+
+</beans>

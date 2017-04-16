@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<context:component-scan base-package="exam.aop"></context:component-scan>
+
+	<bean id="businessImpl" class="exam.aop.interfaces.impl.BusinessImpl"></bean>
+
+	<!-- IntroductionInterceptor 引介通知 -->
+	<bean id="businessIntroductionAdvice" class="exam.aop.advice.introduction.BusinessIntroductionAdvice"></bean>
+	<!-- 
+		target-ref：被代理的对象，也就是target对象
+		proxyInterfaces：被代理对象的接口，也就是target接口
+		interfaces：proxyInterfaces的别名
+		interceptorNames：advice、advisor实现类，具体的横切逻辑实现
+		proxyTargetClass：true=对target进行cglib代理，不使用jdk
+		optimize：true：强制使用cglib
+	 -->
+	<bean id="businessIntroductionAdviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean"
+		p:proxyInterfaces="exam.aop.interfaces.IIntroductionMethod" p:interceptorNames="businessIntroductionAdvice"
+		p:target-ref="businessImpl" p:proxyTargetClass="true"></bean>
+	
+	<!-- 
+		MethodInterceptor 异常通知 -->
+	<bean id="businessThrowsAdvice" class="exam.aop.advice.thr0ws.BusinessThrowsAdvice"></bean>
+	<bean id="businessThrowsAdviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean"
+		p:proxyInterfaces="exam.aop.interfaces.IBusiness" p:interceptorNames="businessThrowsAdvice"
+		p:target-ref="businessImpl"></bean>
+
+	<!-- MethodInterceptor 环绕通知 -->
+	<bean id="businessAroundAdvice" class="exam.aop.advice.around.BusinessAroundAdvice"></bean>
+	<bean id="businessAroundAdviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean"
+		p:proxyInterfaces="exam.aop.interfaces.IBusiness" p:interceptorNames="businessAroundAdvice"
+		p:target-ref="businessImpl" p:proxyTargetClass="true"></bean>
+
+	<!-- AfterReturningAdvice 后置通知 -->
+	<bean id="buinessAfterReturningAdvice" class="exam.aop.advice.after.BusinessAfterAdvice"></bean>
+	<bean id="afterReturningAdviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean"
+		p:proxyInterfaces="exam.aop.interfaces.IBusiness" p:interceptorNames="buinessAfterReturningAdvice"
+		p:target-ref="businessImpl"></bean>
+
+	<!-- BeforeAdvice 前置通知 -->
+	<bean id="buinessBeforeAdvice" class="exam.aop.advice.before.BusinessBeforeAdvice"></bean>
+	<bean id="beforeAdviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean"
+		p:proxyInterfaces="exam.aop.interfaces.IBusiness" p:interceptorNames="buinessBeforeAdvice"
+		p:target-ref="businessImpl"></bean>
+
+</beans>
