@@ -11,13 +11,21 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
 	<context:component-scan base-package="exam.aop"></context:component-scan>
 
+	<!-- DefaultAdvisorAutoProxyCreator 配置 -->	 
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"></bean>
 
+	<!-- 
+	p:interceptorNames="可以配置advice、advisor",配置advice拦截所有方法，配置advisor可以自定义Pointcut
+	继承PointcutAdvisor实现Pointcut规则
+	-->
+	<!-- BeanNameAutoProxyCreator 配置
 	<bean
 		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"
 		p:beanNames="seller,watier,*er" p:interceptorNames="greetingAdvisor"
 		p:optimize="true">
 	</bean>
-
+ 	-->
+ 	
 	<!-- advisor 根据正则匹配类中的方法 -->
 	<bean id="regexpAdvisor"
 		class="org.springframework.aop.support.RegexpMethodPointcutAdvisor"
@@ -25,26 +33,20 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 		<property name="patterns">
 			<list>
 				<value>.*greet.*</value>
+				<value>.*</value>
 			</list>
 		</property>
 	</bean>
-	<bean id="waiterRegexp" class="org.springframework.aop.framework.ProxyFactoryBean"
-		p:interceptorNames="regexpAdvisor" p:proxyTargetClass="true"
-		p:target-ref="watier"></bean>
 
 	<!-- target对象 -->
 	<bean id="seller" class="exam.aop.aspect.target.Seller"></bean>
 	<bean id="watier" class="exam.aop.aspect.target.Watier"></bean>
+	
 	<!-- advice -->
 	<bean id="greetingAdvice" class="exam.aop.aspect.advice.GreetingBeforeAdvice"></bean>
+	
 	<!-- 配置切面，注入前置通知 -->
 	<bean id="greetingAdvisor" class="exam.aop.aspect.advisor.GreetingAdvisor"
 		p:advice-ref="greetingAdvice"></bean>
-	<!-- 通过parent bean设置公共配置信息 -->
-	<bean id="parent" abstract="true"
-		class="org.springframework.aop.framework.ProxyFactoryBean"
-		p:interceptorNames="greetingAdvisor" p:proxyTargetClass="true"></bean>
-	<bean id="sellerProxy" parent="parent" p:target-ref="seller"></bean>
-	<bean id="waiterProxy" parent="parent" p:target-ref="watier"></bean>
 
 </beans>
