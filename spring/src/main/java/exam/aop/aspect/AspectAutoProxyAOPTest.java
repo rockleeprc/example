@@ -14,7 +14,7 @@ import exam.aop.aspect.target.Watier;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:aop/applicationContext-advisor-autoproxy.xml")
-public class AspecctAutoProxyAOPTest {
+public class AspectAutoProxyAOPTest {
 
 	@Qualifier("watier")
 	@Autowired

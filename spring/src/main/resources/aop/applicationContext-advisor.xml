@@ -11,13 +11,6 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
 	<context:component-scan base-package="exam.aop"></context:component-scan>
 
-
-	<bean
-		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"
-		p:beanNames="seller,watier,*er" p:interceptorNames="greetingAdvisor"
-		p:optimize="true">
-	</bean>
-
 	<!-- advisor 根据正则匹配类中的方法 -->
 	<bean id="regexpAdvisor"
 		class="org.springframework.aop.support.RegexpMethodPointcutAdvisor"

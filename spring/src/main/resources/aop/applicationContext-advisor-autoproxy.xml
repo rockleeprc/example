@@ -26,7 +26,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	</bean>
  	-->
  	
-	<!-- advisor 根据正则匹配类中的方法 -->
+	<!-- advisor 根据正则匹配类中的方法
 	<bean id="regexpAdvisor"
 		class="org.springframework.aop.support.RegexpMethodPointcutAdvisor"
 		p:advice-ref="greetingAdvice">
@@ -37,7 +37,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 			</list>
 		</property>
 	</bean>
-
+ 	-->
+ 	
 	<!-- target对象 -->
 	<bean id="seller" class="exam.aop.aspect.target.Seller"></bean>
 	<bean id="watier" class="exam.aop.aspect.target.Watier"></bean>
