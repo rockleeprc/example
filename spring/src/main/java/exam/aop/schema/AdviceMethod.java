@@ -1,26 +1,17 @@
-package exam.aop.aspectj.aspect;
+package exam.aop.schema;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 
-//标识该类为一个切面
-@Aspect
-public class GreetingBeforeAspect {
+public class AdviceMethod {
 
-	/**
-	 * @Before：advice类型
-	 * execution(* greetTo(..))：pointcut表达式
-	 * beoreGreeting()：advice横切逻辑
-	 */
-	@Before("execution(* greetTo(..))")
-	public void beforeGreeting() {
+	public void beforeAdvice() {
 		System.out.println("How are you。。。。");
 	}
 
-	@Around("execution(* serveTo(..))")
-	public void aroundServeTo(ProceedingJoinPoint pjp) throws Throwable {
+	public void aroundAdvice(ProceedingJoinPoint pjp) throws Throwable {
 		System.out.println("before around ");
 		System.out.println(pjp.getTarget().getClass());
 		Object[] args = pjp.getArgs();

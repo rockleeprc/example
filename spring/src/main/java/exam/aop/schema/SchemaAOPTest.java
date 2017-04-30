@@ -1,4 +1,4 @@
-package exam.aop.aspectj;
+package exam.aop.schema;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,33 +12,19 @@ import exam.aop.interfaces.IWaiter;
 import exam.aop.interfaces.impl.NaiveWaiter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:aop/applicationContext-aspectj.xml")
-public class AspecctJTest {
+@ContextConfiguration(locations = "classpath:aop/applicationContext-schema2.xml")
+public class SchemaAOPTest {
 
 	@Qualifier("waiter")
 	@Autowired
 	IWaiter waiter;
 
 	@Test
-	public void aspectJProxy4Config() {
+	public void schemaProxy4Config() {
 
 		// waiter.greetTo("jack");
-		 waiter.greetTo("tom");
+		waiter.greetTo("tom");
 		waiter.serveTo("marry");
 	}
 
-	/**
-	 * 硬编码实现AspectJ
-	 */
-	@Test
-	public void aspectJProxy() {
-		IWaiter waiter = new NaiveWaiter();
-		AspectJProxyFactory factory = new AspectJProxyFactory();
-		factory.setTarget(waiter);
-		factory.addAspect(GreetingBeforeAspect.class);
-		IWaiter proxy = factory.getProxy();
-		proxy.greetTo("jack");
-		proxy.greetTo("tom");
-		proxy.serveTo("marry");
-	}
 }

@@ -11,6 +11,6 @@ public class NaiveWaiter implements IWaiter {
 
 	@Override
 	public void serveTo(String name) {
-		System.out.println("waiter serv to " + name);
+		System.out.println("waiter serve to " + name);
 	}
 }
