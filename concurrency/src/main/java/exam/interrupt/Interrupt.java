@@ -1,4 +1,4 @@
-package exm.interrupt;
+package exam.interrupt;
 
 import org.junit.Test;
 
@@ -22,7 +22,7 @@ public class Interrupt {
 						System.out.println("InterruptedException");
 						/*
 						 * 在业务逻辑中，为保证数据一致性和完整性，不会立刻退出
-						 * Thread.sleep()由于中断异常，会清楚中断标记
+						 * Thread.sleep()由于中断异常，会清除中断标记
 						 * Thread.currentThread().isInterrupted()无法捕获这次中断，在catch
 						 * ()重新设置中断标记
 						 */
