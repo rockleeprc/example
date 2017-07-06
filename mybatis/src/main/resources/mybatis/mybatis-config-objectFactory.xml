@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<typeAliases>
+		<typeAlias alias="User" type="exam.mybatis.model.User" />
+	</typeAliases>
+
+	<!-- 自定义构建工程，用于查询结果返回 -->
+	<objectFactory type="exam.mybatis.objectfactory.MyObjectFactory">
+		<property name="name" value="MyObjectFactory" />
+	</objectFactory>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url"
+					value="jdbc:mysql://127.0.0.1:3306/test?characterEncoding=UTF-8" />
+				<property name="username" value="root" />
+				<property name="password" value="root" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="exam/mybatis/mapper/UserMapper.xml" />
+	</mappers>
+</configuration>
