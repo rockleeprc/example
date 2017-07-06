@@ -1,27 +1,27 @@
 package exam.mybatis.mapper;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
-import exam.mybatis.mapper.UserMapper;
+
 import exam.mybatis.model.User;
 import exam.mybatis.util.SqlSessionFactoryUtil;
 
-/**
- * 基本CRUD操作
- * 
- * @author mint
- *
- */
-public class UserCRUCTest {
-
+public class UserSelectTest {
 	@Test
-	public void selectById() {
+	public void paramsToBean() {
 		SqlSession session = null;
 		try {
 			session = SqlSessionFactoryUtil.openSqlSession();
 			UserMapper userMapper = session.getMapper(UserMapper.class);
-			User user = userMapper.selectByID(1);
-			System.out.println(user);
+			User u = new User();
+			u.setUserName("tom");
+			u.setUserAddress("SH");
+			List<User> list = userMapper.paramsToBean(u);
+			System.out.println(list);
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -33,16 +33,17 @@ public class UserCRUCTest {
 	}
 
 	@Test
-	public void delete() {
+	public void paramsToAnnotation() {
 		SqlSession session = null;
 		try {
 			session = SqlSessionFactoryUtil.openSqlSession();
 			UserMapper userMapper = session.getMapper(UserMapper.class);
-			userMapper.delete(5);
+			List<User> list = userMapper.paramsToAnnotation("java", "BJ");
+			System.out.println(list);
 			session.commit();
 		} catch (Exception e) {
-			session.rollback();
 			e.printStackTrace();
+			session.rollback();
 		} finally {
 			if (session != null)
 				session.close();
@@ -50,21 +51,20 @@ public class UserCRUCTest {
 	}
 
 	@Test
-	public void update() {
-		User u = new User();
-		u.setId(1);
-		u.setUserName("孙艺珍");
-		u.setUserAge("40");
-		u.setUserAddress("韩国");
+	public void paramsToMap() {
 		SqlSession session = null;
 		try {
 			session = SqlSessionFactoryUtil.openSqlSession();
 			UserMapper userMapper = session.getMapper(UserMapper.class);
-			userMapper.update(u);
+			Map<String, String> params = new HashMap<>();
+			params.put("userName", "liyan");
+			params.put("userAddress", "BJ");
+			List<User> list = userMapper.paramsToMap(params);
+			System.out.println(list);
 			session.commit();
 		} catch (Exception e) {
-			session.rollback();
 			e.printStackTrace();
+			session.rollback();
 		} finally {
 			if (session != null)
 				session.close();
@@ -72,18 +72,14 @@ public class UserCRUCTest {
 	}
 
 	@Test
-	public void insert() {
-		User u = new User();
-		u.setUserName("Hadoop");
-		u.setUserAge("14");
-		u.setUserAddress("TW");
+	public void countLikeName() {
 		SqlSession session = null;
 		try {
 			session = SqlSessionFactoryUtil.openSqlSession();
 			UserMapper userMapper = session.getMapper(UserMapper.class);
-			userMapper.insert(u);
+			int count = userMapper.countLikeName("孙");
+			System.out.println(count);
 			session.commit();
-			System.out.println("User.id:" + u.getId());
 		} catch (Exception e) {
 			session.rollback();
 			e.printStackTrace();
