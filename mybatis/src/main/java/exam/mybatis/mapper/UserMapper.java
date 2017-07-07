@@ -14,6 +14,8 @@ public interface UserMapper {
 
 	public int update(User user);
 
+	public int updateById(User user);
+
 	public int delete(int id);
 
 	public int countLikeName(String name);
@@ -23,4 +25,6 @@ public interface UserMapper {
 	public List<User> paramsToAnnotation(@Param("userName") String userName, @Param("userAddress") String userAddress);
 
 	public List<User> paramsToBean(User params);
+
+	public List<User> selectToWhere(User params);
 }

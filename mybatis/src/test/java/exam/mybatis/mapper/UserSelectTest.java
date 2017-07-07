@@ -12,6 +12,50 @@ import exam.mybatis.util.SqlSessionFactoryUtil;
 
 public class UserSelectTest {
 	@Test
+	public void updateById() {
+		SqlSession session = null;
+		try {
+			session = SqlSessionFactoryUtil.openSqlSession();
+			UserMapper userMapper = session.getMapper(UserMapper.class);
+			User u = new User();
+			u.setId(4);
+			u.setSex(1);
+//			u.setUserName("tom");
+			u.setUserAddress("NY");
+			int result = userMapper.updateById(u);
+			System.out.println(result);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+	
+	@Test
+	public void selectToWhwere() {
+		SqlSession session = null;
+		try {
+			session = SqlSessionFactoryUtil.openSqlSession();
+			UserMapper userMapper = session.getMapper(UserMapper.class);
+			User u = new User();
+			u.setUserName("tom");
+			u.setUserAddress("SH");
+			List<User> list = userMapper.selectToWhere(u);
+			System.out.println(list);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+	
+	@Test
 	public void paramsToBean() {
 		SqlSession session = null;
 		try {
