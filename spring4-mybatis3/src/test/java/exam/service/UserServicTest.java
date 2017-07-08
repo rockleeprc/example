@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import exam.pojo.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring/spring.xml", "classpath:spring/spring-mybatis.xml" })
+@ContextConfiguration(locations = {  "classpath:spring/applicationContext.xml" })
 public class UserServicTest {
 	@Autowired
 	IUserService userService;
