@@ -148,12 +148,6 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>${dbcp.version}</version>
 		</dependency>
-		<!-- cglib -->
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib</artifactId>
-			<version>${cglib.version}</version>
-		</dependency>
 		<!-- junit -->
 		<dependency>
 			<groupId>junit</groupId>
