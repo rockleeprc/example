@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  *
  */
 public class MyContainer1 {
-	volatile List<Object> list = new ArrayList<Object>();
+	List<Object> list = new ArrayList<Object>();
 
 	public void add(Object o) {
 		list.add(o);
@@ -33,7 +33,6 @@ public class MyContainer1 {
 					try {
 						TimeUnit.SECONDS.sleep(1);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}

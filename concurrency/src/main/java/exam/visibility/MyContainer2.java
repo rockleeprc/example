@@ -5,14 +5,17 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * volatile list 线程间可见，但t1、t2没有同步， 
- * t2 break时并不准确，t2 while(true)浪费资源
+ * volatile list 线程间可见
+ * 
+ * t1、t2没有同步， 
+ * t2 break时并不准确，
+ * t2 while(true)浪费资源
  * 
  * @author mint
  *
  */
 public class MyContainer2 {
-	List<Object> list = new ArrayList<Object>();
+	volatile List<Object> list = new ArrayList<Object>();
 
 	public void add(Object o) {
 		list.add(o);
@@ -34,7 +37,6 @@ public class MyContainer2 {
 					try {
 						TimeUnit.SECONDS.sleep(1);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}

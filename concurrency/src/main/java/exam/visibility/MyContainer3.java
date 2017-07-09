@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 增加同步，所以用wait/notify
+ * 增加同步，确保size==5时准确退出
  * 
+ * wait/notify必须获取锁后才能使用
  * wait会释放锁
  * notify不会释放锁
  * 
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  *
  */
 public class MyContainer3 {
-	List<Object> list = new ArrayList<Object>();
+	volatile List<Object> list = new ArrayList<Object>();
 
 	public void add(Object o) {
 		list.add(o);
@@ -27,7 +28,7 @@ public class MyContainer3 {
 	public static void main(String[] args) {
 		MyContainer3 container = new MyContainer3();
 		final Object lock = new Object();
-
+		//先启动t2线程,让t2处于等待状态
 		new Thread(new Runnable() {
 
 			@Override
@@ -36,6 +37,7 @@ public class MyContainer3 {
 				synchronized (lock) {
 					if (container.size() != 5) {
 						try {
+							//wait后立即释放锁
 							lock.wait();
 							System.out.println("t2 wait");
 						} catch (InterruptedException e) {

@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  *
  */
 public class MyContainer5 {
-	List<Object> list = new ArrayList<Object>();
+	volatile List<Object> list = new ArrayList<Object>();
 
 	public void add(Object o) {
 		list.add(o);
@@ -32,6 +32,7 @@ public class MyContainer5 {
 			public void run() {
 				if (container.size() != 5) {
 					try {
+						System.out.println("t2 wait");
 						count.await();
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
@@ -51,6 +52,7 @@ public class MyContainer5 {
 					container.add(new Object());
 					System.out.println("add:" + i);
 					if (container.size() == 5) {
+						System.out.println("t1 countDown");
 						count.countDown();
 					}
 					try {

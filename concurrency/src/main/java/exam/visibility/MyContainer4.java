@@ -34,8 +34,8 @@ public class MyContainer4 {
 					if (container.size() != 5) {
 						try {
 							// 1 t1释放锁
-							lock.wait();
 							System.out.println("t2 wait");
+							lock.wait();
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -58,10 +58,11 @@ public class MyContainer4 {
 						System.out.println("add:" + i);
 						if (container.size() == 5) {
 							// 2 t1不释放锁
-							lock.notify();
 							System.out.println("t1 notify");
+							lock.notify();
 							try {
 								// 3 为了让t1释放锁
+								System.out.println("t1 wait");
 								lock.wait();
 							} catch (InterruptedException e) {
 								e.printStackTrace();
