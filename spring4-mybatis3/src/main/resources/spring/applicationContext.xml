@@ -16,6 +16,7 @@
 	<!-- 引入dbconfig.properties属性文件 -->
 	<context:property-placeholder
 		location="classpath:properties/dbconfig.properties" />
+		
 	<!-- 自动扫描(自动注入)，扫描exam.service这个包以及它的子包的所有使用@Service注解标注的类 -->
 	<context:component-scan base-package="exam.service"
 		use-default-filters="true">
