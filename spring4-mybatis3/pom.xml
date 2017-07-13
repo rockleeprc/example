@@ -25,14 +25,14 @@
 		<mysql.version>5.1.42</mysql.version>
 		<dbcp.version>1.2.2</dbcp.version>
 		<c3p0.version>0.9.1.2</c3p0.version>
-		<!-- servlet -->
+		<!-- servlet/jsp, -->
 		<servlet.version>2.5</servlet.version>
 		<jsp.version>2.0</jsp.version>
 		<jstl.version>1.2</jstl.version>
 		<druid.version>1.0.12</druid.version>
 		<!-- log -->
 		<slf4j.version>1.7.2</slf4j.version>
-		<log4j.version>2.4</log4j.version>
+		<log4j.version>2.8.2</log4j.version>
 		<logging.version>1.2</logging.version>
 		<!-- other -->
 		<jackson.version>2.9.0.pr4</jackson.version>
@@ -108,68 +108,53 @@
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
-			<version>2.8.2</version>
+			<version>${log4j.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>2.8.2</version>
+			<version>${log4j.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-taglib</artifactId>
-			<version>2.8.2</version>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-web</artifactId>
+			<version>${log4j.version}</version>
 		</dependency>
 		<!--SLF4J Bridge -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>2.8.2</version>
+			<version>${log4j.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<!-- Apache Commons Logging Bridge -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-jcl</artifactId>
-			<version>2.8.2</version>
+			<version>${log4j.version}</version>
 			<scope>runtime</scope>
-		</dependency>
-		<!-- Log4j 1.x API Bridge -->
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-1.2-api</artifactId>
-			<version>2.8.2</version>
-			<scope>runtime</scope>
-		</dependency>
-
+		</dependency> 
 		<!-- slf4j -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.slf4j</groupId> -->
-<!-- 			<artifactId>slf4j-api</artifactId> -->
-<!-- 			<version>${slf4j.version}</version> -->
-<!-- 			<optional>true</optional> -->
-<!-- 		</dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.slf4j</groupId> -->
-		<!-- <artifactId>slf4j-log4j12</artifactId> -->
-		<!-- <version>${slf4j.version}</version> -->
-		<!-- </dependency> -->
-
-		<!-- logging -->
-		<!-- <dependency> -->
-		<!-- <groupId>commons-logging</groupId> -->
-		<!-- <artifactId>commons-logging</artifactId> -->
-		<!-- <version>${logging.version}</version> -->
-		<!-- <optional>true</optional> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.apache.logging.log4j</groupId> -->
-		<!-- <artifactId>log4j-core</artifactId> -->
-		<!-- <version>${log4j.version}</version> -->
-		<!-- <optional>true</optional> -->
-		<!-- </dependency> -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<!-- loggings -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>${logging.version}</version>
+			<optional>true</optional>
+		</dependency>
 		<!-- servlet/jsp -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

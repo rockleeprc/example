@@ -3,6 +3,10 @@
     "-//mybatis.org//DTD Config 3.0//EN"  
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<settings>
+		<!-- 使用 LOG4J2作为日志输出 -->
+		<setting name="logImpl" value="LOG4J2" />
+	</settings>
 	<typeAliases>
 		<!-- <typeAlias type="exam.pojo.User" alias="user" /> -->
 		<package name="exam.pojo" />
