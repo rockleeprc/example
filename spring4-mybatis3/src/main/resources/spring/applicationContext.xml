@@ -10,23 +10,27 @@
         http://www.springframework.org/schema/tx  
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-	<!-- 支持注解 -->
-	<context:annotation-config />
+
+	<!-- 支持注解 <context:annotation-config /> -->
 
 	<!-- 引入dbconfig.properties属性文件 -->
 	<context:property-placeholder
 		location="classpath:properties/dbconfig.properties" />
-		
+
 	<!-- 自动扫描(自动注入)，扫描exam.service这个包以及它的子包的所有使用@Service注解标注的类 -->
 	<context:component-scan base-package="exam.service"
-		use-default-filters="true">
-		<context:include-filter type="annotation"
-			expression="org.springframework.stereotype.Repository" />
+		use-default-filters="false">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Service" />
+		<!-- <context:include-filter type="annotation" -->
+		<!-- expression="org.springframework.stereotype.Repository" /> -->
+		<context:exclude-filter type="regex"
+			expression="exam.pojo.*" />
+		<context:exclude-filter type="regex"
+			expression="exam.dao.*" />
 	</context:component-scan>
-	
-	<import resource="applicationContext-transaction.xml"/>
-	<import resource="applicationContext-mybatis.xml"/>
-	<import resource="applicationContext-dataSource.xml"/>
+
+	<import resource="applicationContext-transaction.xml" />
+	<import resource="applicationContext-mybatis.xml" />
+	<import resource="applicationContext-dataSource.xml" />
 </beans>
