@@ -22,6 +22,7 @@
 			指的是classpath(类路径)下exam.dao包中的所有xml文件 UserMapper.xml位于exam.dao包下，这样UserMapper.xml就可以被自动扫描 -->
 		<property name="mapperLocations" value="classpath:exam/dao/*Mapper.xml" />
 	</bean>
+	
 	<!-- 配置扫描器 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 扫描exam.dao这个包以及它的子包下的所有映射接口类 -->
@@ -30,12 +31,8 @@
 			java.sql.SQLException: unkow jdbc driver : ${jdbc_url} ref时会马上实例化sqlSessionFactory,但properties文件还没有加载 -->
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
-
+	
 	<!-- sqlSession实例 -->
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory" />
-	</bean>
-
 	<bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>

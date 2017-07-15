@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,7 +19,7 @@ public class UserServicTest {
 	@Autowired
 	IUserService userService;
 	@Autowired
-	SqlSession sqlSession;
+	SqlSessionTemplate sqlSessionTemplate;
 
 	private static final Logger LOG = LogManager.getLogger(UserServicTest.class);
 
@@ -32,7 +33,7 @@ public class UserServicTest {
 	@Test
 	public void sqlSession() {
 		LOG.info("aa");
-		System.out.println(sqlSession);
+		System.out.println(sqlSessionTemplate);
 	}
 
 	@Test
