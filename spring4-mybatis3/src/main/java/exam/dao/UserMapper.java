@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import exam.pojo.User;
 
-@Repository()
+//@Repository()
 public interface UserMapper {
 	public User selectByID(int id);
 

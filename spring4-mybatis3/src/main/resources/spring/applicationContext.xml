@@ -11,7 +11,7 @@
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
 	<!-- 支持注解 -->
-	<context:annotation-config />
+<!-- 	<context:annotation-config /> -->
 
 	<!-- 引入dbconfig.properties属性文件 -->
 	<context:property-placeholder

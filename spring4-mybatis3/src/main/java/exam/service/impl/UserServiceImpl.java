@@ -3,7 +3,8 @@ package exam.service.impl;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import exam.dao.UserMapper;
@@ -13,7 +14,7 @@ import exam.service.IUserService;
 @Service("userServiceImpl")
 public class UserServiceImpl implements IUserService {
 
-	@Autowired
+	@Resource(name="userMapper")  
 	private UserMapper userMapper;
 
 	@Override
