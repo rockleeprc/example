@@ -12,14 +12,21 @@
 	<form:form modelAttribute="user"
 		action="${pageContext.request.contextPath}/valid/regist.do"
 		method="post">
-		<form:errors path="*"/><br/>
-		<form:errors path="name"/>
-	用户名:<form:input id="name" path="name" /><br/>
-	<form:errors path="password"/>	
-	密码:<form:input path="password" /><br/>
-	年龄:<form:input path="age" />	<br/>
-	日期<form:input path="date" /><br/>
+
+		<form:errors path="name" />
+	用户名:<form:input id="name" path="name" />
+		<br />
+		<form:errors path="password" />	
+	密码:<form:input path="password" />
+		<br />
+	年龄:<form:input path="age" />
+		<br />
+	日期<form:input path="date" />
+		<br />
 		<input type="submit">
+		<hr />
+		<form:errors path="*" />
+		<br />
 	</form:form>
 </body>
 </html>

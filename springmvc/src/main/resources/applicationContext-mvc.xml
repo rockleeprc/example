@@ -27,12 +27,12 @@
 		<property name="suffix" value=".jsp"></property>
 		<property name="order" value="1"></property>
 	</bean>
-
+	
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
-				<value>i18n/message</value>
+				<value>classpath:i18n/message</value>
 			</list>
 		</property>
 	</bean>
