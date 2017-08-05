@@ -1,4 +1,4 @@
-package e2;
+package i2;
 
 public class Person {
 
