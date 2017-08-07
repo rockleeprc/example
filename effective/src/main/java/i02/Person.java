@@ -1,10 +1,10 @@
-package i2;
+package i02;
 
 public class Person {
-
+	//require
 	private String name;
 	private int age;
-
+	//optional
 	private double height;
 	private double weight;
 
@@ -16,7 +16,7 @@ public class Person {
 		this.weight = builder.weight;
 	}
 
-	// 不直接生成对象，客户端使用构造器实例化
+	// 不直接生成对象，客户端使用Builder实例化
 	public static class Builder {
 		private String name;
 		private int age;
@@ -44,45 +44,16 @@ public class Person {
 		}
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-	public double getHeight() {
-		return height;
-	}
-
-	public void setHeight(double height) {
-		this.height = height;
-	}
-
-	public double getWeight() {
-		return weight;
-	}
-
-	public void setWeight(double weight) {
-		this.weight = weight;
-	}
-
 	@Override
 	public String toString() {
 		return "Person [name=" + name + ", age=" + age + ", height=" + height + ", weight=" + weight + "]";
 	}
 
 	public static void main(String[] args) {
-		Person p = new Person.Builder("Lee", 18).setHeight(183).setWeight(70).build();
-		System.out.println(p);
+		Person p1 = new Person.Builder("Lee", 18).setHeight(183).setWeight(70).build();
+		System.out.println(p1);
+		Person p2 = new Person.Builder("Lee", 18).setHeight(183).build();
+		System.out.println(p2);
+		
 	}
 }
