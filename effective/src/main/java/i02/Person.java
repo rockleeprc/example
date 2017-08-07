@@ -10,6 +10,7 @@ public class Person {
 
 	// 私有化
 	private Person(Builder builder) {
+		//在Person内进行数据验证，而不是在Builder内
 		this.name = builder.name;
 		this.age = builder.age;
 		this.height = builder.height;
