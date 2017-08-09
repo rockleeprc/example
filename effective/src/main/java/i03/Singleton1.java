@@ -5,5 +5,9 @@ public class Singleton1 {
 
 	private Singleton1() {
 	}
+	
+	public void method(){
+		System.out.println("Singleton1.method()");
+	}
 
 }

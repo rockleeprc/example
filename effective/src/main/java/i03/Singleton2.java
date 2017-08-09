@@ -9,4 +9,8 @@ public class Singleton2 {
 	public static Singleton2 getInstance() {
 		return INSTACE;
 	}
+
+	public void method() {
+		System.out.println("Singleton2.method()");
+	}
 }
