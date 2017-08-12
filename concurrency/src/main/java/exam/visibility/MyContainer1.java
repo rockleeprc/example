@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 一个容器，提供add，size，两个线程，t1添加1-10个元素，t2监控元素个数，当个数=5时，t2退出，并提示
  * 程序运行后t2不会结束，t1、t2线程间可见性引起
  * 
  * @author mint

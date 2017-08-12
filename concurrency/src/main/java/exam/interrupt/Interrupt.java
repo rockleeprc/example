@@ -5,7 +5,7 @@ import org.junit.Test;
 public class Interrupt {
 
 	@Test
-	public void inerrupt3() throws InterruptedException {
+	public void interrupt3() throws InterruptedException {
 		Thread t = new Thread() {
 			@Override
 			public void run() {
