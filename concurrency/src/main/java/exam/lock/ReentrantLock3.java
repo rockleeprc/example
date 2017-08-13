@@ -1,13 +1,18 @@
 package exam.lock;
 
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * ReentrantLock在获取锁时,可以响应中断
+ * 
+ * @author mint
+ *
+ */
 public class ReentrantLock3 {
 
 	public static void main(String[] args) {
-		Lock lock = new ReentrantLock();
+		ReentrantLock lock = new ReentrantLock();
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -39,7 +44,9 @@ public class ReentrantLock3 {
 					System.out.println("t2 interrupt");
 					e.printStackTrace();
 				} finally {
-					lock.unlock();
+					if (lock.isHeldByCurrentThread()) {
+						lock.unlock();
+					}
 				}
 			}
 		}, "t2");

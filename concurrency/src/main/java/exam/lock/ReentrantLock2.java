@@ -4,6 +4,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * ReentrantLock可以尝试性的获取锁,也可以在获取锁时设置等待时间
+ * @author mint
+ *
+ */
 public class ReentrantLock2 {
 
 	private Lock lock = new ReentrantLock();
