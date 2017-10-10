@@ -25,7 +25,8 @@ public class HttpRequester {
 	/**
 	 * 发送GET请求
 	 * 
-	 * @param urlString  URL地址
+	 * @param urlString
+	 *            URL地址
 	 * @return 响应对象
 	 * @throws IOException
 	 */
@@ -36,8 +37,10 @@ public class HttpRequester {
 	/**
 	 * 发送GET请求
 	 * 
-	 * @param urlString  URL地址
-	 * @param params 参数集合
+	 * @param urlString
+	 *            URL地址
+	 * @param params
+	 *            参数集合
 	 * @return 响应对象
 	 * @throws IOException
 	 */
@@ -48,9 +51,12 @@ public class HttpRequester {
 	/**
 	 * 发送GET请求
 	 * 
-	 * @param urlString URL地址
-	 * @param params 参数集合
-	 * @param propertys 请求属性
+	 * @param urlString
+	 *            URL地址
+	 * @param params
+	 *            参数集合
+	 * @param propertys
+	 *            请求属性
 	 * @return 响应对象
 	 * @throws IOException
 	 */
@@ -62,7 +68,8 @@ public class HttpRequester {
 	/**
 	 * 发送POST请求
 	 * 
-	 * @param urlString URL地址
+	 * @param urlString
+	 *            URL地址
 	 * @return 响应对象
 	 * @throws IOException
 	 */
@@ -73,8 +80,10 @@ public class HttpRequester {
 	/**
 	 * 发送POST请求
 	 * 
-	 * @param urlString URL地址
-	 * @param params 参数集合
+	 * @param urlString
+	 *            URL地址
+	 * @param params
+	 *            参数集合
 	 * @return 响应对象
 	 * @throws IOException
 	 */
@@ -85,9 +94,12 @@ public class HttpRequester {
 	/**
 	 * 发送POST请求
 	 * 
-	 * @param urlString URL地址
-	 * @param params 参数集合
-	 * @param propertys 请求属性
+	 * @param urlString
+	 *            URL地址
+	 * @param params
+	 *            参数集合
+	 * @param propertys
+	 *            请求属性
 	 * @return 响应对象
 	 * @throws IOException
 	 */
@@ -99,10 +111,14 @@ public class HttpRequester {
 	/**
 	 * 发送HTTP请求
 	 * 
-	 * @param urlString 地址
-	 * @param method  get/post
-	 * @param parameters  添加由键值对指定的请求参数
-	 * @param propertys  添加由键值对指定的一般请求属性
+	 * @param urlString
+	 *            地址
+	 * @param method
+	 *            get/post
+	 * @param parameters
+	 *            添加由键值对指定的请求参数
+	 * @param propertys
+	 *            添加由键值对指定的一般请求属性
 	 * @return 响映对象
 	 * @throws IOException
 	 */
@@ -136,7 +152,6 @@ public class HttpRequester {
 			for (String key : propertys.keySet()) {
 				urlConnection.addRequestProperty(key, propertys.get(key));
 			}
-
 		if (method.equalsIgnoreCase("POST") && parameters != null) {
 			StringBuffer param = new StringBuffer();
 			for (String key : parameters.keySet()) {
@@ -159,25 +174,25 @@ public class HttpRequester {
 	 */
 	private HttpRespons makeContent(String urlString, HttpURLConnection urlConnection) throws IOException {
 		HttpRespons httpResponser = new HttpRespons();
+		InputStream in = urlConnection.getInputStream();
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
 		try {
-			InputStream in = urlConnection.getInputStream();
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
-//			httpResponser.contentCollection = new Vector<String>();
-			StringBuffer temp = new StringBuffer();
-//			String line = bufferedReader.readLine();
+			// httpResponser.contentCollection = new Vector<String>();
+			StringBuilder content = new StringBuilder();
+			// String line = bufferedReader.readLine();
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
-//				httpResponser.contentCollection.add(line);
-//				System.out.println(line);
-				temp.append(line).append("\r\n");
-//				line = bufferedReader.readLine();
+				// httpResponser.contentCollection.add(line);
+				// System.out.println(line);
+				content.append(line).append("\r\n");
+				// line = bufferedReader.readLine();
 			}
-			System.out.println(temp.toString());
-			bufferedReader.close();
+			// System.out.println(content.toString());
+
 			String ecod = urlConnection.getContentEncoding();
 			if (ecod == null)
 				ecod = this.defaultContentEncoding;
-			
+
 			httpResponser.urlString = urlString;
 			httpResponser.defaultPort = urlConnection.getURL().getDefaultPort();
 			httpResponser.file = urlConnection.getURL().getFile();
@@ -188,7 +203,7 @@ public class HttpRequester {
 			httpResponser.query = urlConnection.getURL().getQuery();
 			httpResponser.ref = urlConnection.getURL().getRef();
 			httpResponser.userInfo = urlConnection.getURL().getUserInfo();
-			httpResponser.content = new String(temp.toString().getBytes(), ecod);
+			httpResponser.content = new String(content.toString().getBytes(), ecod);
 			httpResponser.contentEncoding = ecod;
 			httpResponser.code = urlConnection.getResponseCode();
 			httpResponser.message = urlConnection.getResponseMessage();
@@ -201,6 +216,9 @@ public class HttpRequester {
 		} catch (IOException e) {
 			throw e;
 		} finally {
+			if (bufferedReader != null) {
+				bufferedReader.close();
+			}
 			if (urlConnection != null)
 				urlConnection.disconnect();
 		}
