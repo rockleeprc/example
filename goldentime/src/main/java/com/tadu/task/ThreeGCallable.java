@@ -33,7 +33,7 @@ public class ThreeGCallable implements Callable<String> {
 		params.put("un", URLConsts.G3_UN);
 		params.put("h", key);
 		params.put("bid", otherId);
-		String result = HttpUtils.httpGet(URLConsts.G3_URL, params);
+		String result = HttpUtils.doGet(URLConsts.G3_URL, params);
 
 		SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
 		ThreeSAXParser.Parser3G parser = new ThreeSAXParser.Parser3G();

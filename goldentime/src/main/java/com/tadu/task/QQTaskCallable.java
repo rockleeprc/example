@@ -32,10 +32,10 @@ public class QQTaskCallable implements Callable<String> {
 		params.put("appToken", KeyUtils.qqAppToken());
 		String resultJson = null;
 		try {
-			resultJson = HttpUtils.httpGet(URLConsts.QQ_URL, params);
+			resultJson = HttpUtils.doGet(URLConsts.QQ_URL, params);
 		} catch (Exception e) {
 			for (int i = 0; i < 5; i++) {
-				resultJson = HttpUtils.httpGet(URLConsts.QQ_URL, params);
+				resultJson = HttpUtils.doGet(URLConsts.QQ_URL, params);
 			}
 		} finally {
 			if (resultJson == null)

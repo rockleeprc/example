@@ -43,7 +43,7 @@ public class T {
 		params.put("CBID", "22438572000473902");
 		params.put("appKey", KeyUtils.qqAppKey());
 		params.put("appToken", KeyUtils.qqAppToken());
-		String str = HttpUtils.httpGet(URLConsts.QQ_URL, params);
+		String str = HttpUtils.doGet(URLConsts.QQ_URL, params);
 		System.out.println(str);
 	}
 	

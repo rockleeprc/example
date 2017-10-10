@@ -88,7 +88,7 @@ public class ThreeSAXParser {
 		param.put("h", key);
 		param.put("un", "tadu");
 		param.put("bid", otherId);
-		String result = HttpUtils.httpGet(url, param);
+		String result = HttpUtils.doGet(url, param);
 		System.out.println(result);
 		// XMLReader reader = XMLReaderFactory.createXMLReader();
 		// Parser3G parser = new Parser3G();

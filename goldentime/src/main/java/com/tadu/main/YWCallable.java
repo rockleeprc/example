@@ -175,10 +175,10 @@ public class YWCallable implements Runnable {
 			params.put("appToken", KeyUtils.qqAppToken());
 			String resultJson = null;
 			try {
-				resultJson = HttpUtils.httpGet(URLConsts.QQ_URL, params);
+				resultJson = HttpUtils.doGet(URLConsts.QQ_URL, params);
 			} catch (Exception e) {
 				for (int i = 0; i < 5; i++) {
-					resultJson = HttpUtils.httpGet(URLConsts.QQ_URL, params);
+					resultJson = HttpUtils.doGet(URLConsts.QQ_URL, params);
 				}
 			}
 			jsonList.add(resultJson);
@@ -197,10 +197,10 @@ public class YWCallable implements Runnable {
 		params.put("pageSize", String.valueOf(pageSize));
 		String resultJson = null;
 		try {
-			resultJson = HttpUtils.httpGet(URLConsts.QQ_URL, params);
+			resultJson = HttpUtils.doGet(URLConsts.QQ_URL, params);
 		} catch (Exception e) {
 			for (int i = 0; i < 5; i++) {
-				resultJson = HttpUtils.httpGet(URLConsts.QQ_URL, params);
+				resultJson = HttpUtils.doGet(URLConsts.QQ_URL, params);
 			}
 		}
 		return resultJson;
@@ -217,10 +217,10 @@ public class YWCallable implements Runnable {
 		params.put("pageSize", "50");
 		String resultJson = null;
 		try {
-			resultJson = HttpUtils.httpGet(URLConsts.QQ_URL, params);
+			resultJson = HttpUtils.doGet(URLConsts.QQ_URL, params);
 		} catch (Exception e) {
 			for (int i = 0; i < 5; i++) {
-				resultJson = HttpUtils.httpGet(URLConsts.QQ_URL, params);
+				resultJson = HttpUtils.doGet(URLConsts.QQ_URL, params);
 			}
 		}
 		return resultJson;
@@ -235,10 +235,10 @@ public class YWCallable implements Runnable {
 		params.put("appToken", KeyUtils.qqAppToken());
 		String resultJson = null;
 		try {
-			resultJson = HttpUtils.httpGet(URLConsts.QQ_URL, params);
+			resultJson = HttpUtils.doGet(URLConsts.QQ_URL, params);
 		} catch (Exception e) {
 			for (int i = 0; i < 5; i++) {
-				resultJson = HttpUtils.httpGet(URLConsts.QQ_URL, params);
+				resultJson = HttpUtils.doGet(URLConsts.QQ_URL, params);
 			}
 		}
 		return resultJson;
