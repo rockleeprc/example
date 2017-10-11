@@ -147,10 +147,13 @@ public class HttpRequester {
 		urlConnection.setDoOutput(true);
 		urlConnection.setDoInput(true);
 		urlConnection.setUseCaches(false);
+		//设置超时时间
+		urlConnection.setConnectTimeout(30000);  
+		urlConnection.setReadTimeout(30000);  
 
 		if (propertys != null)
 			for (String key : propertys.keySet()) {
-				urlConnection.addRequestProperty(key, propertys.get(key));
+				urlConnection.setRequestProperty(key, propertys.get(key));
 			}
 		if (method.equalsIgnoreCase("POST") && parameters != null) {
 			StringBuffer param = new StringBuffer();
