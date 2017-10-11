@@ -1,11 +1,7 @@
 package k17;
 
-import java.nio.charset.Charset;
+public class TMain {
+	public static void main(String[] args) {
 
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-
+	}
+}
