@@ -162,7 +162,7 @@ public class HttpRequester {
 			urlConnection.getOutputStream().flush();
 			urlConnection.getOutputStream().close();
 		}
-		return this.makeContent(urlString, urlConnection);
+		return this.parseResponse(urlString, urlConnection);
 	}
 
 	/**
@@ -172,7 +172,7 @@ public class HttpRequester {
 	 * @return 响应对象
 	 * @throws IOException
 	 */
-	private HttpRespons makeContent(String urlString, HttpURLConnection urlConnection) throws IOException {
+	private HttpRespons parseResponse(String urlString, HttpURLConnection urlConnection) throws IOException {
 		HttpRespons httpResponser = new HttpRespons();
 		InputStream in = urlConnection.getInputStream();
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
