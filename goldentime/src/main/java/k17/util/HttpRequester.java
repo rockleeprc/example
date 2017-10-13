@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.Vector;
@@ -128,17 +129,18 @@ public class HttpRequester {
 
 		if (method.equalsIgnoreCase("GET") && parameters != null) {
 			StringBuffer param = new StringBuffer();
-			param.append("?");
 			int i = 0;
 			for (String key : parameters.keySet()) {
 				if (i == 0)
 					param.append("?");
 				else
 					param.append("&");
-				param.append(key).append("=").append(parameters.get(key));
+				
+				param.append(key).append("=").append(URLEncoder.encode(parameters.get(key)));
 				i++;
 			}
 			urlString += param;
+			System.out.println("get url="+urlString);
 		}
 
 		URL url = new URL(urlString);
@@ -190,7 +192,7 @@ public class HttpRequester {
 				content.append(line).append("\r\n");
 				// line = bufferedReader.readLine();
 			}
-			// System.out.println(content.toString());
+			 System.out.println(content.toString());
 
 			String ecod = urlConnection.getContentEncoding();
 			if (ecod == null)
