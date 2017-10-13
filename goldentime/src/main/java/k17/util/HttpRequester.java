@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
@@ -112,7 +113,7 @@ public class HttpRequester {
 	/**
 	 * 发送HTTP请求
 	 * 
-	 * @param urlString
+	 * @param url
 	 *            地址
 	 * @param method
 	 *            get/post
@@ -123,51 +124,121 @@ public class HttpRequester {
 	 * @return 响映对象
 	 * @throws IOException
 	 */
-	private HttpRespons send(String urlString, String method, Map<String, String> parameters,
+	private HttpRespons send(String url, String method, Map<String, String> parameters,
 			Map<String, String> propertys) throws IOException {
-		HttpURLConnection urlConnection = null;
 
 		if (method.equalsIgnoreCase("GET") && parameters != null) {
-			StringBuffer param = new StringBuffer();
-			int i = 0;
-			for (String key : parameters.keySet()) {
-				if (i == 0)
-					param.append("?");
-				else
-					param.append("&");
-				
-				param.append(key).append("=").append(URLEncoder.encode(parameters.get(key)));
-				i++;
-			}
-			urlString += param;
-			System.out.println("get url="+urlString);
+			String param = createGetParam(parameters);
+			url += param;
+			// System.out.println("get url=" + urlString);
 		}
 
-		URL url = new URL(urlString);
-		urlConnection = (HttpURLConnection) url.openConnection();
+		HttpURLConnection urlConnection = createDefaultConnectionAndOpen(url,parameters);
 		urlConnection.setRequestMethod(method);
+
+		if (propertys != null) {
+			setRequestProperty(urlConnection,propertys);
+		}
+		
+		if (method.equalsIgnoreCase("POST") && parameters != null) {
+			String param = createPostParam(parameters);
+			urlConnection.getOutputStream().write(param.toString().getBytes());
+		}
+		urlConnection.getOutputStream().flush();
+		urlConnection.getOutputStream().close();
+		this.parseResponse(urlConnection);
+		return null;
+	}
+
+	private String createPostParam(Map<String, String> parameters) {
+		StringBuilder params = new StringBuilder();
+		for (String key : parameters.keySet()) {
+			params.append("&");
+			params.append(key).append("=").append(parameters.get(key));
+		}
+		return params.toString();
+	}
+
+	private void setRequestProperty(HttpURLConnection urlConnection, Map<String, String> propertys) {
+		for (String key : propertys.keySet()) {
+			urlConnection.setRequestProperty(key, propertys.get(key));
+		}
+	}
+
+	private HttpURLConnection createDefaultConnectionAndOpen(String uri, Map<String, String> parameters) throws IOException {
+		URL url = new URL(uri);
+		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 		urlConnection.setDoOutput(true);
 		urlConnection.setDoInput(true);
 		urlConnection.setUseCaches(false);
-		//设置超时时间
-		urlConnection.setConnectTimeout(30000);  
-		urlConnection.setReadTimeout(30000);  
+		urlConnection.setConnectTimeout(30000);
+		urlConnection.setReadTimeout(30000);
+		return urlConnection;
+	}
 
-		if (propertys != null)
-			for (String key : propertys.keySet()) {
-				urlConnection.setRequestProperty(key, propertys.get(key));
+	private String createGetParam(Map<String, String> parameters) {
+		StringBuilder params = new StringBuilder();
+		int i = 0;
+		for (String key : parameters.keySet()) {
+			if (i == 0) {
+				params.append("?");
+			} else {
+				params.append("&");
 			}
-		if (method.equalsIgnoreCase("POST") && parameters != null) {
-			StringBuffer param = new StringBuffer();
-			for (String key : parameters.keySet()) {
-				param.append("&");
-				param.append(key).append("=").append(parameters.get(key));
-			}
-			urlConnection.getOutputStream().write(param.toString().getBytes());
-			urlConnection.getOutputStream().flush();
-			urlConnection.getOutputStream().close();
+			params.append(key).append("=").append(URLEncoder.encode(parameters.get(key)));
+			i++;
 		}
-		return this.parseResponse(urlString, urlConnection);
+		return params.toString();
+	}
+
+	private HttpRespons parseResponse(HttpURLConnection urlConnection) throws IOException {
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+		try {
+			StringBuilder content = new StringBuilder();
+			String line;
+			while ((line = bufferedReader.readLine()) != null) {
+				// httpResponser.contentCollection.add(line);
+				// System.out.println(line);
+				content.append(line).append("\r\n");
+				// line = bufferedReader.readLine();
+			}
+			System.out.println(content.toString());
+
+			String ecod = urlConnection.getContentEncoding();
+			if (ecod == null)
+				ecod = this.defaultContentEncoding;
+			/*
+			 * httpResponser.defaultPort =
+			 * urlConnection.getURL().getDefaultPort(); httpResponser.file =
+			 * urlConnection.getURL().getFile(); httpResponser.host =
+			 * urlConnection.getURL().getHost(); httpResponser.path =
+			 * urlConnection.getURL().getPath(); httpResponser.port =
+			 * urlConnection.getURL().getPort(); httpResponser.protocol =
+			 * urlConnection.getURL().getProtocol(); httpResponser.query =
+			 * urlConnection.getURL().getQuery(); httpResponser.ref =
+			 * urlConnection.getURL().getRef(); httpResponser.userInfo =
+			 * urlConnection.getURL().getUserInfo(); httpResponser.content = new
+			 * String(content.toString().getBytes(), ecod);
+			 * httpResponser.contentEncoding = ecod; httpResponser.code =
+			 * urlConnection.getResponseCode(); httpResponser.message =
+			 * urlConnection.getResponseMessage(); httpResponser.contentType =
+			 * urlConnection.getContentType(); httpResponser.method =
+			 * urlConnection.getRequestMethod(); httpResponser.connectTimeout =
+			 * urlConnection.getConnectTimeout(); httpResponser.readTimeout =
+			 * urlConnection.getReadTimeout();
+			 * System.out.println(urlConnection.getResponseCode()); return
+			 * httpResponser;
+			 */
+		} catch (IOException e) {
+			throw e;
+		} finally {
+			if (bufferedReader != null) {
+				bufferedReader.close();
+			}
+			if (urlConnection != null)
+				urlConnection.disconnect();
+		}
+		return null;
 	}
 
 	/**
@@ -177,7 +248,7 @@ public class HttpRequester {
 	 * @return 响应对象
 	 * @throws IOException
 	 */
-	private HttpRespons parseResponse(String urlString, HttpURLConnection urlConnection) throws IOException {
+	private HttpRespons parseResponse1(String urlString, HttpURLConnection urlConnection) throws IOException {
 		HttpRespons httpResponser = new HttpRespons();
 		InputStream in = urlConnection.getInputStream();
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
@@ -192,7 +263,7 @@ public class HttpRequester {
 				content.append(line).append("\r\n");
 				// line = bufferedReader.readLine();
 			}
-			 System.out.println(content.toString());
+			System.out.println(content.toString());
 
 			String ecod = urlConnection.getContentEncoding();
 			if (ecod == null)
