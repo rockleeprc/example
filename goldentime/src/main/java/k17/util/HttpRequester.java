@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -11,6 +12,8 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.Vector;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Java HTTP请求对象 发送GET/POST请求工具类
@@ -32,7 +35,7 @@ public class HttpRequester {
 	 * @return 响应对象
 	 * @throws IOException
 	 */
-	public HttpRespons sendGet(String urlString) throws IOException {
+	public String sendGet(String urlString) throws IOException {
 		return this.send(urlString, "GET", null, null);
 	}
 
@@ -46,7 +49,7 @@ public class HttpRequester {
 	 * @return 响应对象
 	 * @throws IOException
 	 */
-	public HttpRespons sendGet(String urlString, Map<String, String> params) throws IOException {
+	public String sendGet(String urlString, Map<String, String> params) throws IOException {
 		return this.send(urlString, "GET", params, null);
 	}
 
@@ -62,7 +65,7 @@ public class HttpRequester {
 	 * @return 响应对象
 	 * @throws IOException
 	 */
-	public HttpRespons sendGet(String urlString, Map<String, String> params, Map<String, String> propertys)
+	public String sendGet(String urlString, Map<String, String> params, Map<String, String> propertys)
 			throws IOException {
 		return this.send(urlString, "GET", params, propertys);
 	}
@@ -75,7 +78,7 @@ public class HttpRequester {
 	 * @return 响应对象
 	 * @throws IOException
 	 */
-	public HttpRespons sendPost(String urlString) throws IOException {
+	public String sendPost(String urlString) throws IOException {
 		return this.send(urlString, "POST", null, null);
 	}
 
@@ -89,7 +92,7 @@ public class HttpRequester {
 	 * @return 响应对象
 	 * @throws IOException
 	 */
-	public HttpRespons sendPost(String urlString, Map<String, String> params) throws IOException {
+	public String sendPost(String urlString, Map<String, String> params) throws IOException {
 		return this.send(urlString, "POST", params, null);
 	}
 
@@ -105,7 +108,7 @@ public class HttpRequester {
 	 * @return 响应对象
 	 * @throws IOException
 	 */
-	public HttpRespons sendPost(String urlString, Map<String, String> params, Map<String, String> propertys)
+	public String sendPost(String urlString, Map<String, String> params, Map<String, String> propertys)
 			throws IOException {
 		return this.send(urlString, "POST", params, propertys);
 	}
@@ -124,8 +127,8 @@ public class HttpRequester {
 	 * @return 响映对象
 	 * @throws IOException
 	 */
-	private HttpRespons send(String url, String method, Map<String, String> parameters,
-			Map<String, String> propertys) throws IOException {
+	private String send(String url, String method, Map<String, String> parameters, Map<String, String> propertys)
+			throws IOException {
 
 		if (method.equalsIgnoreCase("GET") && parameters != null) {
 			String param = createGetParam(parameters);
@@ -133,28 +136,27 @@ public class HttpRequester {
 			// System.out.println("get url=" + urlString);
 		}
 
-		HttpURLConnection urlConnection = createDefaultConnectionAndOpen(url,parameters);
+		HttpURLConnection urlConnection = createDefaultConnectionAndOpen(url, parameters);
 		urlConnection.setRequestMethod(method);
 
 		if (propertys != null) {
-			setRequestProperty(urlConnection,propertys);
+			setRequestProperty(urlConnection, propertys);
 		}
-		
+
 		if (method.equalsIgnoreCase("POST") && parameters != null) {
 			String param = createPostParam(parameters);
 			urlConnection.getOutputStream().write(param.toString().getBytes());
 		}
 		urlConnection.getOutputStream().flush();
 		urlConnection.getOutputStream().close();
-		this.parseResponse(urlConnection);
-		return null;
+		return parseResponse(urlConnection);
 	}
 
-	private String createPostParam(Map<String, String> parameters) {
+	private String createPostParam(Map<String, String> parameters) throws UnsupportedEncodingException {
 		StringBuilder params = new StringBuilder();
 		for (String key : parameters.keySet()) {
 			params.append("&");
-			params.append(key).append("=").append(parameters.get(key));
+			params.append(key).append("=").append(URLEncoder.encode(parameters.get(key), "utf-8"));
 		}
 		return params.toString();
 	}
@@ -165,7 +167,8 @@ public class HttpRequester {
 		}
 	}
 
-	private HttpURLConnection createDefaultConnectionAndOpen(String uri, Map<String, String> parameters) throws IOException {
+	private HttpURLConnection createDefaultConnectionAndOpen(String uri, Map<String, String> parameters)
+			throws IOException {
 		URL url = new URL(uri);
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 		urlConnection.setDoOutput(true);
@@ -176,7 +179,7 @@ public class HttpRequester {
 		return urlConnection;
 	}
 
-	private String createGetParam(Map<String, String> parameters) {
+	private String createGetParam(Map<String, String> parameters) throws UnsupportedEncodingException {
 		StringBuilder params = new StringBuilder();
 		int i = 0;
 		for (String key : parameters.keySet()) {
@@ -185,60 +188,34 @@ public class HttpRequester {
 			} else {
 				params.append("&");
 			}
-			params.append(key).append("=").append(URLEncoder.encode(parameters.get(key)));
+			params.append(key).append("=").append(URLEncoder.encode(parameters.get(key), "utf-8"));
 			i++;
 		}
 		return params.toString();
 	}
 
-	private HttpRespons parseResponse(HttpURLConnection urlConnection) throws IOException {
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-		try {
-			StringBuilder content = new StringBuilder();
-			String line;
-			while ((line = bufferedReader.readLine()) != null) {
-				// httpResponser.contentCollection.add(line);
-				// System.out.println(line);
-				content.append(line).append("\r\n");
-				// line = bufferedReader.readLine();
+	private String parseResponse(HttpURLConnection connection) throws IOException {
+		StringBuilder content = new StringBuilder();
+		if (HttpServletResponse.SC_OK == connection.getResponseCode()) {
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			try {
+				String line;
+				while ((line = bufferedReader.readLine()) != null) {
+					content.append(line).append("\r\n");
+				}
+			} catch (IOException e) {
+				throw e;
+			} finally {
+				if (bufferedReader != null) {
+					bufferedReader.close();
+				}
+				if (connection != null)
+					connection.disconnect();
 			}
-			System.out.println(content.toString());
-
-			String ecod = urlConnection.getContentEncoding();
-			if (ecod == null)
-				ecod = this.defaultContentEncoding;
-			/*
-			 * httpResponser.defaultPort =
-			 * urlConnection.getURL().getDefaultPort(); httpResponser.file =
-			 * urlConnection.getURL().getFile(); httpResponser.host =
-			 * urlConnection.getURL().getHost(); httpResponser.path =
-			 * urlConnection.getURL().getPath(); httpResponser.port =
-			 * urlConnection.getURL().getPort(); httpResponser.protocol =
-			 * urlConnection.getURL().getProtocol(); httpResponser.query =
-			 * urlConnection.getURL().getQuery(); httpResponser.ref =
-			 * urlConnection.getURL().getRef(); httpResponser.userInfo =
-			 * urlConnection.getURL().getUserInfo(); httpResponser.content = new
-			 * String(content.toString().getBytes(), ecod);
-			 * httpResponser.contentEncoding = ecod; httpResponser.code =
-			 * urlConnection.getResponseCode(); httpResponser.message =
-			 * urlConnection.getResponseMessage(); httpResponser.contentType =
-			 * urlConnection.getContentType(); httpResponser.method =
-			 * urlConnection.getRequestMethod(); httpResponser.connectTimeout =
-			 * urlConnection.getConnectTimeout(); httpResponser.readTimeout =
-			 * urlConnection.getReadTimeout();
-			 * System.out.println(urlConnection.getResponseCode()); return
-			 * httpResponser;
-			 */
-		} catch (IOException e) {
-			throw e;
-		} finally {
-			if (bufferedReader != null) {
-				bufferedReader.close();
-			}
-			if (urlConnection != null)
-				urlConnection.disconnect();
+		} else {
+			// TODO 非200怎么处理？
 		}
-		return null;
+		return content.toString();
 	}
 
 	/**
