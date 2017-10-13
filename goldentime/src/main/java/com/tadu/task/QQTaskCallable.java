@@ -12,7 +12,6 @@ import com.tadu.bean.BookInfo;
 import com.tadu.constant.URLConsts;
 import com.tadu.util.HttpUtils;
 import com.tadu.util.KeyUtils;
-import com.xiaoleilu.hutool.util.URLUtil;
 
 public class QQTaskCallable implements Callable<String> {
 

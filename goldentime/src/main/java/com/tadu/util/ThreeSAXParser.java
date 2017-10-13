@@ -82,7 +82,7 @@ public class ThreeSAXParser {
 		String key = KeyUtils.threeGKeyHex(otherId);
 		String url = "http://book.interface.3gsc.com.cn/index.php";
 		System.out.println(url);
-		Map<String, String> param = new HashMap<>();
+		Map<String, String> param = new HashMap<String,String>();
 		param.put("m", "AccessBook");
 		param.put("a", "accessbook");
 		param.put("h", key);
