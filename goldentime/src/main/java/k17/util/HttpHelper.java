@@ -66,6 +66,7 @@ public class HttpHelper {
 
 		if (method.equalsIgnoreCase("POST") && parameters != null) {
 			String param = createPostParam(parameters);
+			System.out.println(param);
 			urlConnection.getOutputStream().write(param.toString().getBytes());
 		}
 		urlConnection.getOutputStream().flush();
@@ -75,9 +76,13 @@ public class HttpHelper {
 
 	private static String createPostParam(Map<String, String> parameters) throws UnsupportedEncodingException {
 		StringBuilder params = new StringBuilder();
+		int i = 0;
 		for (String key : parameters.keySet()) {
-			params.append("&");
+			if (i != 0) {
+				params.append("&");
+			}
 			params.append(key).append("=").append(URLEncoder.encode(parameters.get(key), CHARSET_UTF8));
+			i++;
 		}
 		return params.toString();
 	}
