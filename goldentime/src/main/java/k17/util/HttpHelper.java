@@ -124,6 +124,7 @@ public class HttpHelper {
 				while ((line = bufferedReader.readLine()) != null) {
 					content.append(line).append("\r\n");
 				}
+				System.out.println(line);
 			} catch (IOException e) {
 				throw e;
 			} finally {

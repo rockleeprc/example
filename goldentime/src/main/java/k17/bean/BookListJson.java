@@ -44,5 +44,4 @@ public class BookListJson {
 	public String toString() {
 		return "BookListJson [code=" + code + ", content=" + content + ", hasNext=" + hasNext + ", msg=" + msg + "]";
 	}
-
 }

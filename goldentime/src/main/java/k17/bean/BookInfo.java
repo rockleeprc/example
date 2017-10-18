@@ -111,4 +111,15 @@ public class BookInfo {
 		this.wordCount = wordCount;
 	}
 
+	@Override
+	public String toString() {
+		return "BookInfo [authorPenname=" + authorPenname + ", bookId=" + bookId + ", bookName=" + bookName
+				+ ", bookStatus=" + bookStatus + ", categoryId=" + categoryId + ", categoryName=" + categoryName
+				+ ", channelName=" + channelName + ", coverImageUrl=" + coverImageUrl + ", introduction=" + introduction
+				+ ", lastUpdateChapterDate=" + lastUpdateChapterDate + ", status=" + status + ", wordCount=" + wordCount
+				+ "]";
+	}
+	
+	
+
 }
