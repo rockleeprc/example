@@ -55,6 +55,7 @@ public class HttpHelper {
 		if (method.equalsIgnoreCase("GET") && parameters != null) {
 			String param = createGetParam(parameters);
 			url += param;
+			System.out.println("Get url="+url);
 		}
 
 		HttpURLConnection urlConnection = createDefaultConnection(url, parameters);
