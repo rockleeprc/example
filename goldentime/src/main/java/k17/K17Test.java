@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -46,43 +47,49 @@ public class K17Test {
 	}
 
 	@Test
-	public void chapterList() {
+	public void testRandom() {
+		Random r = new Random();
+		for (int i = 0; i < 100; i++) {
+			System.out.println(r.nextInt(10));
+		}
 	}
 
 	@Test
 	public void t0() throws InterruptedException {
-		int POOL_SIZE = 50;
-		ExecutorService threadPool = Executors.newFixedThreadPool(POOL_SIZE);
-		for (int i = 0; i < 100000; i++) {
-
-			int threadCount = ((ThreadPoolExecutor) threadPool).getActiveCount();
-			// System.out.println("running : " + threadCount);
-			while (threadCount == POOL_SIZE) {
-				TimeUnit.MILLISECONDS.sleep(1);
-				threadCount = ((ThreadPoolExecutor) threadPool).getActiveCount();
-				// System.out.println("running : " + threadCount);
-			}
-			System.out.println("submit");
+		int poolSize = Runtime.getRuntime().availableProcessors()+1;
+		ExecutorService threadPool = Executors.newFixedThreadPool(poolSize);
+		for (int i = 0; i < 1000; i++) {
+			System.out.println("execute i="+i);
 			threadPool.submit(new Runnable() {
 
 				@Override
 				public void run() {
 					System.out.println("run()--" + System.currentTimeMillis());
 					try {
-						TimeUnit.SECONDS.sleep(5);
+						TimeUnit.SECONDS.sleep(10);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					ThreadPoolExecutor tpe = (ThreadPoolExecutor) threadPool;
-					System.out.println("getPoolSize=" + tpe.getPoolSize());
-					System.out.println("getTaskCount=" + tpe.getTaskCount());
-					System.out.println("getActiveCount=" + tpe.getActiveCount());
+					
+					printThreadPoolInfo(threadPool);
+					
 				}
+
+			
 			});
 		}
-		threadPool.awaitTermination(10, TimeUnit.MINUTES);
+		threadPool.awaitTermination(1000, TimeUnit.MINUTES);
 		threadPool.shutdown();
+	}
+	
+	private synchronized void printThreadPoolInfo(ExecutorService threadPool) {
+		System.out.println("-------------------");
+		ThreadPoolExecutor tpe = (ThreadPoolExecutor) threadPool;
+		System.out.println("getPoolSize=" + tpe.getPoolSize());
+		System.out.println("getTaskCount=" + tpe.getTaskCount());
+		System.out.println("getActiveCount=" + tpe.getActiveCount());
+		System.out.println("api.yuewen getCompletedTaskCount=" + tpe.getCompletedTaskCount());
+		
 	}
 
 	@Test
@@ -155,7 +162,7 @@ public class K17Test {
 
 		for (int i = 0; i < 1000; i++) {
 			threadPool.execute(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					try {
@@ -164,11 +171,11 @@ public class K17Test {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-					
+
 				}
 			});
 			System.out.println(i);
-			
+
 			try {
 				TimeUnit.MILLISECONDS.sleep(500);
 			} catch (InterruptedException e) {
@@ -176,7 +183,7 @@ public class K17Test {
 				e.printStackTrace();
 			}
 		}
-		
+
 		try {
 			TimeUnit.MINUTES.sleep(100);
 		} catch (InterruptedException e) {
