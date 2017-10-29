@@ -39,7 +39,7 @@ public class QueryLimitPlugin implements Interceptor {
 
 		// 判断是否时mysql数据库,sql是否被重写
 		if ("mysql".equals(this.dbType) && sql.indexOf(limit) == -1) {
-			String limitSql = sql.trim() + " limit 1,"+limit;
+			String limitSql = sql.trim() + " limit 0,"+limit;
 			metaStatementHandler.setValue("delegate.boundSql.sql", limitSql);
 		}
 		return invocation.proceed();

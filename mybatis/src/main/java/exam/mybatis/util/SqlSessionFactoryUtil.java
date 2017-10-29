@@ -13,9 +13,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 public class SqlSessionFactoryUtil {
 
 	private static SqlSessionFactory sqlSessionFactory = null;
-	// 线程锁
-	private static final Class CLASS_LOCK = SqlSessionFactoryUtil.class;
-
+	private static final Class<SqlSessionFactoryUtil> CLASS_LOCK = SqlSessionFactoryUtil.class;
+	private static final String CONFIG_FILE_RESOURCE="mybatis/mybatis-config.xml"; 
+	
 	/**
 	 * 构造私有化
 	 */
@@ -28,10 +28,9 @@ public class SqlSessionFactoryUtil {
 	 * @return
 	 */
 	public static SqlSessionFactory initSqlSessionFactory() {
-		String resource = "mybatis/mybatis-config.xml";
 		InputStream is = null;
 		try {
-			is = Resources.getResourceAsStream(resource);
+			is = Resources.getResourceAsStream(CONFIG_FILE_RESOURCE);
 		} catch (IOException e) {
 			Logger.getLogger(SqlSessionFactoryUtil.class.getName()).log(Level.SEVERE, null, e);
 			e.printStackTrace();

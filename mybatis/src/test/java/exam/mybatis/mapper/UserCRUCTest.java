@@ -14,6 +14,23 @@ import exam.mybatis.util.SqlSessionFactoryUtil;
  */
 public class UserCRUCTest {
 
+	public static void main(String[] args) {
+		SqlSession session = null;
+		try {
+			session = SqlSessionFactoryUtil.openSqlSession();
+			UserMapper userMapper = session.getMapper(UserMapper.class);
+			User user = userMapper.selectByID(1);
+			System.out.println(user);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+
 	@Test
 	public void selectById() {
 		SqlSession session = null;
