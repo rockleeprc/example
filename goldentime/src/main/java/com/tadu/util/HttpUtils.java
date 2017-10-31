@@ -56,7 +56,7 @@ public class HttpUtils {
 			}
 		}
 		CloseableHttpClient httpClient = HttpClients.createDefault();
-		// System.out.println(url + param.toString());
+		 System.out.println(url + param.toString());
 		if (param != null) {
 			url += param.toString();
 		}
@@ -72,7 +72,6 @@ public class HttpUtils {
 				return EntityUtils.toString(response.getEntity(), "UTF-8");
 			}
 		} catch (Exception e) {
-			// System.err.println(param.toString());
 			e.printStackTrace();
 		} finally {
 			try {
