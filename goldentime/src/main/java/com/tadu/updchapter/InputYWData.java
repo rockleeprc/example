@@ -179,10 +179,10 @@ public class InputYWData {
 
 	@Override
 	public String toString() {
-		return "returnCode=" + returnCode + ",taduId=" + taduId + ", bookName=" + bookName + ", taduPartId="
-				+ taduPartId + ", ChapterName=" + ChapterName + ", taduCreateTime=" + taduCreateTime + ", taduCBID="
-				+ taduCBID + ",cBID="+cBID+", taduCCID=" + taduCCID + ", cCID=" + cCID + ", updateDate=" + updateDate
-				+ ", chapterTitle=" + chapterTitle + ", status="
+		return "returnCode=" + returnCode + "&^taduId=" + taduId + "&^ bookName=" + bookName + "&^ taduPartId="
+				+ taduPartId + "&^ ChapterName=" + ChapterName + "&^ taduCreateTime=" + taduCreateTime + "&^ taduCBID="
+				+ taduCBID + "&^cBID="+cBID+"&^ taduCCID=" + taduCCID + "&^ cCID=" + cCID + "&^ updateDate=" + updateDate
+				+ "&^ chapterTitle=" + chapterTitle + "&^ status="
 				+ (StringUtils.equals(taduCCID, cCID) == true ? "Y" : "X");
 	}
 
