@@ -2,6 +2,8 @@ package com.tadu.updchapter;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import com.tadu.bean.ChapterList;
 import com.tadu.constant.URLConsts;
@@ -19,20 +21,62 @@ public class RequestExecutor {
 
 	public ChapterList chapterlist(int pageNo, int pageSize, String cBID) {
 		ChapterList chapterList = reqChapterList(pageNo, pageSize, cBID);
-		
-		String returnCode = chapterList.getReturnCode();
-		if(!"0".equals(returnCode)){
-			return chapterList;
+		//retry request
+		while(chapterList==null){
+			chapterList = reqChapterList(pageNo, pageSize, cBID);
 		}
 		
-		chapterList = reqChapterList(chapterList.getResult().getTotalCount(), pageSize, cBID);
+		//-1008
+		String returnCode = chapterList.getReturnCode();
+		if (!"0".equals(returnCode)) {
+			return chapterList;
+		}
+
+		int pageIdx = chapterList.getResult().getTotalCount();
+		chapterList = reqChapterList(pageIdx, pageSize, cBID);
+		
+		//retry request
+		while(chapterList==null){
+			chapterList = reqChapterList(pageIdx, pageSize, cBID);
+		}
+
+		boolean isEmpty = chapterList.getResult().getResultData().isEmpty();
+		while (isEmpty) {
+			goToSleep();
+			pageIdx--;
+			chapterList = reqChapterList(pageIdx, pageSize, cBID);
+			
+			//retry request
+			while(chapterList==null){
+				chapterList = reqChapterList(pageIdx, pageSize, cBID);
+			}
+			
+			isEmpty = chapterList.getResult().getResultData().isEmpty();
+			if (pageIdx < 0) {
+				isEmpty = false;
+			}
+		}
+
 		return chapterList;
 
+	}
+	private void goToSleep(){
+		Random r = new Random();
+		try {
+			TimeUnit.MILLISECONDS.sleep(r.nextInt(1000));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private ChapterList reqChapterList(int pageNo, int pageSize, String cBID) {
 		Map<String, String> params = createChapterListParams(pageNo, pageSize, cBID);
-		String resultJson = HttpUtils.doGet(URLConsts.QQ_URL, params);
+		String resultJson = null;
+		try {
+			resultJson = HttpUtils.doGet(URLConsts.QQ_URL, params);
+		} catch (Exception e) {
+			resultJson = HttpUtils.doGet(URLConsts.QQ_URL, params);
+		}
 		ChapterList chapterList = HttpParser.parseChapterList(resultJson);
 		return chapterList;
 	}

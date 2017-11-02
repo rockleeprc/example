@@ -7,8 +7,9 @@ public class FilePathConsts {
 	private static final String REAL_PATH = System.getProperty("user.dir");
 	private static final String SEPARATOR = File.separator;
 	private static final String RESOURCES = "src"+SEPARATOR+"main"+SEPARATOR+"resources";
+	private static final String PAGE_NAME="com"+SEPARATOR+"tadu"+SEPARATOR+"updchapter"+SEPARATOR+"data";
 	
-	public static final String YW_QUERY_BOOK_INFO=REAL_PATH+SEPARATOR+RESOURCES+SEPARATOR+"com"+SEPARATOR+"tadu"+SEPARATOR+"updchapter"+SEPARATOR+"data"+SEPARATOR+"query_book_info_test.txt";
+	public static final String YW_QUERY_BOOK_INFO=REAL_PATH+SEPARATOR+RESOURCES+SEPARATOR+PAGE_NAME+SEPARATOR+"query_book_info.txt";
 	
 	public static final String YW_INPUT_FILE_PATH = "E:" + File.separator + "workfile"+File.separator+"yw_book_id.txt";
 	public static final String QQ_INPUT_FILE_PATH = "E:" + File.separator + "yw_book.txt";

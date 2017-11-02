@@ -77,7 +77,7 @@ public class FileParser {
 			list = new ArrayList<InputYWData>();
 			while (lineIter.hasNext()) {
 				String line = lineIter.next();
-				if(StringUtils.isBlank(line)|| line.length()<50){
+				if(StringUtils.isBlank(line)){
 					continue;
 				}
 				InputYWData bean = createParseYWBean(line);
