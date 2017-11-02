@@ -34,7 +34,7 @@ public class ChapterCallable implements Runnable {
 
 	private void invoke() {
 		RequestExecutor executor = RequestExecutor.getInstance();
-		ChapterList chapterlist = executor.chapterlist(1, 1, data.getcBID());
+		ChapterList chapterlist = executor.chapterlist(1, 1, data.getTaduCBID());
 
 		String returnCode = chapterlist.getReturnCode();
 		data.setReturnCode(returnCode);
