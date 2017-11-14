@@ -56,7 +56,7 @@ public class HttpUtils {
 			}
 		}
 		CloseableHttpClient httpClient = HttpClients.createDefault();
-		// System.out.println(url + param.toString());
+		
 		if (param != null) {
 			url += param.toString();
 		}
@@ -72,8 +72,13 @@ public class HttpUtils {
 				return EntityUtils.toString(response.getEntity(), "UTF-8");
 			}
 		} catch (Exception e) {
-			// System.err.println(param.toString());
-			e.printStackTrace();
+//			System.out.println(url + param.toString());
+			try {
+				FileHelper.writeLine("D:\\yw_chapter_timeout.txt", url + param.toString());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			//e.printStackTrace();
 		} finally {
 			try {
 				httpClient.close();

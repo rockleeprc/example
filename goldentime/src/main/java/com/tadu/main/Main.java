@@ -9,7 +9,7 @@ import java.util.concurrent.Future;
 
 import com.tadu.bean.InputData;
 import com.tadu.constant.FilePathConsts;
-import com.tadu.io.Preparation;
+import com.tadu.io.FileParser;
 import com.tadu.task.QQTaskCallable;
 import com.tadu.task.QQTaskRunable;
 import com.tadu.task.ThreeGCallable;
@@ -42,7 +42,7 @@ public class Main {
 	 * @throws ExecutionException
 	 */
 	public static void g3Callable() throws IOException, InterruptedException, ExecutionException {
-		Preparation operator = Preparation.newInstance(new File(FilePathConsts.G3_INPUT_FILE_PATH));
+		FileParser operator = FileParser.newInstance(new File(FilePathConsts.G3_INPUT_FILE_PATH));
 		List<InputData> list = operator.prepare3G();
 
 		CountDownLatch countDown = new CountDownLatch(list.size());
@@ -67,7 +67,7 @@ public class Main {
 	 * @throws ExecutionException
 	 */
 	public static void qqRunnable() throws InterruptedException, IOException, ExecutionException {
-		Preparation operator = Preparation.newInstance(new File(FilePathConsts.QQ_INPUT_FILE_PATH));
+		FileParser operator = FileParser.newInstance(new File(FilePathConsts.QQ_INPUT_FILE_PATH));
 		List<InputData> list = operator.prepareQQ("	");
 		System.out.println(list.size());
 
@@ -91,7 +91,7 @@ public class Main {
 	 * @throws ExecutionException
 	 */
 	public static void qqCallable() throws IOException, InterruptedException, ExecutionException {
-		Preparation operator = Preparation.newInstance(new File(FilePathConsts.QQ_INPUT_FILE_PATH));
+		FileParser operator = FileParser.newInstance(new File(FilePathConsts.QQ_INPUT_FILE_PATH));
 		List<InputData> list = operator.prepareQQ("	");
 		System.out.println(list.size());
 

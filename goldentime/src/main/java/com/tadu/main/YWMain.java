@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import com.tadu.constant.FilePathConsts;
-import com.tadu.io.Preparation;
+import com.tadu.io.FileParser;
 import com.tadu.task.TraceThreadPoolExecutor;
 
 public class YWMain {
 	private static final TraceThreadPoolExecutor threadPool = TraceThreadPoolExecutor.newInstance(20, 30);
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		Preparation preparation = Preparation.newInstance(new File(FilePathConsts.YW_INPUT_FILE_PATH));
+		FileParser preparation = FileParser.newInstance(new File(FilePathConsts.YW_INPUT_FILE_PATH));
 		List<String> list = preparation.prepareYW();
 		CountDownLatch countDown = new CountDownLatch(list.size());
 		for (int i = 0, len = list.size(); i < len; i++) {
