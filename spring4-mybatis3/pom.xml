@@ -42,7 +42,6 @@
 		<commons-beanutils.version>1.9.3</commons-beanutils.version>
 		<!-- other -->
 		<jackson.version>2.9.0.pr4</jackson.version>
-		<jackson-databind.version>2.9.0.pr4</jackson-databind.version>
 		<httpclient.version>4.5.3</httpclient.version>
 		<junit.version>4.9</junit.version>
 
@@ -238,8 +237,13 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>${jackson-databind.version}</version>
+			<version>${jackson.version}</version>
 		</dependency>
+		  <dependency>  
+            <groupId>com.fasterxml.jackson.jr</groupId>  
+            <artifactId>jackson-jr-all</artifactId>  
+            <version>${jackson.version}</version>  
+        </dependency>  
 		<!-- apache commons -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
