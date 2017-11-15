@@ -1,7 +1,5 @@
 package exam.service;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -20,7 +18,7 @@ public class UserServicTest {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 
-	private static final Logger LOG = LogManager.getLogger(UserServicTest.class);
+	//private static final Logger LOG = LogManager.getLogger(UserServicTest.class);
 
 	/*
 	 * log4j2方式 private static final org.apache.logging.log4j.Logger LOG =
@@ -31,7 +29,7 @@ public class UserServicTest {
 	 */
 	@Test
 	public void sqlSession() {
-		LOG.info("aa");
+		//LOG.info("aa");
 		System.out.println(sqlSessionTemplate);
 	}
 
