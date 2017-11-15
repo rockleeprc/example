@@ -135,6 +135,11 @@
 		</dependency>
 		<!-- log4j2 -->
 		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
 			<version>${log4j.version}</version>
@@ -177,14 +182,6 @@
 			<version>${slf4j.version}</version>
 			<optional>true</optional>
 		</dependency>
-		<!-- loggings -->
-		<!-- <dependency> -->
-		<!-- <groupId>commons-logging</groupId> -->
-		<!-- <artifactId>commons-logging</artifactId> -->
-		<!-- <version>${logging.version}</version> -->
-		<!-- <optional>true</optional> -->
-		<!-- </dependency> -->
-		<!-- servlet/jsp -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -197,6 +194,7 @@
 			<version>${jsp.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- 标签 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>

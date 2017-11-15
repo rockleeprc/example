@@ -35,6 +35,11 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
+	<!-- 配置缓存清除监听器,负责处理由 JavaBean Introspector 功能而引起的缓存泄露 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+
 	<!-- spring mvc -->
 	<servlet>
 		<servlet-name>dispatcherServlet</servlet-name>
