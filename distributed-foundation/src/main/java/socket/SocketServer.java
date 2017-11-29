@@ -10,11 +10,11 @@ public class SocketServer {
 	public static void main(String[] args) {
 		try {
 			Socket socket = new Socket("10.2.0.24", 9999);
-			BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			while (true) {
-				String content = reader.readLine();
-				System.out.println(content);
-			}
+//			BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//			while (true) {
+//				String content = reader.readLine();
+//				System.out.println(content);
+//			}
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
