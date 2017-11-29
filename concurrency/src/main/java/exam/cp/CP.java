@@ -44,7 +44,6 @@ public class CP {
 			public void run() {
 				for (int i = 0; i < 100; i++) {
 					try {
-//						TimeUnit.SECONDS.sleep(2);
 						cp.consume();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
