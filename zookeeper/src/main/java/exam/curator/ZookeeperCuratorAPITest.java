@@ -105,6 +105,7 @@ public class ZookeeperCuratorAPITest {
 	public void testCreateAsync() throws Exception {
 		int cores = Runtime.getRuntime().availableProcessors() + 1;
 		ExecutorService executor = Executors.newFixedThreadPool(cores);
+		//线程池可选参数
 		curator.create().creatingParentsIfNeeded().inBackground(new BackgroundCallback() {
 
 			@Override
