@@ -56,10 +56,10 @@ public class K17Test {
 
 	@Test
 	public void t0() throws InterruptedException {
-		int poolSize = Runtime.getRuntime().availableProcessors()+1;
+		int poolSize = Runtime.getRuntime().availableProcessors() + 1;
 		ExecutorService threadPool = Executors.newFixedThreadPool(poolSize);
 		for (int i = 0; i < 1000; i++) {
-			System.out.println("execute i="+i);
+			System.out.println("execute i=" + i);
 			threadPool.submit(new Runnable() {
 
 				@Override
@@ -70,18 +70,17 @@ public class K17Test {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					
+
 					printThreadPoolInfo(threadPool);
-					
+
 				}
 
-			
 			});
 		}
 		threadPool.awaitTermination(1000, TimeUnit.MINUTES);
 		threadPool.shutdown();
 	}
-	
+
 	private synchronized void printThreadPoolInfo(ExecutorService threadPool) {
 		System.out.println("-------------------");
 		ThreadPoolExecutor tpe = (ThreadPoolExecutor) threadPool;
@@ -89,13 +88,13 @@ public class K17Test {
 		System.out.println("getTaskCount=" + tpe.getTaskCount());
 		System.out.println("getActiveCount=" + tpe.getActiveCount());
 		System.out.println("api.yuewen getCompletedTaskCount=" + tpe.getCompletedTaskCount());
-		
+
 	}
 
 	@Test
 	public void testChapterContent() {
-		String chapterId = "28178827";
-		String chapterId1 = "28178830";
+		String chapterId = "864061";
+		String chapterId1 = "3599170";
 		final String url = URL_PREFIX + URL_CHAPTER_CONTENT_JSON;
 		Map<String, String> params = paramOfChapterContent(chapterId);
 		try {
@@ -111,7 +110,6 @@ public class K17Test {
 
 	private void printChapterContent(ChapterContentJson chapterContentJson) {
 		System.out.println(chapterContentJson);
-
 	}
 
 	private Map<String, String> paramOfChapterContent(String chapterId) {
@@ -126,7 +124,7 @@ public class K17Test {
 
 	@Test
 	public void testVolumnAndChapterList() {
-		String bookId = "391013";
+		String bookId = "41068";
 		Map<String, String> param = paramOfVolumeList(PARTNER_ID, bookId);
 		final String url = URL_PREFIX + URL_VOLUMNAND_CHAPTER_LIST_JSON;
 		try {
@@ -194,13 +192,14 @@ public class K17Test {
 
 	@Test
 	public void testVolumeList() {
-		String bookId = "1721756";
+		String bookId = "525295";
 		Map<String, String> param = paramOfVolumeList(PARTNER_ID, bookId);
 		final String url = URL_PREFIX + URL_VOLUME_LIST_JSON;
+		System.out.println(url);
 		try {
 			String postResult = HttpHelper.doPost(url, param);
 			// String getResult = HttpHelper.doGet(url, param);
-			// System.out.println(postResult);
+			 System.out.println(postResult);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -235,10 +234,9 @@ public class K17Test {
 		try {
 			String postResult = HttpHelper.doPost(url, param);
 			String getResult = HttpHelper.doGet(url, param);
-			System.out.println("post result = " + postResult);
-			System.out.println("get result = " + getResult);
+//			System.out.println("post result = " + postResult);
+//			System.out.println("get result = " + getResult);
 			BookListJson bookListJson = HttpParser.parseBookList(postResult);
-			System.out.println(bookListJson);
 			printBookList(bookListJson);
 			boolean hasNextPage = "1".equals(bookListJson.getHasNext());
 			while (hasNextPage) {
@@ -247,6 +245,7 @@ public class K17Test {
 				postResult = HttpHelper.doPost(url, param);
 				// System.out.println(postResult);
 				bookListJson = HttpParser.parseBookList(postResult);
+				printBookList(bookListJson);
 				hasNextPage = "1".equals(bookListJson.getHasNext());
 				System.out.println(hasNextPage);
 			}
@@ -259,7 +258,9 @@ public class K17Test {
 	private void printBookList(BookListJson bookListJson) {
 		List<BookInfo> content = bookListJson.getContent();
 		for (BookInfo bi : content) {
-			System.out.println("bookInfo = " + bi);
+			if ("317856".equals(bi.getBookId())) {
+				System.out.println(bi);
+			}
 		}
 	}
 
