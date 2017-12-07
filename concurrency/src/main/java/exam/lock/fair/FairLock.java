@@ -5,6 +5,8 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * 公平锁和非公平锁
  * 
+ * synchronized 锁是非公平锁
+ * 
  * @author Administrator
  *
  */
