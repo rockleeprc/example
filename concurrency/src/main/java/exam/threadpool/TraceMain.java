@@ -24,7 +24,8 @@ public class TraceMain {
 
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		// execute();
-		submit();
+		// submit();
+		trace();
 	}
 
 	public static void trace() {
