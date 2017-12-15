@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- OFF、FATAL、ERROR、WARN、INFO、DEBUG、TRACE、 ALL -->
-<Configuration status="WARN" monitorInterval="60">
+<Configuration status="WARN" monitorInterval="60" >
+<!-- 
+<Configuration strict="true"
+           xmlns="http://logging.apache.org/log4j/2.0/config"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://logging.apache.org/log4j/2.0/config 
+           https://raw.githubusercontent.com/apache/logging-log4j2/log4j-2.8.2/log4j-core/src/main/resources/Log4j-config.xsd">
+            -->
 	<!--先定义所有的appender -->
 	<Appenders>
 		<!--文件会打印出所有信息，这个log每次运行程序会自动清空，由append属性决定，这个也挺有用的，适合临时测试用 -->
@@ -37,13 +44,14 @@
 	</Appenders>
 	<Loggers>
 		<!--过滤掉spring和mybatis的一些无用的DEBUG信息 -->
-		<Logger name="org.springframework" level="INFO" />
+		<Logger name="org.springframework" level="DEBUG" />
+		<Logger name="org.apache.ibatis" level="DEBUG" />
 		<Logger name="org.mybatis" level="INFO" />
 
 		<!--建立一个默认的root的logger -->
 		<Root level="ALL">
 			<AppenderRef ref="Console" />
-			<!-- <appender-ref ref="RollingFile" /> -->
+			<AppenderRef ref="RollingFile" />
 		</Root>
 	</Loggers>
 </Configuration>
