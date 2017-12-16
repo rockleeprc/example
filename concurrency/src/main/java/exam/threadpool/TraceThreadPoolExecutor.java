@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 日志、完整异常堆栈信息
+ * 
  * @author mint
  *
  */
@@ -42,6 +43,11 @@ public class TraceThreadPoolExecutor extends ThreadPoolExecutor {
 		};
 	}
 
+	/**
+	 * 提交任务的线程堆栈信息
+	 * 
+	 * @return
+	 */
 	private Exception clientTrace() {
 		return new Exception("Client statck trace");
 	}

@@ -91,9 +91,9 @@ public class UserCRUCTest {
 	@Test
 	public void insert() {
 		User u = new User();
-		u.setUserName("Hadoop");
-		u.setUserAge("14");
-		u.setUserAddress("TW");
+		u.setUserName("C");
+		u.setUserAge("21");
+		u.setUserAddress("HK");
 		SqlSession session = null;
 		try {
 			session = SqlSessionFactoryUtil.openSqlSession();
