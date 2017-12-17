@@ -1,7 +1,0 @@
-package decorator.io;
-
-import java.io.FilterInputStream;
-
-public class LoweerCaseInputStream extends FilterInputStream {
-
-}

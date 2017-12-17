@@ -1,7 +1,0 @@
-package exam.aop.advice.thr0ws;
-
-import org.springframework.aop.ThrowsAdvice;
-
-public class BusinessThrowsAdvice implements ThrowsAdvice {
-
-}
