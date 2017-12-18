@@ -1,6 +1,5 @@
 .git
 /classes
-/bin
 /target/
 ./settings
 .classpath
