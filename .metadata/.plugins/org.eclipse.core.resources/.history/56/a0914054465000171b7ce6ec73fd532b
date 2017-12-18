@@ -1,7 +1,0 @@
-package exm.interrupt;
-
-public class Interrupt {
-	public static void main(String[] args) {
-
-	}
-}
