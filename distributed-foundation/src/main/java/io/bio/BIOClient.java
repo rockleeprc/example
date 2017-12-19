@@ -14,6 +14,7 @@ public class BIOClient {
 		for (int i = 0; i < 5; i++) {
 			os.write(UUID.randomUUID().toString().getBytes());
 		}
+		//必须close，否则Exception in thread "main" java.net.SocketException: Connection reset
 		os.close();
 		socket.close();
 	}
