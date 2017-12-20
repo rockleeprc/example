@@ -6,7 +6,13 @@ import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ServerMain {
+/**
+ * server和client都是单线程，程序有阻塞问题
+ * 
+ * @author Administrator
+ *
+ */
+public class SingleThreadServerMain {
 
 	public static void main(String[] args) throws IOException {
 		ServerSocket serverSocket = new ServerSocket(9999);
@@ -22,7 +28,7 @@ public class ServerMain {
 			PrintStream ps = new PrintStream(accept.getOutputStream());
 			ps.print("hi client");
 			ps.close();
-			ps.close();
+			serverSocket.close();
 		}
 
 	}
