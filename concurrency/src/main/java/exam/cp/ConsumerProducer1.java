@@ -2,6 +2,12 @@ package exam.cp;
 
 import java.util.LinkedList;
 
+/**
+ * 在方法上添加synchronized实现生产者、消费者模型
+ * @author Administrator
+ *
+ * @param <T>
+ */
 public class ConsumerProducer1<T> {
 	private final LinkedList<T> list = new LinkedList<>();
 	private final int MAX_SIZE = 10;
