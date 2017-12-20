@@ -11,8 +11,8 @@ import java.net.UnknownHostException;
 public class MutiThreadClientMain {
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		Socket socket = new Socket("127.0.0.1", 9999);
-		
-		new Thread(new Reciever(socket)).start();
+
+		new Thread(new ClientReciever(socket)).start();
 		PrintWriter print = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
 		BufferedReader buf = new BufferedReader(new InputStreamReader(System.in));
 		String line = null;
@@ -26,11 +26,11 @@ public class MutiThreadClientMain {
 		socket.close();
 	}
 
-	public static class Reciever implements Runnable {
+	public static class ClientReciever implements Runnable {
 		private Socket socket;
 		private BufferedReader reader;
 
-		public Reciever(Socket socket) {
+		public ClientReciever(Socket socket) {
 			super();
 			this.socket = socket;
 			try {
