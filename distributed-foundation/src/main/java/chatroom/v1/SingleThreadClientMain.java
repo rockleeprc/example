@@ -18,7 +18,7 @@ public class SingleThreadClientMain {
 				// break后,server会阻塞,client收不到任何消息
 				break;
 			}
-			print.print(line);
+			print.println(line);
 		}
 
 		BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));

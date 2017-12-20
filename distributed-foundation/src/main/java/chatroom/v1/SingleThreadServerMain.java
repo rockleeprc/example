@@ -26,7 +26,7 @@ public class SingleThreadServerMain {
 				System.out.println(new String(buf, 0, len));
 			}
 			PrintStream ps = new PrintStream(accept.getOutputStream());
-			ps.print("hi client");
+			ps.println("hi client");
 			ps.close();
 			serverSocket.close();
 		}
