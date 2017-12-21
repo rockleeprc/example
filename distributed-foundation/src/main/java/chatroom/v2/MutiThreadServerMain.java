@@ -28,6 +28,12 @@ public class MutiThreadServerMain {
 		}
 	}
 
+	/**
+	 * 接收client的请求，并将请求发送给所有client
+	 * 
+	 * @author Administrator
+	 *
+	 */
 	private static class ServerReciever implements Runnable {
 		private Socket socket;
 		private BufferedReader reader;

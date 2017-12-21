@@ -15,7 +15,7 @@ public class SingleThreadClientMain {
 		BufferedReader buf = new BufferedReader(new InputStreamReader(System.in));
 		while ((line = buf.readLine()) != null) {
 			if ("break".equals(line)) {
-				// break后,server会阻塞,client收不到任何消息
+				// break后,server.readLine会阻塞,client.readLine也会阻塞，收不到任何消息
 				break;
 			}
 			print.println(line);
