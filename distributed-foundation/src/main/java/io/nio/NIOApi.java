@@ -52,9 +52,9 @@ public class NIOApi {
 	}
 
 	/**
-	 * position：当前缓冲区的位置，从postion的下一个位置开始读/写数据<br/>
+	 * position：从position的下一个位置开始读/写数据<br/>
 	 * capacity：缓冲区的大小<br/>
-	 * limit：缓冲区世界数据的大小，limit<=capacity<br/>
+	 * limit：缓冲区实际数据大小，limit<=capacity<br/>
 	 * mark：在数据处理过程中可以随时记录当前位置，在任意时刻回到这个位置<br/>
 	 * 
 	 * flip()：limit=position，position=0，mark=0，读写转换<br/>
