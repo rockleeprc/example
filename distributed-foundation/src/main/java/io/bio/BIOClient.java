@@ -12,9 +12,12 @@ public class BIOClient {
 		Socket socket = new Socket("localhost", 9999);
 		OutputStream os = socket.getOutputStream();
 		for (int i = 0; i < 5; i++) {
-			os.write(UUID.randomUUID().toString().getBytes());
+			String send = (UUID.randomUUID().toString() + "\r\n");
+			os.write(("hi server :" + send).getBytes());
 		}
-		//必须close，否则Exception in thread "main" java.net.SocketException: Connection reset
+		// 必须close，否则Exception in thread "main" java.net.SocketException:
+		// Connection reset
+		System.in.read();
 		os.close();
 		socket.close();
 	}
