@@ -54,7 +54,7 @@ public class NIOServerMain {
 					SocketChannel client = (SocketChannel) key.channel();
 
 					int len = 0;
-					// read()返回值不会是-1，如果没读到会返回0
+					//socketChannel.configureBlocking(false)非阻塞时，read()返回值不会是-1，如果没读到会返回0
 					while ((len = client.read(buffer)) > 0) {
 						buffer.flip();
 						// System.out.println(charset.decode(buffer));
