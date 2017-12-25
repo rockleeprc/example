@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
@@ -25,6 +26,7 @@ public class NIOApi {
 		System.out.println(fis.available());
 		FileChannel fc = fis.getChannel();
 		MappedByteBuffer mbb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fis.available());
+		System.out.println(mbb.isReadOnly());
 		while (mbb.hasRemaining()) {
 
 			System.out.print((char) mbb.get());
@@ -49,6 +51,20 @@ public class NIOApi {
 
 		byte[] bytes = new byte[1024];
 		ByteBuffer buffer2 = ByteBuffer.wrap(bytes);
+		ByteBuffer buffer3 = ByteBuffer.wrap("abc".getBytes());
+	}
+
+	@Test
+	public void compact() {
+		CharBuffer cb = CharBuffer.allocate(10);
+		cb.put('a').put('b').put('c').put('d').put('e');
+		cb.position(2);
+		// cde会覆盖掉ab
+		cb.compact();
+		cb.flip();
+		while (cb.hasRemaining()) {
+			System.out.println(cb.get());
+		}
 	}
 
 	/**
@@ -88,6 +104,30 @@ public class NIOApi {
 		buffer.flip();
 		System.out.println(
 				"limit=" + buffer.limit() + " capacity=" + buffer.capacity() + " position=" + buffer.position());
+	}
+
+	/**
+	 * 手动读写转换
+	 */
+	@Test
+	public void limitAndPosistion() {
+		ByteBuffer buffer = ByteBuffer.allocate(15);
+		System.out.println(
+				"limit=" + buffer.limit() + " capacity=" + buffer.capacity() + " position=" + buffer.position());
+
+		for (int i = 0; i < 10; i++) {
+			buffer.put((byte) i);
+		}
+
+		buffer.limit(buffer.position()).position(0);
+		System.out.println(
+				"limit=" + buffer.limit() + " capacity=" + buffer.capacity() + " position=" + buffer.position());
+
+		for (int i = 0; i < 5; i++) {
+			System.out.println(buffer.get());
+		}
+
+		System.out.println(buffer.remaining());
 	}
 
 	/**
