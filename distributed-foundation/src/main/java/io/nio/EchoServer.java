@@ -73,6 +73,8 @@ public class EchoServer {
 						clientChannel.write(buffer);
 
 						key.interestOps(SelectionKey.OP_READ);
+					}else if(key.isConnectable()){
+						System.out.println("isConnectable");
 					}
 				} catch (Exception e) {
 					key.cancel();
