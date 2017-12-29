@@ -2,12 +2,15 @@ package exam.cas;
 
 import java.util.concurrent.atomic.AtomicLongFieldUpdater;
 
+import org.junit.Test;
+
 public class CAS {
 	private volatile long count = 0;
 	private static final AtomicLongFieldUpdater<CAS> fieldUpdater = AtomicLongFieldUpdater.newUpdater(CAS.class,
 			"count");
 
-	public static void main(String[] args) {
+	@Test
+	public void t1() {
 		CAS c = new CAS();
 		boolean flag = c.compareAndSwap(0, 10);
 		System.out.println(flag + "-" + c.count);
