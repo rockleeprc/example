@@ -7,8 +7,9 @@
 		<!-- 使用 LOG4J2作为日志输出 -->
 		<setting name="logImpl" value="LOG4J2" />
 	</settings>
+	<!-- applicationContext-mybatis.xml中配置
 	<typeAliases>
-		<!-- <typeAlias type="exam.pojo.User" alias="user" /> -->
 		<package name="exam.pojo" />
 	</typeAliases>
+	 -->
 </configuration>

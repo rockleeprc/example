@@ -20,6 +20,8 @@
 		<!-- 自动扫描exam/dao/目录下的所有SQL映射的xml文件, 省掉mybatis.xml里的手工配置value="classpath:exam/dao/*.xml" 
 			指的是classpath(类路径)下exam.dao包中的所有xml文件 UserMapper.xml位于exam.dao包下，这样UserMapper.xml就可以被自动扫描 -->
 		<property name="mapperLocations" value="classpath:exam/dao/*Mapper.xml" />
+		<!-- 将包下的类名映射为别名 -->
+		<property name="typeAliasesPackage" value="exam.pojo"/>
 	</bean>
 
 	<!-- 配置扫描器 -->
@@ -29,6 +31,8 @@
 		<!-- <property name="sqlSessionFactory" ref="sqlSessionFactory"></property> 
 			java.sql.SQLException: unkow jdbc driver : ${jdbc_url} ref时会马上实例化sqlSessionFactory,但properties文件还没有加载 -->
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+		<!-- 被标注Repository才扫描 -->
+		<property name="annotationClass" value="org.springframework.stereotype.Repository"/>
 	</bean>
 
 	<!-- sqlSession实例 -->
