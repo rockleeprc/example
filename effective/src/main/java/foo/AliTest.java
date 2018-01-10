@@ -158,17 +158,52 @@ public class AliTest {
 		System.out.println(str);
 
 	}
-	
+
 	@Test
-	public void t24(){
-		// TODO	
-		// FIXME	
-		String bookId=",";
+	public void test22() {
+		// TODO
+		// FIXME
+		String bookId = ",";
 		String[] split = StringUtils.split(bookId, ",");
-		System.out.println("len="+split.length);
-		for (int i=0;i<split.length;i++) {
+		System.out.println("len=" + split.length);
+		for (int i = 0; i < split.length; i++) {
 			System.out.println(split[i]);
 		}
-		//System.out.println(Arrays.toString(split));
+		// System.out.println(Arrays.toString(split));
 	}
+
+	/**
+	 * finally{}中return会忽略到try{}中的return
+	 */
+	@Test
+	public void test21() {
+		System.out.println(m1(2));
+	}
+
+	public int m1(int i) {
+		try {
+			if (i == 1)
+				return 1;
+			if (i == 2)
+				return 2;
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			return -1;
+		}
+	}
+
+	/**
+	 * 自动拆箱的NPE
+	 */
+	@Test
+	public void test20() {
+		System.out.println(m2());
+	}
+
+	public int m2() {
+		Integer i = null;
+		return i;
+	}
+
 }
