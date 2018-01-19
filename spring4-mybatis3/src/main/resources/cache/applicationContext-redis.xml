@@ -74,8 +74,8 @@
 				expression="execution(public !void exam.dao..*.*(..))" />
 			<aop:around pointcut-ref="daoCachePointcut1" method="checkAndProceed" />
 		</aop:aspect>
-		<aop:aspect ref="cacheInterceptor" order="1000"><!-- order 参数控制 aop通知的优先级，值越小，优先级越高 
-				，在事务提交后删除缓存 -->
+		<!-- order 参数控制 aop通知的优先级，值越小，优先级越高 ，在事务提交后删除缓存 -->
+		<aop:aspect ref="cacheInterceptor" order="1000">
 			<aop:pointcut id="deleteCachePointcut1" expression="execution(* exam.dao..*.*(..))" />
 			<aop:after-returning pointcut-ref="deleteCachePointcut1"
 				method="checkAndDeleteCache" returning="retVal" />
