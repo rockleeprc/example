@@ -23,7 +23,7 @@ public class AutoLoadCacheTest {
 
 	@Test
 	public void select() throws IOException {
-		User user = userService.selectByID(19);
+		User user = userService.selectByID(8);
 		System.out.println(user);
 	}
 
@@ -54,12 +54,24 @@ public class AutoLoadCacheTest {
 		user = userService.selectByID(1);
 		System.out.println(user);
 	}
-	
+
 	@Test
-	public void insetCache(){
+	public void insetCache() {
 		User u = new User();
-		u.setUserName("bb");
+		u.setUserName("孙艺珍1");
+		u.setSex(1);
+		u.setUserAddress("BJ");
+		u.setUserAge("19");
+
 		int result = userService.insert(u);
+		System.out.println(result);
+	}
+
+	@Test
+	public void deleteCache() {
+		User user = userService.selectByID(3);
+		System.out.println(user);
+		int result = userService.delete(user.getId());
 		System.out.println(result);
 	}
 

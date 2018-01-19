@@ -13,6 +13,13 @@ import com.jarvis.cache.type.CacheOpType;
 
 import exam.pojo.User;
 
+/**
+ * https://github.com/qiujiayu/autoload-cache-spring-boot-starter/blob/master/
+ * src/test/java/com/jarvis/cache/demo/mapper/UserMapper.java
+ * 
+ * @author Administrator
+ *
+ */
 @Repository()
 public interface UserMapper {
 	static final String CACHE_NAME = "user_";
@@ -21,8 +28,7 @@ public interface UserMapper {
 	@Cache(expire = expire, autoload = true, key = "'" + CACHE_NAME + "'+#args[0]", condition = "#args[0]>0")
 	public User selectByID(int id);
 
-	//@Cache(expire = expire, key = "'" + CACHE_NAME + "'+#args[0].id", opType = CacheOpType.WRITE)
-	@Cache(expire=expire, key="'" + CACHE_NAME + "'+#retVal.id", opType=CacheOpType.WRITE)
+	@CacheDelete({ @CacheDeleteKey(value = "'" + CACHE_NAME + "' + #args[0].id") })
 	public int insert(User user);
 
 	@CacheDelete({ @CacheDeleteKey(value = "'" + CACHE_NAME + "'+#args[0].id", condition = "null != #args[0]") })
@@ -30,6 +36,7 @@ public interface UserMapper {
 
 	public int updateById(User user);
 
+	@CacheDelete({ @CacheDeleteKey(value = "'" + CACHE_NAME + "' + #args[0]", condition = "#retVal > 0") })
 	public int delete(int id);
 
 	public int countLikeName(String name);
