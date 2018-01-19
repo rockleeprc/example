@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="  
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd  
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		">
+
+	<!-- Jedis 连接池配置 -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="2000" />
+		<property name="maxIdle" value="100" />
+		<property name="minIdle" value="50" />
+		<property name="maxWaitMillis" value="2000" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		<property name="testWhileIdle" value="false" />
+	</bean>
+
+	<bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool">
+		<constructor-arg ref="jedisPoolConfig" />
+		<constructor-arg>
+			<list>
+				<bean class="redis.clients.jedis.JedisShardInfo">
+					<constructor-arg value="127.0.0.1" />
+					<constructor-arg type="int" value="6379" />
+					<constructor-arg value="redis1" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="autoLoadConfig" class="com.jarvis.cache.to.AutoLoadConfig">
+		<property name="threadCnt" value="10" />
+		<property name="maxElement" value="20000" />
+		<property name="printSlowLog" value="true" />
+		<property name="slowLoadTime" value="500" />
+		<property name="sortType" value="1" />
+		<property name="checkFromCacheBeforeLoad" value="true" />
+		<property name="autoLoadPeriod" value="50" />
+		<property name="functions">
+			<map>
+				<entry key="isEmpty" value="com.jarvis.cache.CacheUtil" />
+			</map>
+		</property>
+	</bean>
+	<bean id="hessianSerializer" class="com.jarvis.cache.serializer.HessianSerializer" />
+	<bean id="scriptParser" class="com.jarvis.cache.script.SpringELParser" />
+	<bean id="cacheManager" class="com.jarvis.cache.redis.ShardedJedisCacheManager">
+		<constructor-arg ref="hessianSerializer" />
+		<property name="shardedJedisPool" ref="shardedJedisPool" />
+	</bean>
+	<bean id="cacheHandler" class="com.jarvis.cache.CacheHandler"
+		destroy-method="destroy">
+		<constructor-arg ref="cacheManager" />
+		<constructor-arg ref="scriptParser" />
+		<constructor-arg ref="autoLoadConfig" />
+		<constructor-arg ref="hessianSerializer" />
+	</bean>
+
+	<bean id="cacheInterceptor" class="com.jarvis.cache.aop.aspectj.AspectjAopInterceptor">
+		<constructor-arg ref="cacheHandler" />
+	</bean>
+
+	<!-- proxy-target-class=false为jdk代理，为true的话，会导致拦截不了mybatis的mapper -->
+	<aop:config proxy-target-class="false">
+		<!-- 拦截mybatis的mapper -->
+		<aop:aspect ref="cacheInterceptor">
+			<aop:pointcut id="daoCachePointcut1"
+				expression="execution(public !void exam.dao..*.*(..))" />
+			<aop:around pointcut-ref="daoCachePointcut1" method="checkAndProceed" />
+		</aop:aspect>
+		<aop:aspect ref="cacheInterceptor" order="1000"><!-- order 参数控制 aop通知的优先级，值越小，优先级越高 
+				，在事务提交后删除缓存 -->
+			<aop:pointcut id="deleteCachePointcut1" expression="execution(* exam.dao..*.*(..))" />
+			<aop:after-returning pointcut-ref="deleteCachePointcut1"
+				method="checkAndDeleteCache" returning="retVal" />
+		</aop:aspect>
+	</aop:config>
+	<aop:config proxy-target-class="false">
+		<!-- 拦截@Cache -->
+		<aop:aspect ref="cacheInterceptor">
+			<aop:pointcut id="daoCachePointcut"
+				expression="execution(public !void exam.dao..*.*(..)) &amp;&amp; @annotation(cache)" />
+			<aop:around pointcut-ref="daoCachePointcut" method="proceed" />
+		</aop:aspect>
+		<!-- 拦截@CacheDelete -->
+		<aop:aspect ref="cacheInterceptor" order="1000"><!-- order 参数控制 aop通知的优先级，值越小，优先级越高 
+				，在事务提交后删除缓存 -->
+			<aop:pointcut id="deleteCachePointcut"
+				expression="execution(* exam.dao..*.*(..)) &amp;&amp; @annotation(cacheDelete)" />
+			<aop:after-returning pointcut-ref="deleteCachePointcut"
+				method="deleteCache" returning="retVal" />
+		</aop:aspect>
+	</aop:config>
+</beans>

@@ -30,4 +30,5 @@
 	<import resource="applicationContext-transaction.xml" />
 	<import resource="applicationContext-mybatis.xml" />
 	<import resource="applicationContext-dataSource.xml" />
+	<import resource="classpath:cache/applicationContext-redis.xml" />
 </beans>

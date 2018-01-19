@@ -6,10 +6,15 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.jarvis.cache.annotation.Cache;
+
 import exam.pojo.User;
 
 @Repository()
 public interface UserMapper {
+	static final String cacheName = "user";
+
+	@Cache(expire = 600, autoload = true, key = "'user_mapper_selectByID_'+#args[0]", condition = "#args[0]>0")
 	public User selectByID(int id);
 
 	public int insert(User user);
