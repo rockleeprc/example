@@ -14,7 +14,7 @@ import com.jarvis.cache.type.CacheOpType;
 import exam.pojo.User;
 
 /**
- * https://github.com/qiujiayu/autoload-cache-spring-boot-starter/blob/master/
+ * @see https://github.com/qiujiayu/autoload-cache-spring-boot-starter/blob/master/
  * src/test/java/com/jarvis/cache/demo/mapper/UserMapper.java
  * 
  * @author Administrator
