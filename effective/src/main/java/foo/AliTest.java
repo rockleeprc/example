@@ -21,6 +21,23 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 public class AliTest {
+
+	/**
+	 * args...
+	 */
+	@Test
+	public void test30() {
+		m3("1", "2", "3");
+	}
+
+	public void m3(String... args) {
+		String[] arr = args;
+		int len = args.length;
+		for (int i = 0; i < len; i++) {
+			System.out.println(arr[i]);
+		}
+	}
+
 	/**
 	 * 线城池使用ThreadPoolExecutor实现，控制线程数和请求队列的长度
 	 */
@@ -160,8 +177,7 @@ public class AliTest {
 	}
 
 	/**
-	 * test commons-lang
-	 * TODO、FIXME
+	 * test commons-lang TODO、FIXME
 	 */
 	@Test
 	public void test22() {
