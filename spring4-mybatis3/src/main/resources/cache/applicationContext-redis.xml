@@ -26,7 +26,7 @@
 		<constructor-arg>
 			<list>
 				<bean class="redis.clients.jedis.JedisShardInfo">
-					<constructor-arg value="127.0.0.1" />
+					<constructor-arg value="192.168.33.11" />
 					<constructor-arg type="int" value="6379" />
 					<constructor-arg value="redis1" />
 				</bean>
