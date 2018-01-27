@@ -52,7 +52,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dispatcherServlet</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<url-pattern>*.action</url-pattern>
 	</servlet-mapping>
 
 	<!-- session过期时间120分钟 -->
@@ -60,10 +60,12 @@
 		<session-timeout>120</session-timeout>
 	</session-config>
 
+	<!-- 404错误是会显示错误页面，如果不配置404.jsp将什么都不显示（排错困难）
 	<error-page>
 		<error-code>404</error-code>
 		<location>/404.jsp</location>
 	</error-page>
+	 -->
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

@@ -42,29 +42,12 @@ public class UserServiceImpl implements IUserService {
 		return userMapper.delete(id);
 	}
 
-	@Override
-	public int countLikeName(String name) {
-		return userMapper.countLikeName(name);
-	}
+	
 
 	@Override
-	public List<User> paramsToMap(Map<String, String> params) {
-		return userMapper.paramsToMap(params);
-	}
-
-	@Override
-	public List<User> paramsToAnnotation(String userName, String userAddress) {
-		return userMapper.paramsToAnnotation(userName, userAddress);
-	}
-
-	@Override
-	public List<User> paramsToBean(User params) {
-		return userMapper.paramsToBean(params);
-	}
-
-	@Override
-	public List<User> selectToWhere(User params) {
-		return userMapper.selectToWhere(params);
+	public List<User> findAll() {
+		
+		return userMapper.findAll();
 	}
 
 }
