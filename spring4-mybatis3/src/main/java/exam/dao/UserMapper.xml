@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="exam.dao.UserMapper">
+	<cache type="exam.cache.RedisCache" />
 	<sql id="user_colums">
 		id,userAge,userName,userAddress,sex
 	</sql>
 	<!-- 自定义结果集，查询中不能用select *，查询单表时优先使用自动映射 -->
 	<resultMap type="exam.pojo.User" id="userMap">
 		<id property="id" column="id"></id>
-		<result property="userAge" column="userAge"/>
+		<result property="userAge" column="userAge" />
 		<result property="userName" column="userName" />
 		<result property="userAddress" column="userAddress" />
+		<result property="sex" column="sex" />
 	</resultMap>
 
 	<update id="updateById" parameterType="int">
@@ -80,7 +82,8 @@
 	</select>
 
 	<select id="selectByID" parameterType="int" resultType="User">
-		select *
+		select
+		<include refid="user_colums" />
 		from user where id = #{id}
 	</select>
 
