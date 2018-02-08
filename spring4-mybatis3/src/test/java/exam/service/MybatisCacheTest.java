@@ -44,9 +44,9 @@ public class MybatisCacheTest {
 
 	@Test
 	public void select() {
-		User user = userService.selectByID(19);
+		User user = userService.selectByID(2);
 		System.out.println(user);
-		user = userService.selectByID(19);
+		user = userService.selectByID(2);
 		System.out.println(user);
 	}
 }
