@@ -18,16 +18,23 @@ public class ReflectorTest {
 		ReflectorFactory facotry = new DefaultReflectorFactory();
 		userReflector = facotry.findForClass(User.class);
 	}
-
+	
 	@Test
 	public void testGetterType() {
-		Class<?> clazz = userReflector.getGetterType("userName");
-		System.out.println(clazz.getName());
+		Class<?> clazzName = userReflector.getGetterType("userName");
+		System.out.println(clazzName.getName());
+		
+		Class<?> clazzSex = userReflector.getGetterType("sex");
+		System.out.println(clazzSex.getName());
+		
 	}
 
 	@Test
 	public void testGetInvoker() throws IllegalAccessException, InvocationTargetException, InstantiationException {
-		Invoker invoker = userReflector.getGetInvoker("userName");
+		Invoker invoker = userReflector.getGetInvoker("sex");
+		System.out.println(invoker);
+		Class<?> clazz = invoker.getType();
+		System.out.println(clazz);
 	}
 
 	@Test
