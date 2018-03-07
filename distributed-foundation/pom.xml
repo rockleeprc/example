@@ -8,6 +8,13 @@
 	<name>distributed-foundation Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
+		<!-- activemq -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>5.14.4</version>
+		</dependency>
+
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
