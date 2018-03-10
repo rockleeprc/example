@@ -1,4 +1,4 @@
-package activemq;
+package activemq.p2p;
 
 import javax.jms.Connection;
 import javax.jms.Destination;
@@ -17,23 +17,23 @@ public class MQReceiver {
 			// 创建连接
 			connection = connectionFactory.createConnection();
 			connection.start();
-//			connectionFactory.setDispatchAsync(false);
-			Session session = connection.createSession(Boolean.TRUE, Session.DUPS_OK_ACKNOWLEDGE);
+			// connectionFactory.setDispatchAsync(false);
+			Session session = connection.createSession(Boolean.TRUE, Session.AUTO_ACKNOWLEDGE);
 
 			// 创建队列（如果队列已经存在则不会创建， first-queue是队列名称）
 			// destination表示目的地
 			Destination destination = session.createQueue("first-queue");
 			// 创建消息接收者
 			MessageConsumer consumer = session.createConsumer(destination);
-			
+
 			TextMessage textMessage = (TextMessage) consumer.receive();
 			System.out.println(textMessage.getText());
 
-//			for (int i = 0; i < 10; i++) {
-//				TextMessage textMessage = (TextMessage) consumer.receive();
-//				System.out.println(textMessage.getText());
-//			}
-			 session.commit();
+			// for (int i = 0; i < 10; i++) {
+			// TextMessage textMessage = (TextMessage) consumer.receive();
+			// System.out.println(textMessage.getText());
+			// }
+			session.commit();
 			session.close();
 		} catch (JMSException e) {
 			e.printStackTrace();

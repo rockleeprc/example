@@ -1,4 +1,4 @@
-package activemq;
+package activemq.p2p;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;

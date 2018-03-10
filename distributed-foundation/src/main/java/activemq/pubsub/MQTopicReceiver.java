@@ -1,17 +1,18 @@
-package activemq;
+package activemq.pubsub;
 
 import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 import javax.jms.JMSException;
-import javax.jms.MessageProducer;
+import javax.jms.MessageConsumer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-public class MQSender {
+public class MQTopicReceiver {
 	public static void main(String[] args) {
-		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.33.11:61616");
+		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://192.168.33.11:61616");
 		Connection connection = null;
 		try {
 			// 创建连接
@@ -22,19 +23,11 @@ public class MQSender {
 
 			// 创建队列（如果队列已经存在则不会创建， first-queue是队列名称）
 			// destination表示目的地
-			Destination destination = session.createQueue("first-queue");
-			// 创建消息发送者
-			MessageProducer producer = session.createProducer(destination);
-			
-			TextMessage textMessage = session.createTextMessage("hello, 菲菲,我是帅帅的mic:");
-			producer.send(textMessage);
-			
-			// for (int i = 0; i < 10; i++) {
-			// TextMessage textMessage = session.createTextMessage("hello,
-			// 菲菲,我是帅帅的mic:" + i);
-			// producer.send(textMessage);
-			// }
-			
+			Destination destination = session.createTopic("first-topic");
+			// 创建消息接收者
+			MessageConsumer consumer = session.createConsumer(destination);
+			TextMessage textMessage = (TextMessage) consumer.receive();
+			System.out.println(textMessage.getText());
 			session.commit();
 			session.close();
 		} catch (JMSException e) {
