@@ -1,16 +1,18 @@
-package activemq.p2p;
+package activemq.queue;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 import javax.jms.JMSException;
+import javax.jms.Message;
 import javax.jms.MessageConsumer;
+import javax.jms.MessageListener;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-public class JmsConsumer {
+public class JmsAsynConsumer {
 
 	public static void main(String[] args) {
 		// activemq.xml中配置指定的用户、密码才能访问ActiveMQ
@@ -29,10 +31,24 @@ public class JmsConsumer {
 			//消息发送和接受的地点，要么queue，要么topic
 			Destination destination = session.createQueue("mq-queue");
 			
-			//创建MessageConsumer，并使用非阻塞模式接受消息
 			MessageConsumer messageConsumer = session.createConsumer(destination);
-			TextMessage message  = (TextMessage) messageConsumer.receive();
-			System.out.println(message.getText());
+			//这种异步接受“貌似”是ActiveMQ主动的推送消息给消费者，其本质还是消费者轮询消息服务器导致的，只不过这个过程被封装了
+			messageConsumer.setMessageListener(new MessageListener() {
+				
+				@Override
+				public void onMessage(Message message) {
+					
+					if(message instanceof TextMessage){
+						TextMessage textMessage  = (TextMessage) message;
+						try {
+							System.out.println(textMessage.getText());
+						} catch (JMSException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			});
+			
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}finally{

@@ -1,18 +1,18 @@
-package activemq.p2p;
+package activemq.queue;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
+import javax.jms.DeliveryMode;
 import javax.jms.Destination;
 import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageConsumer;
-import javax.jms.MessageListener;
+import javax.jms.MessageProducer;
+import javax.jms.Queue;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-public class JmsAsynConsumer {
+public class JmsProducer {
 
 	public static void main(String[] args) {
 		// activemq.xml中配置指定的用户、密码才能访问ActiveMQ
@@ -31,24 +31,15 @@ public class JmsAsynConsumer {
 			//消息发送和接受的地点，要么queue，要么topic
 			Destination destination = session.createQueue("mq-queue");
 			
-			MessageConsumer messageConsumer = session.createConsumer(destination);
-			//这种异步接受“貌似”是ActiveMQ主动的推送消息给消费者，其本质还是消费者轮询消息服务器导致的，只不过这个过程被封装了
-			messageConsumer.setMessageListener(new MessageListener() {
-				
-				@Override
-				public void onMessage(Message message) {
-					
-					if(message instanceof TextMessage){
-						TextMessage textMessage  = (TextMessage) message;
-						try {
-							System.out.println(textMessage.getText());
-						} catch (JMSException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			});
+			//创建MessageProducer，并设置持久化方式，默认持久
+			MessageProducer messageProducer = session.createProducer(destination);
+			messageProducer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 			
+			//jms规范定义5中消息类型StreamMessage、MapMessage、TextMessage、ObjectMessage、BytesMessage
+			//定义messsage类型，并发送
+			TextMessage message  = session.createTextMessage();
+			message.setText("this is TextMessage");
+			messageProducer.send(message);
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}finally{

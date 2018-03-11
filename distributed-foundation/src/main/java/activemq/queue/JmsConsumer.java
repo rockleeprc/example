@@ -1,18 +1,16 @@
-package activemq.p2p;
+package activemq.queue;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
-import javax.jms.DeliveryMode;
 import javax.jms.Destination;
 import javax.jms.JMSException;
-import javax.jms.MessageProducer;
-import javax.jms.Queue;
+import javax.jms.MessageConsumer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-public class JmsProducer {
+public class JmsConsumer {
 
 	public static void main(String[] args) {
 		// activemq.xml中配置指定的用户、密码才能访问ActiveMQ
@@ -31,15 +29,10 @@ public class JmsProducer {
 			//消息发送和接受的地点，要么queue，要么topic
 			Destination destination = session.createQueue("mq-queue");
 			
-			//创建MessageProducer，并设置持久化方式，默认持久
-			MessageProducer messageProducer = session.createProducer(destination);
-			messageProducer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-			
-			//jms规范定义5中消息类型StreamMessage、MapMessage、TextMessage、ObjectMessage、BytesMessage
-			//定义messsage类型，并发送
-			TextMessage message  = session.createTextMessage();
-			message.setText("this is TextMessage");
-			messageProducer.send(message);
+			//创建MessageConsumer，并使用非阻塞模式接受消息
+			MessageConsumer messageConsumer = session.createConsumer(destination);
+			TextMessage message  = (TextMessage) messageConsumer.receive();
+			System.out.println(message.getText());
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}finally{
