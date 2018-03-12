@@ -18,9 +18,9 @@ public class BaseInvocationHandlerImpl implements BaseInvocationHandler {
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		System.out.println("start...这是BaseInvocationHandler");
-		method.invoke(this.target, args);
+		Object reult = method.invoke(this.target, args);
 		System.out.println("end...这是BaseInvocationHandler");
-		return null;
+		return reult;
 	}
 
 }

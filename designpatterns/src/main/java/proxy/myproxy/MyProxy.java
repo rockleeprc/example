@@ -57,9 +57,9 @@ public class MyProxy {
 		sb.append("import java.lang.reflect.Method;" + ln);
 		
 		sb.append("public class $Proxy0 implements " + interfaces[0].getName() + "{" + ln);
-		sb.append("MyInvocationHandler h;" + ln);
+		sb.append("BaseInvocationHandler h;" + ln);
 
-		sb.append("public $Proxy0(MyInvocationHandler h) { " + ln);
+		sb.append("public $Proxy0(BaseInvocationHandler h) { " + ln);
 		sb.append("this.h = h;");
 		sb.append("}" + ln);
 

@@ -31,12 +31,6 @@ public class DynamicProxyTest {
 	/**
 	 * 详细步骤
 	 * 
-	 * @throws NoSuchMethodException
-	 * @throws SecurityException
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
 	 */
 	@Test
 	public void test1() throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
