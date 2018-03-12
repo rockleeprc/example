@@ -39,7 +39,7 @@ public class MyProxy {
 			// 4、编译生成的.class文件加载到JVM中来
 			Class<?> proxyClass = classLoader.findClass("$Proxy0");
 			Constructor<?> c = proxyClass.getConstructor(BaseInvocationHandler.class);
-			f.delete();
+//			f.delete();
 
 			// 5、返回字节码重组以后的新的代理对象
 			return c.newInstance(invocationHandler);
