@@ -11,13 +11,19 @@ import factory.method.FactoryMethod;
 import factory.simple.SimpleFactory;
 
 public class FactoryTest {
-	
+
+	/**
+	 * 工厂方法
+	 */
 	@Test
-	public void testAbstract(){
-		BMWCarStore factory  = new BMWCarStore();
+	public void testAbstract() {
+		CarStore factory = new BMWCarStore();
 		Car car = factory.getCar("bmw");
 	}
 
+	/**
+	 * 工厂方法
+	 */
 	@Test
 	public void testMethodFactory() {
 		FactoryMethod facotry = new BenzFactory();
@@ -29,6 +35,9 @@ public class FactoryTest {
 		System.out.println(bmw);
 	}
 
+	/**
+	 * 简单工厂
+	 */
 	@Test
 	public void testSimpleFactory() {
 		SimpleFactory facotry = new SimpleFactory();
