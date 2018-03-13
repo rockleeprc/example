@@ -16,7 +16,7 @@ public class FactoryTest {
 	 * 工厂方法
 	 */
 	@Test
-	public void testAbstract() {
+	public void testAbstractFacotry() {
 		CarStore factory = new BMWCarStore();
 		Car car = factory.getCar("bmw");
 	}
