@@ -1,13 +1,22 @@
-package factory;
+package factory.test;
 
 import org.junit.Test;
 
+import factory.Car;
+import factory.method.BMWCarStore;
 import factory.method.BMWFactory;
 import factory.method.BenzFactory;
+import factory.method.CarStore;
 import factory.method.FactoryMethod;
 import factory.simple.SimpleFactory;
 
 public class FactoryTest {
+	
+	@Test
+	public void testAbstract(){
+		BMWCarStore factory  = new BMWCarStore();
+		Car car = factory.getCar("bmw");
+	}
 
 	@Test
 	public void testMethodFactory() {
