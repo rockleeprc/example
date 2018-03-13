@@ -11,8 +11,16 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	default-lazy-init="false" default-autowire="no">
 
 
+	<!-- name可以使用id不能使用的一些字符，比如/。而且 还可以通过逗号、空格或者冒号分割指定多个name -->
 	<bean id="person" class="exam.pojo.Person">
+		<!-- setter优先于 constructor -->
 		<constructor-arg index="0" value="rock" />
 		<constructor-arg index="1" value="28" />
+		<!-- <property name="name" value="liyan" /> -->
+		<property name="name">
+	<!-- <null></null> -->
+			<value>liyan</value>
+		</property>
+		<property name="age" value="18" />
 	</bean>
 </beans>
