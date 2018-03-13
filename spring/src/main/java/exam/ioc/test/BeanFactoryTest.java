@@ -1,4 +1,4 @@
-package exam.ioc;
+package exam.ioc.test;
 
 import org.junit.Test;
 import org.springframework.beans.MutablePropertyValues;
@@ -85,7 +85,7 @@ public class BeanFactoryTest {
 		propertyValues.addPropertyValue(new PropertyValue("name", "liyan"));
 		propertyValues.addPropertyValue(new PropertyValue("age", 18));
 		person.setPropertyValues(propertyValues);
-		// 绑定完成 2
+		// 绑定完成
 		return (BeanFactory) registry;
 	}
 }
