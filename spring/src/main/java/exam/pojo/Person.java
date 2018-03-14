@@ -1,4 +1,4 @@
-package exam.jdbc.entity;
+package exam.pojo;
 
 public class Person {
 	private Integer id;

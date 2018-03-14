@@ -1,0 +1,91 @@
+package exam.ioc.test;
+
+import org.junit.Test;
+import org.springframework.beans.MutablePropertyValues;
+import org.springframework.beans.PropertyValue;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.config.ConstructorArgumentValues;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.beans.factory.support.PropertiesBeanDefinitionReader;
+import org.springframework.beans.factory.support.RootBeanDefinition;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+
+import exam.pojo.Person;
+
+public class BeanFactoryTest {
+
+	/**
+	 * 读取配置文件
+	 */
+	@Test
+	public void readProperties() {
+		DefaultListableBeanFactory beanRegistry = new DefaultListableBeanFactory();
+		BeanFactory container = (BeanFactory) bindViaPropertiesFile(beanRegistry);
+		Person person = (Person) container.getBean("person");
+		System.out.println(person);
+	}
+
+	public BeanFactory bindViaPropertiesFile(BeanDefinitionRegistry registry) {
+		PropertiesBeanDefinitionReader reader = new PropertiesBeanDefinitionReader(registry);
+		reader.loadBeanDefinitions("classpath:ioc/applicationContext.properties");
+		return (BeanFactory) registry;
+	}
+
+	/**
+	 * 读取xml配置
+	 */
+	@Test
+	public void readXML() {
+		DefaultListableBeanFactory beanRegistry = new DefaultListableBeanFactory();
+		BeanFactory container = (BeanFactory) bindViaXMLFile(beanRegistry);
+
+		Person p = (Person) container.getBean("person");
+		System.out.println(p);
+	}
+
+	public BeanFactory bindViaXMLFile(BeanDefinitionRegistry registry) {
+		// 通过BeanDefinitionReader读取方式
+		// XmlBeanDefinitionReader负责读取Spring指定格式的XML配置文件并解析，之后将解析后的文件内容映射到相应的BeanDefinition，并加载到相应的BeanDefinitionRegistry中
+		XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(registry);
+		reader.loadBeanDefinitions("classpath:ioc/applicationContext-beanFactory.xml");
+		return (BeanFactory) registry;
+		// 通过XmlBeanFactory方式
+		// return new XmlBeanFactory(new
+		// ClassPathResource("ioc/applicationContext-beanFactory.xml"));
+
+	}
+
+	/**
+	 * 直接编码方式
+	 */
+	@Test
+	public void hardCode() {
+		DefaultListableBeanFactory beanRegistry = new DefaultListableBeanFactory();
+		BeanFactory container = (BeanFactory) bindViaCode(beanRegistry);
+		Person person = (Person) container.getBean("person");
+		System.out.println(person);
+	}
+
+	public BeanFactory bindViaCode(BeanDefinitionRegistry registry) {
+		AbstractBeanDefinition person = new RootBeanDefinition(Person.class, true);
+		// 将bean定义注册到容器中
+		registry.registerBeanDefinition("person", person);
+
+		// 指定依赖关系
+		// 1. 可以通过构造方法注入方式
+		ConstructorArgumentValues argValues = new ConstructorArgumentValues();
+		argValues.addIndexedArgumentValue(0, "liyan");
+		argValues.addIndexedArgumentValue(1, 18);
+		person.setConstructorArgumentValues(argValues);
+
+		// 2. 或者通过setter方法注入方式
+		MutablePropertyValues propertyValues = new MutablePropertyValues();
+		propertyValues.addPropertyValue(new PropertyValue("name", "liyan"));
+		propertyValues.addPropertyValue(new PropertyValue("age", 18));
+		person.setPropertyValues(propertyValues);
+		// 绑定完成
+		return (BeanFactory) registry;
+	}
+}
