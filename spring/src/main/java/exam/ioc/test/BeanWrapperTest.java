@@ -1,4 +1,4 @@
-package exam.ioc;
+package exam.ioc.test;
 
 import static org.junit.Assert.*;
 
