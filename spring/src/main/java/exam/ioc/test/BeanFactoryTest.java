@@ -11,10 +11,36 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.PropertiesBeanDefinitionReader;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.core.io.ClassPathResource;
 
 import exam.pojo.Person;
 
 public class BeanFactoryTest {
+
+	@Test
+	public void testBeanFactory() {
+		// 配置文件被抽象为Resource
+		ClassPathResource res = new ClassPathResource("ioc/applicationContext-beanFactory.xml");
+		// DefaultListableBeanFactory是一个默认的功能完整的IOC容器实现
+		DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+		// 读取配置文件
+		XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
+		reader.loadBeanDefinitions(res);
+
+		Person p1 = (Person) factory.getBean("person");
+		Person p2 = (Person) factory.getBean(Person.class);
+//		Person p3 = (Person) factory.getBean("person", "a", 10);
+
+		System.out.println(p1);
+		System.out.println(p2);
+//		System.out.println(p3);
+
+		System.out.println(factory.isSingleton("person"));
+		System.out.println(factory.isPrototype("person"));
+		System.out.println(factory.isTypeMatch("person", Person.class));
+		System.out.println(factory.getType("person"));
+		System.out.println(factory.containsBean("person"));
+	}
 
 	/**
 	 * 读取配置文件
