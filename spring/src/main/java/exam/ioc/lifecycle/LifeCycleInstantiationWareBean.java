@@ -9,6 +9,11 @@ import org.springframework.beans.factory.config.InstantiationAwareBeanPostProces
 
 public class LifeCycleInstantiationWareBean extends InstantiationAwareBeanPostProcessorAdapter {
 
+	public LifeCycleInstantiationWareBean() {
+		super();
+		System.out.println("LifeCycleInstantiationWareBean");
+	}
+
 	@Override
 	public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
 		System.out.println("LifeCycleInstantiationWareBean-" + beanName);
@@ -16,10 +21,9 @@ public class LifeCycleInstantiationWareBean extends InstantiationAwareBeanPostPr
 	}
 
 	@Override
-	public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
-
+	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 		System.out.println("LifeCycleInstantiationWareBean-" + beanName);
-		return super.postProcessAfterInstantiation(bean, beanName);
+		 return super.postProcessAfterInitialization(bean, beanName);
 	}
 
 	@Override
