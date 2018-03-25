@@ -10,8 +10,9 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
-<!-- 	<bean id="beanPostProcessor" class="exam.ioc.lifecycle.LifeCyclePostProcessor"></bean> -->
-<!-- 	<bean id="beanFactoryPostProcessor" class="exam.ioc.lifecycle.LifeCycleBeanFactoryPostProcessor"></bean> -->
+	<bean id="beanFactoryPostProcessor" class="exam.ioc.lifecycle.LifeCycleBeanFactoryPostProcessor"></bean>
+	<bean id="beanPostProcessor" class="exam.ioc.lifecycle.LifeCyclePostProcessor"></bean>
+	<bean id="instantiationWareBean" class="exam.ioc.lifecycle.LifeCycleInstantiationWareBean"></bean>
 
 	<bean id="lifeCycleImpl" class="exam.ioc.interfaces.impl.LifeCycleImpl"
 		init-method="init" destroy-method="destroyMethod" p:name="a">
