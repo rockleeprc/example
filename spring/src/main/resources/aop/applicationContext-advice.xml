@@ -20,8 +20,9 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 		proxyInterfaces：被代理对象的接口，也就是target接口
 		interfaces：proxyInterfaces的别名
 		interceptorNames：advice、advisor实现类，具体的横切逻辑实现
-		proxyTargetClass：true=对target进行cglib代理，不使用jdk
+		proxyTargetClass：true=对target进行cglib代理，不使用jdk，=true时忽略proxyInterfaces配置
 		optimize：true：强制使用cglib
+		singletion：返回代理对象是否为单例，默认单例
 	 -->
 	<bean id="businessIntroductionAdviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean"
 		p:proxyInterfaces="exam.aop.interfaces.IIntroductionMethod" p:interceptorNames="businessIntroductionAdvice"

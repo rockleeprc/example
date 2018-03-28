@@ -48,7 +48,7 @@ public class AdviceAOPTest {
 	IBusiness businessAroundAdviceProxy;
 
 	/**
-	 *  MethodInterceptor 基于配置
+	 * MethodInterceptor 基于配置
 	 */
 	@Test
 	public void aroundAdviceProxy4Conf() {
@@ -78,7 +78,7 @@ public class AdviceAOPTest {
 	/**
 	 * BeforeAdvice 基于配置
 	 * 
-	 * 使用ProxyFactoryBean implements FactoryBean<Object> 
+	 * 使用ProxyFactoryBean implements FactoryBean<Object>
 	 * 负责为其它bean创建代理对象，内部使用ProxyFactory
 	 */
 	@Test
@@ -90,16 +90,20 @@ public class AdviceAOPTest {
 	 * BeforeAdvice 基于jdk代理，硬编码
 	 * 
 	 * JdkDynamicAopProxy创建
+	 * 
+	 * Spring配置见ProxyFactoryBean
 	 */
 	@Test
 	public void beforeAdvice4Jdk() {
 		IBusiness bus = new BusinessImpl();
 		BeforeAdvice advice = new BusinessBeforeAdvice();
+
+		// spring提供的代理工厂
 		ProxyFactory pf = new ProxyFactory();
 		pf.setTarget(bus);
 		pf.addAdvice(advice);
-		// 使用jdk代理，指定接口
-		pf.setInterfaces(bus.getClass().getInterfaces());
+		pf.setInterfaces(bus.getClass().getInterfaces());// 使用jdk代理，指定接口
+
 		IBusiness proxy = (IBusiness) pf.getProxy();
 		proxy.doSomething();
 		System.out.println(proxy.getClass().getName());
@@ -114,11 +118,12 @@ public class AdviceAOPTest {
 	public void beforeAdvice4Cglib() {
 		IBusiness bus = new BusinessImpl();
 		BeforeAdvice advice = new BusinessBeforeAdvice();
+
 		ProxyFactory pf = new ProxyFactory();
 		pf.setTarget(bus);
 		pf.addAdvice(advice);
-		// 针对代理进行优化，接口也会使用cglib
-		pf.setOptimize(true);
+		pf.setOptimize(true);// 针对代理进行优化，接口也会使用cglib
+
 		IBusiness proxy = (IBusiness) pf.getProxy();
 		proxy.doSomething();
 		System.out.println(proxy.getClass().getName());

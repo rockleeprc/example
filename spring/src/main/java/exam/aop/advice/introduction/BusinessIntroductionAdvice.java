@@ -5,12 +5,12 @@ import org.springframework.aop.support.DelegatingIntroductionInterceptor;
 
 import exam.aop.interfaces.IIntroductionMethod;
 
+/**
+ * BusinessIntroductionAdvice创建代理时，cglib创建代理的时间较长，
+ * 保持BusinessIntroductionAdvice为singleton，类中变量用ThreadLocal实现，效率更高
+ */
 public class BusinessIntroductionAdvice extends DelegatingIntroductionInterceptor implements IIntroductionMethod {
-
-	/**
-	 * BusinessIntroductionAdvice创建代理时，cglib创建代理的时间较长，
-	 * 保持BusinessIntroductionAdvice为singleton，类中变量用ThreadLocal实现，效率更高
-	 */
+	private static final long serialVersionUID = -8213962377263745715L;
 
 	/**
 	 * 通过实现接口方法，在目标类织入新的方法
