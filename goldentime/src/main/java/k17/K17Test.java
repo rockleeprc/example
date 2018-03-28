@@ -2,6 +2,7 @@ package k17;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -285,5 +287,21 @@ public class K17Test {
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_ZERO_POINT);
 		String currentDate = sdf.format(new Date());
 		System.out.println(currentDate);
+	}
+	@Test
+	public void t(){
+//		-copyrightId:22 OR -copyrightId:213
+		String[] arr = StringUtils.split("12,1",",");
+		System.out.println(Arrays.toString(arr));
+		String copyright="-copyrightId:";
+		StringBuffer sb = new StringBuffer();
+		for(int i=0;i<arr.length;i++){
+			if(i!=0){
+				sb.append(" OR ");
+			}
+			sb.append(copyright).append(arr[i]);
+			
+		}
+		System.out.println(sb.toString());
 	}
 }

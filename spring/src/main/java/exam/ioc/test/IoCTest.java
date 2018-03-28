@@ -121,7 +121,7 @@ public class IoCTest {
 	}
 
 	public BeanFactory bindViaCode(BeanDefinitionRegistry registry) {
-		AbstractBeanDefinition person = new RootBeanDefinition(Person.class, true);
+		AbstractBeanDefinition person = new RootBeanDefinition(Person.class, 0, true);
 		// 将bean定义注册到容器中
 		registry.registerBeanDefinition("person", person);
 
