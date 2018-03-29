@@ -1,5 +1,7 @@
 package exam.aop.advice;
 
+
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.aop.BeforeAdvice;
@@ -13,6 +15,9 @@ import exam.aop.advice.before.BusinessBeforeAdvice;
 import exam.aop.interfaces.IBusiness;
 import exam.aop.interfaces.IIntroductionMethod;
 import exam.aop.interfaces.impl.BusinessImpl;
+
+
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:aop/applicationContext-advice.xml")
@@ -128,4 +133,5 @@ public class AdviceAOPTest {
 		proxy.doSomething();
 		System.out.println(proxy.getClass().getName());
 	}
+	
 }

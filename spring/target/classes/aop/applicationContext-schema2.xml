@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- proxy-target-class是否这只cglib代理 -->
+	<aop:config proxy-target-class="true">
+		<!-- 定义切点，可以复用 -->
+		<aop:pointcut expression="execution(* *To(..))" id="waiterPT" />
+		<!-- 定义切面，可以有多个 -->
+		<aop:aspect ref="adviceMethod">
+			<aop:before method="beforeAdvice" pointcut-ref="waiterPT" />
+		</aop:aspect>
+		<aop:aspect ref="adviceMethod">
+			<aop:around method="aroundAdvice" pointcut-ref="waiterPT" />
+		</aop:aspect>
+	</aop:config>
+
+	<!-- 切面 -->
+	<bean id="adviceMethod" class="exam.aop.schema.AdviceMethod"></bean>
+
+	<!-- target Bean -->
+	<bean id="waiter" class="exam.aop.interfaces.impl.NaiveWaiter"></bean>
+
+</beans>
