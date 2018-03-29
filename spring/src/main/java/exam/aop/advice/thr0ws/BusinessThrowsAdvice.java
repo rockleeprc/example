@@ -16,12 +16,11 @@ public class BusinessThrowsAdvice implements ThrowsAdvice {
 	 * ThrowsAdvice没有定义任何方法，此接口为标记接口<br/> 
 	 * 方法名必须定义为 afterThrowing()
 	 * 可选[Method method, Object[] args, Object target]
-	 * 最后一个必须为Throwable或子类
+	 * 最后一个参数必须为Throwable或子类
 	 * 
 	 * @param method
 	 * @param args
 	 * @param target
-	 *            可选
 	 * @param ex
 	 */
 	public void afterThrowing(Method method, Object[] args, Object target, Exception ex) {

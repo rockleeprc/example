@@ -11,7 +11,7 @@ public class GreetingBeforeAdvice implements MethodBeforeAdvice {
 		System.out.println(target.getClass().getName() + "." + method.getName());
 		String name = (String) args[0];
 		System.out.println("参数："+name);
-		System.out.println("MethodBeforeAdvice start...");
+		System.out.println("exam.aop.aspect.advice.GreetingBeforeAdvice.before(Method, Object[], Object)...");
 	}
 
 }
