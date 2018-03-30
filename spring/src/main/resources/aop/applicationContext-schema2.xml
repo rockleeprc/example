@@ -12,7 +12,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	<!-- proxy-target-class是否这只cglib代理 -->
 	<aop:config proxy-target-class="true">
 		<!-- 定义切点，可以复用 -->
-		<aop:pointcut expression="execution(* *To(..))" id="waiterPT" />
+		<aop:pointcut id="waiterPT" expression="execution(* *To(..))" />
 		<!-- 定义切面，可以有多个 -->
 		<aop:aspect ref="adviceMethod">
 			<aop:before method="beforeAdvice" pointcut-ref="waiterPT" />
