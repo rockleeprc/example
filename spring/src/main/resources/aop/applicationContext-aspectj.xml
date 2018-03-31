@@ -11,8 +11,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
 	<context:component-scan base-package="exam.aop"/>
 
-	<!-- 开启基于@AspectJ切面的驱动器，不用配置AnnotationAwareAspectJAutoProxyCreator --><aop:aspectj-autoproxy 
-		proxy-target-class="true" /> 
+	<!-- 开启基于@AspectJ切面的驱动器，不用配置AnnotationAwareAspectJAutoProxyCreator -->
+	<aop:aspectj-autoproxy proxy-target-class="true" /> 
 
 	<!-- target Bean -->
 	<bean id="waiter" class="exam.aop.interfaces.impl.NaiveWaiter" />

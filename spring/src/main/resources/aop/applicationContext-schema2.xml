@@ -22,7 +22,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 		</aop:aspect>
 	</aop:config>
 
-	<!-- 切面 -->
+	<!-- advice -->
 	<bean id="adviceMethod" class="exam.aop.schema.AdviceMethod"></bean>
 
 	<!-- target Bean -->

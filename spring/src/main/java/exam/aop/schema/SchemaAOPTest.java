@@ -23,7 +23,7 @@ public class SchemaAOPTest {
 	public void schemaProxy4Config() {
 
 		// waiter.greetTo("jack");
-		waiter.greetTo("tom");
+//		waiter.greetTo("tom");
 		waiter.serveTo("marry");
 	}
 
