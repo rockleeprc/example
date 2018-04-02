@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<context:component-scan base-package="exam.thread"></context:component-scan>
+
+	<bean id="printThread" class="exam.thread.PrintThread" scope="prototype"></bean>
+
+	<!-- 异步线程池 -->
+	<bean id="threadPool"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<!-- 核心线程数 -->
+		<property name="corePoolSize" value="5" />
+		<!-- 最大线程数 -->
+		<property name="maxPoolSize" value="50" />
+		<!-- 队列最大长度 -->
+		<property name="queueCapacity" value="1000" />
+		<!-- 线程池维护线程所允许的空闲时间 -->
+		<property name="keepAliveSeconds" value="300" />
+		<!-- 线程池对拒绝任务(无线程可用)的处理策略 -->
+		<property name="rejectedExecutionHandler">
+			<bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />
+		</property>
+	</bean>
+
+</beans>

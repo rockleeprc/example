@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<context:component-scan base-package="exam.aop"></context:component-scan>
+
+	<!-- DefaultAdvisorAutoProxyCreator 配置 -->	 
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"></bean>
+
+	<!-- BeanNameAutoProxyCreator 配置
+	p:interceptorNames="可以配置advice、advisor"
+		配置advice拦截所有方法，配置advisor可以自定义Pointcut继承PointcutAdvisor实现Pointcut规则
+	p:interceptorNames="指定一个或多个增强的bean"
+	
+	<bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"
+		p:beanNames="seller,watier,*er" p:interceptorNames="greetingAdvisor"
+		p:optimize="true">
+	</bean>
+ 	-->
+ 	
+	<!-- advisor 根据正则匹配类中的方法-->
+	<bean id="regexpAdvisor"
+		class="org.springframework.aop.support.RegexpMethodPointcutAdvisor"
+		p:advice-ref="greetingAdvice">
+		<property name="patterns">
+			<list>
+				<value>.*greet.*</value>
+<!-- 				<value>.*</value> -->
+			</list>
+		</property>
+	</bean>
+ 	
+ 	
+	<!-- target对象 -->
+	<bean id="seller" class="exam.aop.aspect.target.Seller"></bean>
+	<bean id="watier" class="exam.aop.aspect.target.Watier"></bean>
+	
+	<!-- advice -->
+	<bean id="greetingAdvice" class="exam.aop.aspect.advice.GreetingBeforeAdvice"></bean>
+	
+	<!-- 配置切面，注入前置通知 -->
+	<bean id="greetingAdvisor" class="exam.aop.aspect.advisor.GreetingAdvisor"
+		p:advice-ref="greetingAdvice"></bean>
+
+</beans>
