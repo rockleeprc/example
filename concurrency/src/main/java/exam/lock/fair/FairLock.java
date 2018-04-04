@@ -1,5 +1,6 @@
 package exam.lock.fair;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -16,14 +17,17 @@ public class FairLock implements Runnable {
 	 * 公平锁
 	 */
 	private static ReentrantLock fairLock = new ReentrantLock(true);
-	// private static ReentrantLock fairLock = new ReentrantLock(false);
+//	 private static ReentrantLock fairLock = new ReentrantLock(false);
 
 	@Override
 	public void run() {
 		while (true) {
 			try {
 				fairLock.lock();
+				TimeUnit.SECONDS.sleep(1);
 				System.out.println(Thread.currentThread().getName() + " 获得锁");
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			} finally {
 				if (fairLock.isHeldByCurrentThread()) {
 					fairLock.unlock();

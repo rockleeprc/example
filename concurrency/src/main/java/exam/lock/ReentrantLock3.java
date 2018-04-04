@@ -11,7 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ReentrantLock3 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		ReentrantLock lock = new ReentrantLock();
 		Thread t1 = new Thread(new Runnable() {
 			@Override
@@ -28,6 +28,7 @@ public class ReentrantLock3 {
 			}
 		}, "t1");
 		t1.start();
+		// t1.interrupt();
 
 		Thread t2 = new Thread(new Runnable() {
 
@@ -52,13 +53,7 @@ public class ReentrantLock3 {
 		}, "t2");
 
 		t2.start();
-
-		try {
-			TimeUnit.SECONDS.sleep(3);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
+		TimeUnit.SECONDS.sleep(3);
 		t2.interrupt();
 	}
 }

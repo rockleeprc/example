@@ -13,6 +13,7 @@ public class ReentrantLockCondition implements Runnable {
 
 		try {
 			lock.lock();
+			//释放锁
 			condition.await();
 			System.out.println(Thread.currentThread().getName()+" is go on");
 		} catch (InterruptedException e) {
@@ -24,13 +25,15 @@ public class ReentrantLockCondition implements Runnable {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		ReentrantLockCondition rlc = new ReentrantLockCondition();
-		Thread t = new Thread(rlc, "t");
+		ReentrantLockCondition task = new ReentrantLockCondition();
+		Thread t = new Thread(task, "t");
 		t.start();
 		
 		TimeUnit.SECONDS.sleep(2);
 
+		//先获取锁才能调用signal
 		lock.lock();
+		//主线程唤醒在condition等待的t线程
 		condition.signal();
 		System.out.println("signal");
 		lock.unlock();
