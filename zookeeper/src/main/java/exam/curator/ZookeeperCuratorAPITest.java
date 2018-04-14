@@ -19,7 +19,8 @@ import org.junit.Test;
 
 public class ZookeeperCuratorAPITest {
 	private static CuratorFramework curator;
-	private static final String HOSTS = "hdp01:2181,hdp02:2181,hdp03:2181";
+//	private static final String HOSTS = "hdp01:2181,hdp02:2181,hdp03:2181";
+	private static final String HOSTS = "centos1:2181,centos2:2181,centos3:2181";
 	private static final int TIMEOUT = 10 * 1000;
 	private static final int MAX_RETRIES = 3;
 

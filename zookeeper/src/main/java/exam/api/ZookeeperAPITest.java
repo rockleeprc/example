@@ -17,7 +17,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ZookeeperAPITest {
-	private static final String HOSTS = "hdp01:2181,hdp02:2181,hdp03:2181";
+//	private static final String HOSTS = "hdp01:2181,hdp02:2181,hdp03:2181";
+	private static final String HOSTS = "centos1:2181,centos2:2181,centos3:2181";
 	private static final int TIMEOUT = 10 * 1000;
 	private static final CountDownLatch LATCH = new CountDownLatch(1);
 	private static ZooKeeper zkClient = null;
@@ -56,11 +57,11 @@ public class ZookeeperAPITest {
 			System.out.println(string);
 		}
 	}
-	
+
 	@Test
 	public void testCreateSequential() throws KeeperException, InterruptedException, IOException {
 		zkClient.getChildren("/eclipse", true);// 注册Watcher
-		//只有创建SEQUENTIAL节点时才能用“xxx/”，自动创建带序号的节点
+		// 只有创建SEQUENTIAL节点时才能用“xxx/”，自动创建带序号的节点
 		zkClient.create("/eclipse/", "ide1".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT_SEQUENTIAL);
 		zkClient.create("/eclipse/", "ide2".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT_SEQUENTIAL);
 		System.in.read();
