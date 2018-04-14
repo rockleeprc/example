@@ -66,6 +66,13 @@
 			<artifactId>tomcat-jsp-api</artifactId>
 			<version>7.0.82</version>
 		</dependency>
+			<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.22.0-CR2</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>distributed-foundation</finalName>
