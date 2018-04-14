@@ -9,22 +9,21 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<context:component-scan base-package="exam.aop"></context:component-scan>
+	<context:component-scan base-package="exam.aop"/>
 
-	<!-- 开启基于@AspectJ切面的驱动器，不用配置AnnotationAwareAspectJAutoProxyCreator-->
-	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+	<!-- 开启基于@AspectJ切面的驱动器，不用配置AnnotationAwareAspectJAutoProxyCreator -->
+	<aop:aspectj-autoproxy proxy-target-class="true" /> 
 
-	
 	<!-- target Bean -->
-	<bean id="waiter" class="exam.aop.interfaces.impl.NaiveWaiter"></bean>
-	
+	<bean id="waiter" class="exam.aop.interfaces.impl.NaiveWaiter" />
+
 	<!-- 切面 -->
-	<bean class="exam.aop.aspectj.aspect.GreetingBeforeAspect"></bean>
-	
-	<!-- 基于spring配置-->
-	<!-- 自动代理创建器，将@Aspect切面织入到target bean中
+	<bean class="exam.aop.aspectj.aspect.GreetingBeforeAspect" />
+
+	<!-- 基于spring配置 -->
+	<!-- 自动代理创建器，将@Aspect切面织入到target bean中 
 	<bean
-		class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"></bean>
- 	-->
+		class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" />
+	-->
 
 </beans>

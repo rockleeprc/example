@@ -23,7 +23,7 @@ public class AspecctJTest {
 	public void aspectJProxy4Config() {
 
 		// waiter.greetTo("jack");
-		 waiter.greetTo("tom");
+//		 waiter.greetTo("tom");
 		waiter.serveTo("marry");
 	}
 

@@ -1,6 +1,8 @@
 package exam.aop.aspectj.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -18,8 +20,14 @@ public class GreetingBeforeAspect {
 	public void beforeGreeting() {
 		System.out.println("How are you。。。。");
 	}
+	
+//	@AfterReturning("execution(* serveTo(..))")
+	@After("execution(* serveTo(..))")
+	public void afterGreeting() {
+		System.out.println("say goodby。。。。");
+	}
 
-	@Around("execution(* serveTo(..))")
+	@Around("execution(* greetTo(..))")
 	public void aroundServeTo(ProceedingJoinPoint pjp) throws Throwable {
 		System.out.println("before around ");
 		System.out.println(pjp.getTarget().getClass());

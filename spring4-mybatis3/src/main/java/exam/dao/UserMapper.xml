@@ -1,16 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="exam.dao.UserMapper">
+	<cache type="exam.cache.RedisCache" eviction="LRU" />
 	<sql id="user_colums">
-		id,userName,userAddress
+		id,userAge,userName,userAddress,sex
 	</sql>
 	<!-- 自定义结果集，查询中不能用select *，查询单表时优先使用自动映射 -->
 	<resultMap type="exam.pojo.User" id="userMap">
 		<id property="id" column="id"></id>
+		<result property="userAge" column="userAge" />
 		<result property="userName" column="userName" />
 		<result property="userAddress" column="userAddress" />
+		<result property="sex" column="sex" />
 	</resultMap>
 
 	<update id="updateById" parameterType="int">
@@ -31,6 +32,12 @@
 		</set>
 		where id=#{id}
 	</update>
+
+	<select id="findAll" resultType="user">
+		select
+		<include refid="user_colums" />
+		from user
+	</select>
 
 	<select id="selectToWhere" resultType="user">
 		select
@@ -75,7 +82,8 @@
 	</select>
 
 	<select id="selectByID" parameterType="int" resultType="User">
-		select *
+		select
+		<include refid="user_colums" />
 		from user where id = #{id}
 	</select>
 
@@ -83,13 +91,13 @@
 	<insert id="insert" parameterType="User" useGeneratedKeys="true"
 		keyProperty="id">
 		insert into
-		user(userName,userAge,userAddress)
-		values(#{userName},#{userAge},#{userAddress})
+		user(userName,userAge,userAddress,sex)
+		values(#{userName},#{userAge},#{userAddress},#{sex})
 	</insert>
 
 	<update id="update" parameterType="User">
 		update user set
-		userName=#{userName},userAge=#{userAge},userAddress=#{userAddress}
+		userName=#{userName},userAge=#{userAge},userAddress=#{userAddress},sex=#{sex}
 		where id=#{id}
 	</update>
 

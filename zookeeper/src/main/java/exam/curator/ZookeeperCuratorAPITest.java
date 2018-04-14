@@ -44,7 +44,7 @@ public class ZookeeperCuratorAPITest {
 	 */
 	@Test
 	public void testDelete() throws Exception {
-		curator.delete().deletingChildrenIfNeeded().forPath("/consumers");
+		curator.delete().deletingChildrenIfNeeded().forPath("/dubbo");
 	}
 
 	/**

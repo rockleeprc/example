@@ -21,7 +21,7 @@
 			指的是classpath(类路径)下exam.dao包中的所有xml文件 UserMapper.xml位于exam.dao包下，这样UserMapper.xml就可以被自动扫描 -->
 		<property name="mapperLocations" value="classpath:exam/dao/*Mapper.xml" />
 		<!-- 将包下的类名映射为别名 -->
-		<property name="typeAliasesPackage" value="exam.pojo"/>
+		<property name="typeAliasesPackage" value="exam.pojo" />
 	</bean>
 
 	<!-- 配置扫描器 -->
@@ -32,11 +32,31 @@
 			java.sql.SQLException: unkow jdbc driver : ${jdbc_url} ref时会马上实例化sqlSessionFactory,但properties文件还没有加载 -->
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 		<!-- 被标注Repository才扫描 -->
-		<property name="annotationClass" value="org.springframework.stereotype.Repository"/>
+		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
 	</bean>
 
 	<!-- sqlSession实例 -->
 	<bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- redis数据源 -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="${redis.maxIdle}" />
+		<property name="maxTotal" value="${redis.maxActive}" />
+		<property name="maxWaitMillis" value="${redis.maxWait}" />
+		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
+	</bean>
+	<!-- Spring-redis连接池管理工厂 -->
+	<bean id="jedisConnectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="hostName" value="${redis.host}" />
+		<property name="port" value="${redis.port}" />
+		<property name="password" value="${redis.pass}" />
+		<property name="poolConfig" ref="jedisPoolConfig" />
+	</bean>
+	<!-- 使用中间类解决RedisCache.jedisConnectionFactory的静态注入，从而使MyBatis实现第三方缓存 -->
+	<bean id="redisCacheTransfer" class="exam.cache.RedisCacheTransfer">
+		<property name="jedisConnectionFactory" ref="jedisConnectionFactory" />
 	</bean>
 </beans>

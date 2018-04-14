@@ -9,7 +9,7 @@ public class BusinessBeforeAdvice implements MethodBeforeAdvice {
 	/**
 	 * @param method  目标类方法
 	 * @param args 目标类方法参数
-	 * @param target 目标类实力
+	 * @param target 目标类实例
 	 * @throws
 	 */
 	public void before(Method method, Object[] args, Object target) throws Throwable {

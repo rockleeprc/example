@@ -37,7 +37,7 @@ public class UserCRUCTest {
 		try {
 			session = SqlSessionFactoryUtil.openSqlSession();
 			UserMapper userMapper = session.getMapper(UserMapper.class);
-			User user = userMapper.selectByID(1);
+			User user = userMapper.selectByID(5);
 			System.out.println(user);
 			session.commit();
 		} catch (Exception e) {

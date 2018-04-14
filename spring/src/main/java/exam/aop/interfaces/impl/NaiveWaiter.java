@@ -12,5 +12,6 @@ public class NaiveWaiter implements IWaiter {
 	@Override
 	public void serveTo(String name) {
 		System.out.println("waiter serve to " + name);
+//		throw new RuntimeException("exam.aop.interfaces.impl.NaiveWaiter.serveTo(String) 抛出异常");
 	}
 }

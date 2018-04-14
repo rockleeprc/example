@@ -10,11 +10,17 @@ public class CAS {
 			"count");
 
 	@Test
+	public void t2() {
+	}
+
+	@Test
 	public void t1() {
 		CAS c = new CAS();
 		boolean flag = c.compareAndSwap(0, 10);
 		System.out.println(flag + "-" + c.count);
 		flag = c.compareAndSwap(10, 20);
+		System.out.println(flag + "-" + c.count);
+		flag = c.compareAndSwap(10, 30);
 		System.out.println(flag + "-" + c.count);
 	}
 
@@ -22,4 +28,5 @@ public class CAS {
 		boolean isOK = fieldUpdater.compareAndSet(this, oldValue, newValue);
 		return isOK;
 	}
+	
 }

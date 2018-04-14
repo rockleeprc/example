@@ -29,4 +29,6 @@ public interface UserMapper {
 	public List<User> paramsToBean(User params);
 
 	public List<User> selectToWhere(User params);
+
+	public List<User> findAll();
 }

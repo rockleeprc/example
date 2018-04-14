@@ -20,7 +20,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import exam.jdbc.entity.Person;
+import exam.pojo.Person;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:jdbc/applicationContext-jdbc.xml")

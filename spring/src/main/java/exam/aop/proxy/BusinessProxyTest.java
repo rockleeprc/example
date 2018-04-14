@@ -30,7 +30,7 @@ public class BusinessProxyTest {
 			public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
 				System.out.println("cglib proxy starting...");
 				System.out.println(obj.getClass().getName() + "." + method.getName());
-				// 通过代理调用父类中的方法
+				// 通过代理调用父类中的方法，调用invoke()会出现死循环
 				Object result = proxy.invokeSuper(obj, args);
 				return result;
 			}

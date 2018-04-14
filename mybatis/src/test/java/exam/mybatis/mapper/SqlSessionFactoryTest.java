@@ -44,7 +44,7 @@ public class SqlSessionFactoryTest {
 
 			// 业务操作
 			UserMapper userMapper = session.getMapper(UserMapper.class);
-			User user = userMapper.selectByID(1);
+			User user = userMapper.selectByID(6);
 			System.err.println(user);
 
 			session.commit();

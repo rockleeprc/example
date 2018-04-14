@@ -14,11 +14,11 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	<!-- DefaultAdvisorAutoProxyCreator 配置 -->	 
 	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"></bean>
 
-	<!-- 
-	p:interceptorNames="可以配置advice、advisor",配置advice拦截所有方法，配置advisor可以自定义Pointcut
-	继承PointcutAdvisor实现Pointcut规则
-	-->
 	<!-- BeanNameAutoProxyCreator 配置
+	p:interceptorNames="可以配置advice、advisor"
+		配置advice拦截所有方法，配置advisor可以自定义Pointcut继承PointcutAdvisor实现Pointcut规则
+	p:interceptorNames="指定一个或多个增强的bean"
+	
 	<bean
 		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"
 		p:beanNames="seller,watier,*er" p:interceptorNames="greetingAdvisor"
@@ -26,18 +26,18 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	</bean>
  	-->
  	
-	<!-- advisor 根据正则匹配类中的方法
+	<!-- advisor 根据正则匹配类中的方法-->
 	<bean id="regexpAdvisor"
 		class="org.springframework.aop.support.RegexpMethodPointcutAdvisor"
 		p:advice-ref="greetingAdvice">
 		<property name="patterns">
 			<list>
 				<value>.*greet.*</value>
-				<value>.*</value>
+<!-- 				<value>.*</value> -->
 			</list>
 		</property>
 	</bean>
- 	-->
+ 	
  	
 	<!-- target对象 -->
 	<bean id="seller" class="exam.aop.aspect.target.Seller"></bean>

@@ -8,6 +8,13 @@
 	<name>distributed-foundation Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
+		<!-- activemq -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>5.14.4</version>
+		</dependency>
+
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
@@ -59,8 +66,25 @@
 			<artifactId>tomcat-jsp-api</artifactId>
 			<version>7.0.82</version>
 		</dependency>
+			<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.22.0-CR2</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>distributed-foundation</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>
