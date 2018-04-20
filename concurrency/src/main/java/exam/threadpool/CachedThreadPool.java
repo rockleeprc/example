@@ -33,4 +33,9 @@ public class CachedThreadPool {
 			}
 		}
 	}
+	public static void main(String[] args) {
+		ExecutorService threadPool = Executors.newCachedThreadPool();
+		threadPool.execute(new Task());
+		threadPool.execute(new Task());
+	}
 }
