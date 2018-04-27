@@ -33,7 +33,7 @@ public class NIOServerMain {
 
 		while (true) {
 			int waitNum = selector.select();
-			// 注册到Selector上的Channel都没有需要处理的IO时，selector.select()将会阻塞，一下判断没有必要
+			// 注册到Selector上的Channel都没有需要处理的IO时，selector.select()将会阻塞，以下判断没有必要
 			if (waitNum == 0)
 				continue;
 

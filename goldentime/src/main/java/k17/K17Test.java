@@ -2,6 +2,7 @@ package k17;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -303,5 +304,15 @@ public class K17Test {
 			
 		}
 		System.out.println(sb.toString());
+	}
+	
+	@Test
+	public void jdk8(){
+		List<Integer> list= new ArrayList<Integer>();
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		list.forEach((i)->System.out.println(i));
+		
 	}
 }
