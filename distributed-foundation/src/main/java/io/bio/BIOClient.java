@@ -17,8 +17,8 @@ public class BIOClient {
 		}
 		// 必须close，否则Exception in thread "main" java.net.SocketException:
 		// Connection reset
-		System.in.read();
-		os.close();
+//		System.in.read();
+//		os.close();
 		socket.close();
 	}
 
