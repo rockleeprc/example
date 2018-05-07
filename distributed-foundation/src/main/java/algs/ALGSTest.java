@@ -2,6 +2,11 @@ package algs;
 
 import org.junit.Test;
 
+/**
+ * @see https://algs4.cs.princeton.edu/
+ * @author Administrator
+ *
+ */
 public class ALGSTest {
 
 	@Test

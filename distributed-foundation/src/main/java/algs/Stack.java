@@ -3,14 +3,14 @@ package algs;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Stack<String> implements Iterable<String> {
+public class Stack<T> implements Iterable<T> {
 
 	private Node first;
 	private int N;
 
-	private static class Node<String> {
+	private static class Node<T> {
 		String item;
-		Node next;
+		Node<T> next;
 	}
 
 	public boolean isEmpty() {
@@ -29,19 +29,19 @@ public class Stack<String> implements Iterable<String> {
 		N++;
 	}
 
-	public String pop() {
-		String item = (String) first.item;
+	public T pop() {
+		T item = (T) first.item;
 		first = first.next;
 		N--;
 		return item;
 	}
 
-	public Iterator<String> iterator() {
-		return new ListIterator<String>(first);
+	public Iterator<T> iterator() {
+		return new ListIterator<T>(first);
 	}
 
 	// an iterator, doesn't implement remove() since it's optional
-	private class ListIterator<String> implements Iterator<String> {
+	private class ListIterator<T> implements Iterator<T> {
 		private Node<String> current;
 
 		public ListIterator(Node<String> first) {
@@ -56,12 +56,29 @@ public class Stack<String> implements Iterable<String> {
 			throw new UnsupportedOperationException();
 		}
 
-		public String next() {
+		public T next() {
 			if (!hasNext())
 				throw new NoSuchElementException();
-			String item = current.item;
+			T item = (T) current.item;
 			current = current.next;
 			return item;
+		}
+	}
+
+	public static void main(String[] args) {
+		Stack<String> stack = new Stack<String>();
+		stack.push("1");
+		stack.push("2");
+		stack.push("3");
+		// System.out.println(stack.size());
+		for (String s : stack) {
+			System.out.println(s);
+		}
+		System.out.println("pop");
+		stack.pop();
+		// System.out.println(stack.size());
+		for (String s : stack) {
+			System.out.println(s);
 		}
 	}
 
