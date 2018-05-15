@@ -32,7 +32,7 @@
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
-				<value>classpath:i18n/message</value>
+				<value>classpath*:i18n/message</value>
 			</list>
 		</property>
 	</bean>
