@@ -1,5 +1,6 @@
 package singleton;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -11,24 +12,38 @@ public class SingletonTest {
 
 	@Test
 	public void testConcurrency() {
-		for (;;) {
-			threadPool.execute(new Runnable() {
+		int count = 10;
+		CountDownLatch latch = new CountDownLatch(count);
+		System.out.println(latch.getCount());
+		for (int i = 0; i < count; i++) {
+
+			new Thread(new Runnable() {
 
 				@Override
 				public void run() {
-					Singleton s = Singleton.getInstace();
-					System.out.println(s);
+					try {
+						latch.await();
+						// LazySingleton instance = LazySingleton.getInstance();
+						//HungrySingleton instance = HungrySingleton.getInstance();
+						InnerSingleton instance = InnerSingleton.getInstace();
+						System.out.println(instance);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
 				}
-			});
+			}).start();
+			latch.countDown();
 		}
+
 	}
 
 	@Test
 	public void testInner() {
-		Singleton s1 = Singleton.getInstace();
-		Singleton s2 = Singleton.getInstace();
-		Singleton s3 = Singleton.getInstace();
-		Singleton s4 = Singleton.getInstace();
+		InnerSingleton s1 = InnerSingleton.getInstace();
+		InnerSingleton s2 = InnerSingleton.getInstace();
+		InnerSingleton s3 = InnerSingleton.getInstace();
+		InnerSingleton s4 = InnerSingleton.getInstace();
 		System.out.println(s1);
 		System.out.println(s2);
 		System.out.println(s3);

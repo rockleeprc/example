@@ -1,16 +1,16 @@
 package singleton;
 
-public class Singleton {
+public class InnerSingleton {
 
-	private Singleton() {
+	private InnerSingleton() {
 	}
 
-	public static Singleton getInstace() {
+	public static InnerSingleton getInstace() {
 		return LazyHolder.INSTANCE;
 
 	}
 
 	private static class LazyHolder {
-		private static final Singleton INSTANCE = new Singleton();
+		private static final InnerSingleton INSTANCE = new InnerSingleton();
 	}
 }
