@@ -1,5 +1,6 @@
 package singleton;
 
+import java.lang.reflect.Constructor;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -9,6 +10,28 @@ import org.junit.Test;
 public class SingletonTest {
 
 	ExecutorService threadPool = Executors.newFixedThreadPool(10);
+
+	@Test
+	public void testReflect() {
+		try {
+			Class<?> clazz = InnerSingleton.class;
+			// 通过反射拿到私有的构造方法
+			Constructor<?> c = clazz.getDeclaredConstructor();
+			c.setAccessible(true);
+
+			Object o1 = c.newInstance();
+			Object o2 = c.newInstance();
+
+			System.out.println(o1);
+			System.out.println(o2);
+
+			System.out.println(o1 == o2);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	@Test
 	public void testConcurrency() {
@@ -24,7 +47,8 @@ public class SingletonTest {
 					try {
 						latch.await();
 						// LazySingleton instance = LazySingleton.getInstance();
-						//HungrySingleton instance = HungrySingleton.getInstance();
+						// HungrySingleton instance =
+						// HungrySingleton.getInstance();
 						InnerSingleton instance = InnerSingleton.getInstace();
 						System.out.println(instance);
 					} catch (InterruptedException e) {
