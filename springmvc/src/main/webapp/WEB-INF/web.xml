@@ -8,12 +8,17 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
+
 	<display-name>Archetype Created Web Application</display-name>
+	<!-- spring监听器,根据contextConfigLocation的配置文件,启动ApplicationContext容器 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext-*.xml</param-value>
+		<param-value>classpath*:applicationContext-*.xml</param-value>
 	</context-param>
-	
+
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -30,10 +35,7 @@
 		<filter-name>characterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<!-- spring监听器,根据contextConfigLocation的配置文件,启动ApplicationContext容器 -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+
 
 	<!-- spring mvc配置文件 -->
 	<servlet>
@@ -42,7 +44,7 @@
 		<init-param>
 			<!--默认加载<serlvet-name>-servlet.xml -->
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:applicationContext-mvc.xml</param-value>
+			<param-value>classpath*:applicationContext-mvc.xml</param-value>
 		</init-param>
 		<!--启动时 加载一次 -->
 		<load-on-startup>1</load-on-startup>

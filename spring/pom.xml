@@ -115,7 +115,6 @@
 	<build>
 		<finalName>spring</finalName>
 		<plugins>
-			<!-- 指定maven的JDK版本和编码：配置某版本jdk编译，不设置默认用jdk1.5 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
