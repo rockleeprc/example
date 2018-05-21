@@ -14,6 +14,8 @@ public class PostProcessorTest {
 				"src/main/resources/postprocessor/applicationContext-postprocessor.xml");
 		Person p = (Person) applicationContext.getBean("person");
 		System.out.println(p);
+		p = (Person) applicationContext.getBean("person");
+		System.out.println(p);
 
 	}
 }
