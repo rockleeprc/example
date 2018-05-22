@@ -1,5 +1,9 @@
 package singleton;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Constructor;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -11,11 +15,35 @@ public class SingletonTest {
 
 	ExecutorService threadPool = Executors.newFixedThreadPool(10);
 
+	/**
+	 * 单例对象反序列化时，要在单例对象内重写readResolve()，不然反序列化时会重新new一个对象
+	 */
+	@Test
+	public void testSingletonSerial() {
+		HungrySingleton s1 = HungrySingleton.getInstance();
+		HungrySingleton s2 = null;
+		try (FileOutputStream fos = new FileOutputStream("HungrySingleton.obj");
+				FileInputStream fis = new FileInputStream("HungrySingleton.obj");
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				ObjectInputStream ois = new ObjectInputStream(fis);) {
+			oos.writeObject(s1);
+			s2 = (HungrySingleton) ois.readObject();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		System.out.println(s1);
+		System.out.println(s2);
+	}
+
+	/**
+	 * 通过反射实例化案例对象
+	 */
 	@Test
 	public void testReflect() {
 		try {
 			Class<?> clazz = InnerSingleton.class;
-			// 通过反射拿到私有的构造方法
 			Constructor<?> c = clazz.getDeclaredConstructor();
 			c.setAccessible(true);
 
@@ -33,6 +61,9 @@ public class SingletonTest {
 
 	}
 
+	/**
+	 * 并发实现单例类
+	 */
 	@Test
 	public void testConcurrency() {
 		int count = 10;
@@ -62,6 +93,9 @@ public class SingletonTest {
 
 	}
 
+	/**
+	 * 静态内部类实现单例
+	 */
 	@Test
 	public void testInner() {
 		InnerSingleton s1 = InnerSingleton.getInstace();

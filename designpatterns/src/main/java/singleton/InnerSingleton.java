@@ -1,7 +1,8 @@
 package singleton;
 
-public class InnerSingleton {
 
+public class InnerSingleton {
+	
 	private static boolean initialized = false;
 
 	private InnerSingleton() {
@@ -24,4 +25,5 @@ public class InnerSingleton {
 	private static class LazyHolder {
 		private static final InnerSingleton INSTANCE = new InnerSingleton();
 	}
+	
 }
