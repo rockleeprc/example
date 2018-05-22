@@ -15,6 +15,7 @@
 		<logging.version>1.2</logging.version>
 		<junit.version>4.9</junit.version>
 		<jsp.version>2.0</jsp.version>
+		<jackson.version>2.9.0.pr4</jackson.version>
 	</properties>
 	<dependencies>
 		<!-- spring -->
@@ -83,12 +84,26 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>6.0.0.CR3</version>
 		</dependency>
-		<!-- servlet/jsp/jstl -->
+		<!-- jackson -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-			<scope>provided</scope>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.jr</groupId>
+			<artifactId>jackson-jr-all</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 		<!-- <dependency> -->
 		<!-- <groupId>javax.servlet</groupId> -->
@@ -100,7 +115,6 @@
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
-			<!-- <scope>provided</scope> -->
 		</dependency>
 		<!-- log4j2 -->
 		<dependency>
@@ -152,7 +166,16 @@
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 		</dependency>
-
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.tomcat</groupId> -->
+		<!-- <artifactId>tomcat-servlet-api</artifactId> -->
+		<!-- <version>7.0.82</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.tomcat</groupId> -->
+		<!-- <artifactId>tomcat-jsp-api</artifactId> -->
+		<!-- <version>7.0.82</version> -->
+		<!-- </dependency> -->
 	</dependencies>
 	<build>
 		<finalName>springmvc</finalName>

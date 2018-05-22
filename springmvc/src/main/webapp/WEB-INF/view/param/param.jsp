@@ -14,9 +14,9 @@
 	<form
 		action="<c:url value="/param/handle1.do"/>"
 		method="post">
-		用户名:<input type="text" name="name"><br /> 密码:<input
-			type="text" name="password"><br /> <input type="submit"
-			name="提交">
+		用户名:<input type="text" name="name"><br /> 
+		密码:<input type="text" name="password"><br /> 
+		<input type="submit" name="提交">
 	</form>
 	<hr/>
 	获取session,请求头参数
@@ -48,13 +48,11 @@
 	<hr/>
 	数据格式化
 	<form
-		action="<c:url value="/param/handle5.do"/>"
-		method="post">
-		用户名:<input type="text" name="name"><br /> 密码:<input
-			type="text" name="password"><br />
-			生日:<input type="text" name="date"><br/>
-			 <input type="submit"
-			name="提交">
+		action='<c:url value="/param/handle5.do"/>' method="post">
+		用户名:<input type="text" name="name"><br /> 
+		密码:<input type="text" name="password"><br />
+		生日:<input type="text" name="date"><br/>
+		 <input type="submit" name="提交">
 	</form>
 </body>
 </html>

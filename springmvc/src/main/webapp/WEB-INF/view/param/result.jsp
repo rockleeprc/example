@@ -9,12 +9,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	${user.name}创建成功<br/>
-	${name}<br/>
-	${password}<br/>
-	${sessionId}<br/>
-	${encoding}<br/>
-	${language}<br/>
+	user.name:${user.name}创建成功<br/>
+	user.date:${user.date}<br/>
+	name:${name}<br/>
+	password:${password}<br/>
+	sessionId:${sessionId}<br/>
+	encoding:${encoding}<br/>
+	language:${language}<br/>
+	referer:${referer}<br/>
 	<br />
 </body>
 </html>

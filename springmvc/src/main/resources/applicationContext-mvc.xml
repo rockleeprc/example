@@ -18,6 +18,15 @@
 
 	<!-- 自动扫面com.springmvc目录及其子目录下面所有类文件，自动注入所有带注解的类 -->
 	<context:component-scan base-package="exam.web" />
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/item/*"/>
+			<bean class="exam.interceptor.MVCInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	
 
 
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
@@ -27,12 +36,31 @@
 		<property name="suffix" value=".jsp"></property>
 		<property name="order" value="1"></property>
 	</bean>
-	
+
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
 				<value>classpath*:i18n/message</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="mappingJackson2HttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+				<value>text/json;charset=UTF-8</value>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJackson2HttpMessageConverter" />
 			</list>
 		</property>
 	</bean>

@@ -48,11 +48,13 @@ public class ParamController {
 	@RequestMapping(value = "handle2")
 	public ModelAndView handle2(@CookieValue(value = "JSESSIONID") String sessionId,
 			@RequestHeader(value = "Accept-Encoding") String encoding,
-			@RequestHeader(value = "Accept-Language") String language) {
+			@RequestHeader(value = "Accept-Language") String language,
+			@RequestHeader(value="Referer") String referer) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("sessionId", sessionId);
 		mav.addObject("encoding", encoding);
 		mav.addObject("language", language);
+		mav.addObject("referer", referer);
 		mav.setViewName("param/result");
 		return mav;
 
