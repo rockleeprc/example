@@ -13,7 +13,7 @@ public class ClassHelper {
 
 	static {
 		String basePackage = ConfigHelper.getAppBasePackage();
-		System.out.println(basePackage);
+		//System.out.println(basePackage);
 		CLASS_SET = ClassUtil.getClassSet(basePackage);
 	}
 
@@ -49,7 +49,7 @@ public class ClassHelper {
 	}
 
 	public static void main(String[] args) {
-		Set<Class<?>> set = getControllerClassSet();
+		Set<Class<?>> set = getBeanClassSet();
 		System.out.println(set.size());
 		for (Class<?> clazz : set) {
 			System.out.println(clazz.getSimpleName());

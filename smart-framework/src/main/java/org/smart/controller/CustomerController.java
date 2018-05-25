@@ -1,15 +1,17 @@
 package org.smart.controller;
 
 import org.framework.annotation.Controller;
+import org.framework.annotation.Inject;
+import org.smart.service.CustomerService;
 
 /**
  * 处理客户管理相关请求
  */
 @Controller
 public class CustomerController {
-//
-//    @Inject
-//    private CustomerService customerService;
+
+    @Inject
+    public CustomerService customerService;
 //
 //    /**
 //     * 进入 客户列表 界面
