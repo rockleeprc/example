@@ -1,4 +1,4 @@
-package org.framework.cons;
+package org.framework;
 
 /**
  * 提供相关配置项常量

@@ -2,7 +2,7 @@ package org.framework.helper;
 
 import java.util.Properties;
 
-import org.framework.cons.ConfigConstant;
+import org.framework.ConfigConstant;
 import org.framework.util.PropsUtil;
 
 public final class ConfigHelper {
@@ -30,15 +30,15 @@ public final class ConfigHelper {
 	}
 
 	public static String getAppJspPath() {
-		return PropsUtil.getString(CONFIG_PROPS, ConfigConstant.APP_JSP_PATH,"/WEB-INF/view");
+		return PropsUtil.getString(CONFIG_PROPS, ConfigConstant.APP_JSP_PATH, "/WEB-INF/view");
 	}
 
 	public static String getAppAssetPath() {
-		return PropsUtil.getString(CONFIG_PROPS, ConfigConstant.APP_ASSET_PATH,"/asset/");
+		return PropsUtil.getString(CONFIG_PROPS, ConfigConstant.APP_ASSET_PATH, "/asset/");
 	}
 
-	public static String getAppUploadLimit() {
-		return PropsUtil.getString(CONFIG_PROPS, ConfigConstant.APP_UPLOAD_LIMIT);
+	public static int getAppUploadLimit() {
+		return PropsUtil.getInt(CONFIG_PROPS, ConfigConstant.APP_UPLOAD_LIMIT);
 	}
 
 	public static void main(String[] args) {
