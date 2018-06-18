@@ -1,0 +1,10 @@
+2018-05-18 at 14:28:30 CST DEBUG org.springframework.http.client.support.HttpAccessor 87 createRequest - Created POST request for "http://127.0.0.1:8080/springmvc/param/handle5.do"
+2018-05-18 at 14:28:30 CST DEBUG org.springframework.web.client.RestTemplate$HttpEntityRequestCallback 878 doWithRequest - Writing [{name=[p], password=[p]}] using [org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter@3bd82cf5]
+2018-05-18 at 14:28:30 CST DEBUG org.springframework.web.client.RestTemplate 691 handleResponse - POST request for "http://127.0.0.1:8080/springmvc/param/handle5.do" resulted in 200 (OK)
+2018-05-18 at 14:31:37 CST DEBUG org.springframework.http.client.support.HttpAccessor 87 createRequest - Created POST request for "http://127.0.0.1:8080/springmvc/param/handle5.do"
+2018-05-18 at 14:31:37 CST DEBUG org.springframework.web.client.RestTemplate$HttpEntityRequestCallback 878 doWithRequest - Writing [{name=[p], password=[p]}] using [org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter@3bd82cf5]
+2018-05-18 at 14:31:37 CST DEBUG org.springframework.web.client.RestTemplate 691 handleResponse - POST request for "http://127.0.0.1:8080/springmvc/param/handle5.do" resulted in 200 (OK)
+2018-05-18 at 14:31:37 CST DEBUG org.springframework.http.client.support.HttpAccessor 87 createRequest - Created POST request for "http://127.0.0.1:8080/springmvc/param/handle5.do"
+2018-05-18 at 14:31:37 CST DEBUG org.springframework.web.client.RestTemplate$AcceptHeaderRequestCallback 779 doWithRequest - Setting request Accept header to [text/plain, */*]
+2018-05-18 at 14:31:37 CST DEBUG org.springframework.web.client.RestTemplate 691 handleResponse - POST request for "http://127.0.0.1:8080/springmvc/param/handle5.do" resulted in 200 (OK)
+2018-05-18 at 14:31:37 CST DEBUG org.springframework.web.client.HttpMessageConverterExtractor 102 extractData - Reading [java.lang.String] as "text/html;charset=UTF-8" using [org.springframework.http.converter.StringHttpMessageConverter@69453e37]
