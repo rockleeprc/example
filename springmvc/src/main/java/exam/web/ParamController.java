@@ -28,7 +28,7 @@ public class ParamController {
 	 * required=true 默认值,参数不存在,会抛异常
 	 */
 	@RequestMapping(value = "handle1")
-	public ModelAndView handle1(@RequestParam(value = "age", required = true) Integer age,
+	public ModelAndView handle1(@RequestParam(value = "age", required = false) Integer age,
 			@RequestParam(value = "name") String name, @RequestParam(value = "password") String password) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("name", name);

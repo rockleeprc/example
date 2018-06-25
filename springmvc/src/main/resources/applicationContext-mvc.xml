@@ -17,7 +17,7 @@
 	<mvc:annotation-driven />
 
 	<!-- 自动扫面com.springmvc目录及其子目录下面所有类文件，自动注入所有带注解的类 -->
-	<context:component-scan base-package="exam.web" />
+	<context:component-scan base-package="exam" />
 	
 	<mvc:interceptors>
 		<mvc:interceptor>
