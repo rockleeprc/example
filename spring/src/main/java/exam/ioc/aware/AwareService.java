@@ -2,6 +2,7 @@ package exam.ioc.aware;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Properties;
 
 import org.springframework.beans.factory.BeanNameAware;
@@ -28,6 +29,8 @@ public class AwareService implements BeanNameAware, ResourceLoaderAware {
 
 	public void print() {
 		System.out.println("beanName : " + beanName);
+		
+		//通过spring ResourceLoader
 		Resource resource = resourceLoader.getResource("classpath:dataSource.properties");
 		Properties prop = new Properties();
 		try {
@@ -38,6 +41,20 @@ public class AwareService implements BeanNameAware, ResourceLoaderAware {
 			e.printStackTrace();
 		}
 		System.out.println(prop.getProperty("jdbc.driverClassName"));
+		
+		//通过java类加载器
+		InputStream resourceAsStream = AwareService.class.getClassLoader().getResourceAsStream("dataSource.properties");
+		try {
+			prop.load(resourceAsStream);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(prop.getProperty("jdbc.driverClassName"));
+		
+//		InputStream is = AwareService.class.getClassLoader().getResourceAsStream("/");
+		URL url = AwareService.class.getClassLoader().getResource("");
+		System.out.println("--->"+url);
 	}
 
 }
