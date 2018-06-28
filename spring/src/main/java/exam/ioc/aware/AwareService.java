@@ -54,7 +54,7 @@ public class AwareService implements BeanNameAware, ResourceLoaderAware {
 		
 //		InputStream is = AwareService.class.getClassLoader().getResourceAsStream("/");
 		URL url = AwareService.class.getClassLoader().getResource("");
-		System.out.println("--->"+url);
+		System.out.println("--->"+url);//E:/workspace/github/example/spring/target/test-classes/
 	}
 
 }
