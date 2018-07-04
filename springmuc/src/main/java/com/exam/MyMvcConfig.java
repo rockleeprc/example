@@ -24,7 +24,7 @@ import com.exam.messageconverter.MyMessageConverter;
 @Configuration
 @EnableWebMvc// 1
 @EnableScheduling
-@ComponentScan("com.wisely.highlight_springmvc4")
+@ComponentScan("com.exam")
 public class MyMvcConfig extends WebMvcConfigurerAdapter {// 2
 
 	@Bean
