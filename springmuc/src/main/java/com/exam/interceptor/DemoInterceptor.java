@@ -23,7 +23,7 @@ public class DemoInterceptor extends HandlerInterceptorAdapter {//1
 		long startTime = (Long) request.getAttribute("startTime");
 		request.removeAttribute("startTime");
 		long endTime = System.currentTimeMillis();
-		System.out.println("本次请求处理时间为:" + new Long(endTime - startTime)+"ms");
+		System.out.println("接口 "+request.getRequestURI()+" 请求处理时间为:"+ new Long(endTime - startTime)+"ms");
 		request.setAttribute("handlingTime", endTime - startTime);
 	}
 
