@@ -44,6 +44,8 @@ public class ItemController {
 	 */
 	@RequestMapping("/list")
 	public void handle1(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String auth = request.getHeader("Authorization");
+		System.out.println(auth);
 		System.out.println("exam.controller.ItemController.m1()");
 		response.getWriter().println("<h1>Hello World</h1>");
 	}
