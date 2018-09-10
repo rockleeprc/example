@@ -22,7 +22,7 @@ public interface UserMapper {
 
 	public List<User> paramsToMap(Map<String, String> params);
 
-	public List<User> paramsToAnnotation(@Param("userName") String userName, @Param("userAddress") String userAddress);
+	public List<User> paramsToAnnotation(@Param("name") String name, @Param("address") String address);
 
 	public List<User> paramsToBean(User params);
 

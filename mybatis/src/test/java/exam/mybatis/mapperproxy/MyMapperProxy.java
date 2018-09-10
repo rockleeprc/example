@@ -15,7 +15,7 @@ public class MyMapperProxy implements InvocationHandler {
 			
 			User u = new User();
 			u.setId((Integer) args[0]);
-			u.setUserName(this.toString());
+			u.setName(this.toString());
 			return u;
 		}
 		return null;

@@ -23,10 +23,15 @@
 				<property name="url" value="jdbc:mysql://192.168.0.56:3306/test?characterEncoding=UTF-8" />
 				<property name="username" value="domain" />
 				<property name="password" value="domain" />
-				 -->
+
  				<property name="url" value="jdbc:mysql://192.168.33.11:3306/test?characterEncoding=UTF-8" />
 				<property name="username" value="root" />
 				<property name="password" value="root" />
+				 -->
+				 
+ 				<property name="url" value="jdbc:mysql://47.106.214.111:3306/test?characterEncoding=UTF-8" />
+				<property name="username" value="zyb" />
+				<property name="password" value="zyb123456" />
 			</dataSource>
 		</environment>
 	</environments>

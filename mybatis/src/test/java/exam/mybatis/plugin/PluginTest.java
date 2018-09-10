@@ -27,7 +27,7 @@ public class PluginTest {
 			// 业务操作
 			UserMapper userMapper = session.getMapper(UserMapper.class);
 			User params =new User();
-			params.setUserAddress("BJ");
+			params.setAddress("BJ");
 			List<User> list = userMapper.selectToWhere(params);
 			System.err.println(list);
 

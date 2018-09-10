@@ -20,8 +20,8 @@ public class UserSelectTest {
 			User u = new User();
 			u.setId(4);
 			u.setSex(1);
-//			u.setUserName("tom");
-			u.setUserAddress("NY");
+//			u.setName("tom");
+			u.setAddress("NY");
 			int result = userMapper.updateById(u);
 			System.out.println(result);
 			session.commit();
@@ -41,8 +41,8 @@ public class UserSelectTest {
 			session = SqlSessionFactoryUtil.openSqlSession();
 			UserMapper userMapper = session.getMapper(UserMapper.class);
 			User u = new User();
-			u.setUserName("tom");
-			u.setUserAddress("SH");
+			u.setName("tom");
+			u.setAddress("SH");
 			List<User> list = userMapper.selectToWhere(u);
 			System.out.println(list);
 			session.commit();
@@ -62,8 +62,8 @@ public class UserSelectTest {
 			session = SqlSessionFactoryUtil.openSqlSession();
 			UserMapper userMapper = session.getMapper(UserMapper.class);
 			User u = new User();
-			u.setUserName("tom");
-			u.setUserAddress("SH");
+			u.setName("tom");
+			u.setAddress("SH");
 			List<User> list = userMapper.paramsToBean(u);
 			System.out.println(list);
 			session.commit();

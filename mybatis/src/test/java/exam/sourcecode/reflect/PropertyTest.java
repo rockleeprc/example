@@ -16,7 +16,7 @@ public class PropertyTest {
 	public void testPropertyCopier() {
 		User u1 = new User();
 		u1.setId(1);
-		u1.setUserAddress("BJ");
+		u1.setAddress("BJ");
 		User u2 = new User();
 		PropertyCopier.copyBeanProperties(User.class, u1, u2);
 		System.out.println(u2);

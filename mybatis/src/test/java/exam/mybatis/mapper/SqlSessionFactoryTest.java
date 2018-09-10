@@ -9,23 +9,10 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
-import exam.mybatis.mapper.UserMapper;
 import exam.mybatis.model.User;
 
 public class SqlSessionFactoryTest {
 
-	/**
-	 * 配置文件方式创建SqlSessionFactory
-	 * 
-	 * @throws IOException
-	 */
-	@Test
-	public void buildSqlSessionFactoryProperties() throws IOException {
-		String resource = "mybatis/mybatis-config-properties.xml";
-		InputStream is = Resources.getResourceAsStream(resource);
-		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
-		System.out.println(sqlSessionFactory);
-	}
 
 	/**
 	 * SqlSession 模板代码
@@ -44,7 +31,7 @@ public class SqlSessionFactoryTest {
 
 			// 业务操作
 			UserMapper userMapper = session.getMapper(UserMapper.class);
-			User user = userMapper.selectByID(6);
+			User user = userMapper.selectByID(1);
 			System.err.println(user);
 
 			session.commit();

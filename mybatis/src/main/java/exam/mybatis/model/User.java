@@ -6,18 +6,10 @@ import org.apache.ibatis.type.Alias;
 public class User {
 
 	private int id;
-	private String userName;
-	private String userAge;
-	private String userAddress;
+	private String name;
+	private String age;
+	private String address;
 	private int sex;
-
-	public int getSex() {
-		return sex;
-	}
-
-	public void setSex(int sex) {
-		this.sex = sex;
-	}
 
 	public int getId() {
 		return id;
@@ -27,34 +19,41 @@ public class User {
 		this.id = id;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getName() {
+		return name;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getUserAge() {
-		return userAge;
+	public String getAge() {
+		return age;
 	}
 
-	public void setUserAge(String userAge) {
-		this.userAge = userAge;
+	public void setAge(String age) {
+		this.age = age;
 	}
 
-	public String getUserAddress() {
-		return userAddress;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setUserAddress(String userAddress) {
-		this.userAddress = userAddress;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public int getSex() {
+		return sex;
+	}
+
+	public void setSex(int sex) {
+		this.sex = sex;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", userAge=" + userAge + ", userAddress=" + userAddress
-				+ "]";
+		return "User [id=" + id + ", name=" + name + ", age=" + age + ", address=" + address + ", sex=" + sex + "]";
 	}
 
 }

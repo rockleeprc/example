@@ -4,26 +4,26 @@
 
 <mapper namespace="exam.mybatis.mapper.UserMapper">
 	<sql id="user_colums">
-		id,userName,userAddress
+		id,name,address
 	</sql>
 	<!-- 自定义结果集，查询中不能用select *，查询单表时优先使用自动映射 -->
 	<resultMap type="exam.mybatis.model.User" id="userMap">
 		<id property="id" column="id"></id>
-		<result property="userName" column="userName" />
-		<result property="userAddress" column="userAddress" />
+		<result property="name" column="name" />
+		<result property="address" column="address" />
 	</resultMap>
 
 	<update id="updateById" parameterType="int">
 		update user
 		<set>
-			<if test="userName!=null">
-				userName=#{userName},
+			<if test="name!=null">
+				name=#{name},
 			</if>
-			<if test="userAddress!=null">
-				userAddress=#{userAddress},
+			<if test="address!=null">
+				address=#{address},
 			</if>
-			<if test="userAge!=null">
-				userAge=#{userAge},
+			<if test="age!=null">
+				age=#{age},
 			</if>
 			<if test="sex!=null">
 				sex=#{sex}
@@ -37,11 +37,11 @@
 		<include refid="user_colums" />
 		from user
 		<where>
-			<if test="userName!=null">
-				and userName=#{userName}
+			<if test="name!=null">
+				and name=#{name}
 			</if>
-			<if test="userAddress!=null">
-				and userAddress=#{userAddress}
+			<if test="address!=null">
+				and address=#{address}
 			</if>
 		</where>
 	</select>
@@ -49,29 +49,29 @@
 	<!-- 参数javabean -->
 	<select id="paramsToBean" resultType="User">
 		select
-		id,userName,userAddress
-		from user where userName=#{userName} and
-		userAddress=#{userAddress}
+		id,name,address
+		from user where name=#{name} and
+		address=#{address}
 	</select>
 
 	<!-- 参数注解 -->
 	<select id="paramsToAnnotation" resultMap="userMap">
 		select
-		id,userName,userAddress
-		from user where userName=#{userName} and
-		userAddress=#{userAddress}
+		id,name,address
+		from user where name=#{name} and
+		address=#{address}
 	</select>
 
 	<!-- 参数map -->
 	<select id="paramsToMap" parameterType="map" resultMap="userMap">
 		select
-		id,userName,userAddress
-		from user where userName=#{userName} and
-		userAddress=#{userAddress}
+		id,name,address
+		from user where name=#{name} and
+		address=#{address}
 	</select>
 
 	<select id="countLikeName" parameterType="string" resultType="int">
-		select count(*) from user where userName like concat(#{name},'%')
+		select count(*) from user where name like concat(#{name},'%')
 	</select>
 
 	<select id="selectByID" parameterType="int" resultType="user">
@@ -83,13 +83,13 @@
 	<insert id="insert" parameterType="User" useGeneratedKeys="true"
 		keyProperty="id">
 		insert into
-		user(userName,userAge,userAddress)
-		values(#{userName},#{userAge},#{userAddress})
+		user(name,age,address)
+		values(#{name},#{age},#{address})
 	</insert>
 
 	<update id="update" parameterType="User">
 		update user set
-		userName=#{userName},userAge=#{userAge},userAddress=#{userAddress}
+		name=#{name},age=#{age},address=#{address}
 		where id=#{id}
 	</update>
 
