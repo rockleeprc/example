@@ -14,6 +14,36 @@ import exam.mybatis.mapper.UserMapper;
 import exam.mybatis.model.User;
 
 public class PluginTest {
+
+	/**
+	 * @throws IOException
+	 */
+	@Test
+	public void testSqlCostInterceptor() throws IOException {
+		String resource = "mybatis/mybatis-config-plugin.xml";
+		InputStream is = Resources.getResourceAsStream(resource);
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
+		SqlSession session = null;
+
+		try {
+			session = sqlSessionFactory.openSession();
+
+			// 业务操作
+			UserMapper userMapper = session.getMapper(UserMapper.class);
+			User user = userMapper.selectByID(1);
+			System.out.println(user);
+
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+	}
+
 	@Test
 	public void queryLimitPlugin() throws IOException {
 		String resource = "mybatis/mybatis-config-plugin.xml";
@@ -26,7 +56,7 @@ public class PluginTest {
 
 			// 业务操作
 			UserMapper userMapper = session.getMapper(UserMapper.class);
-			User params =new User();
+			User params = new User();
 			params.setAddress("BJ");
 			List<User> list = userMapper.selectToWhere(params);
 			System.err.println(list);

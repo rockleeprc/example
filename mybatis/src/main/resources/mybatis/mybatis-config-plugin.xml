@@ -10,21 +10,33 @@
 
 	<!-- 插件配置 -->
 	<plugins>
-		<plugin interceptor="exam.mybatis.plugin.QueryLimitPlugin">
-			<property name="dbType" value="mysql" />
-			<property name="limit" value="2" />
+<!-- 		<plugin interceptor="exam.mybatis.plugin.QueryLimitPlugin"> -->
+<!-- 			<property name="dbType" value="mysql" /> -->
+<!-- 			<property name="limit" value="2" /> -->
+<!-- 		</plugin> -->
+		<plugin interceptor="exam.mybatis.plugin.SqlCostInterceptor">
+			<property name="username" value="root"/>
+			<property name="password" value="123456"/>
 		</plugin>
 	</plugins>
 
-	<environments default="development">
+	<environments default="work">
 		<environment id="development">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="com.mysql.jdbc.Driver" />
-				<property name="url"
-					value="jdbc:mysql://192.168.0.56:3306/test?characterEncoding=UTF-8" />
+				<property name="url" value="jdbc:mysql://192.168.0.56:3306/test?characterEncoding=UTF-8" />
 				<property name="username" value="domain" />
 				<property name="password" value="domain" />
+			</dataSource>
+		</environment>
+		<environment id="work">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://47.106.214.111:3306/test?characterEncoding=UTF-8" />
+				<property name="username" value="zyb" />
+				<property name="password" value="zyb123456" />
 			</dataSource>
 		</environment>
 	</environments>

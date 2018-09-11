@@ -9,7 +9,7 @@
 	</typeAliases>
 
 	<!-- 使用development构建数据库环境 -->
-	<environments default="development">
+	<environments default="work">
 		<environment id="development">
 			<!-- jdbc 事物 -->
 			<transactionManager type="JDBC">
@@ -28,7 +28,17 @@
 				<property name="username" value="root" />
 				<property name="password" value="root" />
 				 -->
-				 
+			</dataSource>
+		</environment>
+		<environment id="work">
+			<!-- jdbc 事物 -->
+			<transactionManager type="JDBC">
+				<!-- 事物不自动提交,手动commit -->
+				<property name="autoCommit" value="false" />
+			</transactionManager>
+			<!-- 数据库链接 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
  				<property name="url" value="jdbc:mysql://47.106.214.111:3306/test?characterEncoding=UTF-8" />
 				<property name="username" value="zyb" />
 				<property name="password" value="zyb123456" />
