@@ -2,6 +2,7 @@ package netty.time;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
@@ -30,6 +31,14 @@ public class TimeClient {
 
 			// 启动客户端
 			ChannelFuture f = b.connect(host, port).sync(); // 用 connect() 方法代替了 bind() 方法
+			f.addListener(new ChannelFutureListener() {
+				
+				@Override
+				public void operationComplete(ChannelFuture future) throws Exception {
+					System.out.println(future.isSuccess());
+					System.out.println("连接成功后异步回调");
+				}
+			});
 
 			// 等待连接关闭
 			f.channel().closeFuture().sync();
