@@ -18,7 +18,7 @@ public class EchoServer {
 	}
 
 	public void start() throws Exception {
-		EchoServerHandler serverHandler = new EchoServerHandler();
+		EchoServerHandler echoServerHandler = new EchoServerHandler();
 		//事件处理类，如连接，读写数据
 		EventLoopGroup group = new NioEventLoopGroup();
 		try{
@@ -26,15 +26,17 @@ public class EchoServer {
 		bootstrap.group(group)
 					.channel(NioServerSocketChannel.class)//指定使用的NIO Channel
 					.localAddress(new InetSocketAddress(port))
-					.childHandler(new ChannelInitializer<Channel>() {
+					.childHandler(new ChannelInitializer<Channel>() {//添加一个EchoServerHandler到子Channel的 ChannelPipeline 
 						@Override
 						protected void initChannel(Channel ch) throws Exception {
-							ch.pipeline().addLast(serverHandler);
+							ch.pipeline().addLast(echoServerHandler);
 						}
 					});
-		//sync()阻塞，直到执行完成
+		System.out.println("sync before");
 		ChannelFuture channelFuture = bootstrap.bind().sync();
+		System.out.println("sync after");
 		channelFuture.channel().closeFuture().sync();
+		System.out.println("close after");
 		}finally{
 			group.shutdownGracefully().sync();
 		}
