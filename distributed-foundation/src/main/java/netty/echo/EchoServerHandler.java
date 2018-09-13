@@ -16,6 +16,11 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 	private static final Logger logger = Logger.getLogger(EchoServerHandler.class.getName());
 
 	@Override
+	public void channelActive(ChannelHandlerContext ctx) throws Exception {
+		ctx.writeAndFlush(Unpooled.copiedBuffer("welcome ", CharsetUtil.UTF_8));
+	}
+
+	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 		ByteBuf buf = (ByteBuf) msg;
 		System.out.println("Server received : " + buf.toString(CharsetUtil.UTF_8));
