@@ -32,11 +32,8 @@ public class EchoServer {
 							ch.pipeline().addLast(echoServerHandler);
 						}
 					});
-		System.out.println("sync before");
 		ChannelFuture channelFuture = bootstrap.bind().sync();
-		System.out.println("sync after");
 		channelFuture.channel().closeFuture().sync();
-		System.out.println("close after");
 		}finally{
 			group.shutdownGracefully().sync();
 		}

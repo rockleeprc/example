@@ -1,46 +1,36 @@
 package netty.echo;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.util.CharsetUtil;
 
-public class EchoClientHandler extends ChannelInboundHandlerAdapter {
-
-	private static final Logger logger = Logger.getLogger(EchoClientHandler.class.getName());
-
-	private final ByteBuf firstMessage;
+@Sharable // 可以被多个channel共享
+public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
 	/**
-	 * Creates a client-side handler.
+	 * 连接channel是活跃时，被调用
 	 */
-	public EchoClientHandler(int firstMessageSize) {
-		if (firstMessageSize <= 0) {
-			throw new IllegalArgumentException("firstMessageSize: " + firstMessageSize);
-		}
-		firstMessage = Unpooled.buffer(firstMessageSize);
-		for (int i = 0; i < firstMessage.capacity(); i++) {
-			firstMessage.writeByte((byte) i);
-		}
+	@Override
+	public void channelActive(ChannelHandlerContext ctx) throws Exception {
+		// 通道活跃是发送一条消息
+		ctx.writeAndFlush(Unpooled.copiedBuffer("hello netty", CharsetUtil.UTF_8));
+	}
+
+	/**
+	 * 调用完成后立刻释放ByteBuf引用
+	 */
+	@Override
+	protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
+		System.out.println("clinet received : " + msg.toString(CharsetUtil.UTF_8));
 	}
 
 	@Override
-	public void channelActive(ChannelHandlerContext ctx) {
-		ctx.writeAndFlush(firstMessage);
-	}
-
-	@Override
-	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-		ctx.write(msg);
-	}
-
-	@Override
-	public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-		ctx.flush();
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+		cause.printStackTrace();
+		ctx.close();
 	}
 
 }
