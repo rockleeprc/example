@@ -22,6 +22,7 @@ public class EchoServer {
 		//事件处理类，如连接，读写数据
 		EventLoopGroup group = new NioEventLoopGroup();
 		try{
+		//服务器端启动程序
 		ServerBootstrap bootstrap = new ServerBootstrap();
 		bootstrap.group(group)
 					.channel(NioServerSocketChannel.class)//指定使用的NIO Channel
@@ -29,6 +30,7 @@ public class EchoServer {
 					.childHandler(new ChannelInitializer<Channel>() {//添加一个EchoServerHandler到子Channel的 ChannelPipeline 
 						@Override
 						protected void initChannel(Channel ch) throws Exception {
+							//增加到pipeline中最后一个handler
 							ch.pipeline().addLast(echoServerHandler);
 						}
 					});

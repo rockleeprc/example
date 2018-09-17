@@ -64,6 +64,9 @@ public class ItemController {
 	 */
 	@RequestMapping(value = "/demo2", method = RequestMethod.GET)
 	private void test2(HttpServletRequest request) {
+		System.out.println(request.getRequestURL());
+		System.out.println(request.getRequestURI());
+		//http://127.0.0.1/springmvc/item/demo2.do
 		HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
 				.getResponse();
 		try {
