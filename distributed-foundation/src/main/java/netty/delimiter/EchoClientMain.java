@@ -11,12 +11,12 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
+import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.util.CharsetUtil;
 
@@ -35,14 +35,15 @@ public class EchoClientMain {
 				@Override
 				protected void initChannel(Channel ch) throws Exception {
 					ch.pipeline()
-					.addLast(new DelimiterBasedFrameDecoder(1024, DELIMITER))
+//					.addLast(new DelimiterBasedFrameDecoder(1024, DELIMITER))
+					.addLast(new LineBasedFrameDecoder(1024))
 					.addLast(new StringDecoder(Charset.forName("UTF-8")))
 					.addLast(new EchoClientHandler());
 				}
 			});
 			ChannelFuture channelFuture = bootstrap.connect().sync();
 			
-			String line = "ssss $E$ sss $E$";
+			String line = "AAA \r\n BBB \r\n CCC \r\n EEE \r\n";
 			channelFuture.channel().writeAndFlush(Unpooled.copiedBuffer(line,CharsetUtil.UTF_8));
 			TimeUnit.SECONDS.sleep(1);
 			
@@ -60,10 +61,10 @@ public class EchoClientMain {
 
 	}
 
-	private static class EchoClientHandler extends ChannelInboundHandlerAdapter {
+	private static class EchoClientHandler extends SimpleChannelInboundHandler<String> {
 
 		@Override
-		public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+		public void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
 			System.out.println("client recieved  " + msg.toString());
 		}
 

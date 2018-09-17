@@ -14,7 +14,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.util.CharsetUtil;
 
@@ -34,8 +34,13 @@ public class EchoServerMain {
 			bootstrap.childHandler(new ChannelInitializer<Channel>() {
 				@Override
 				protected void initChannel(Channel ch) throws Exception {
+					/**
+					 * 使用DelimiterBasedFrameDecoder后，所有channelRead中读取的数据类型都是String
+					 * 分隔符需要使用ByteBuf类型声明，超出maxFrameLength会抛异常
+					 */
 					ch.pipeline()
-					.addLast(new DelimiterBasedFrameDecoder(1024, DELIMITER))
+//					.addLast(new DelimiterBasedFrameDecoder(1024, DELIMITER))
+					.addLast(new LineBasedFrameDecoder(1024))
 					.addLast(new StringDecoder(Charset.forName("UTF-8")))
 					.addLast(new EchoServerHandler());
 				}
