@@ -58,17 +58,10 @@ public class EchoServerMain {
 	private static class EchoServerHandler extends ChannelInboundHandlerAdapter {
 		
 		@Override
-		public void channelActive(ChannelHandlerContext ctx) throws Exception {
-			// 通道活跃是发送一条消息
-			ctx.writeAndFlush(Unpooled.copiedBuffer("hello $E$ netty", CharsetUtil.UTF_8));
-		}
-
-
-		@Override
 		public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 			String message = msg.toString();
 			System.out.println("server recieved : " + message);
-			ctx.writeAndFlush(Unpooled.copiedBuffer(message,CharsetUtil.UTF_8));
+			ctx.writeAndFlush(Unpooled.copiedBuffer(message+"$E$",CharsetUtil.UTF_8));
 		}
 
 		@Override
