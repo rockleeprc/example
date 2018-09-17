@@ -21,8 +21,9 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.util.CharsetUtil;
 
 public class EchoClientMain {
-//	private static final ByteBuf DELIMITER = Unpooled.copiedBuffer("$E$",CharsetUtil.UTF_8);
+	// private static final ByteBuf DELIMITER = Unpooled.copiedBuffer("$E$",CharsetUtil.UTF_8);
 	private static final ByteBuf DELIMITER = Unpooled.copiedBuffer("$E$".getBytes());
+
 	public static void main(String[] args) throws UnsupportedEncodingException {
 		EventLoopGroup group = new NioEventLoopGroup();
 		try {
@@ -35,20 +36,21 @@ public class EchoClientMain {
 				@Override
 				protected void initChannel(Channel ch) throws Exception {
 					ch.pipeline()
-//					.addLast(new DelimiterBasedFrameDecoder(1024, DELIMITER))
-					.addLast(new LineBasedFrameDecoder(1024))
-					.addLast(new StringDecoder(Charset.forName("UTF-8")))
-					.addLast(new EchoClientHandler());
+							// .addLast(new DelimiterBasedFrameDecoder(1024, DELIMITER))
+							.addLast(new LineBasedFrameDecoder(1024))
+							.addLast(new StringDecoder(Charset.forName("UTF-8"))).addLast(new EchoClientHandler());
 				}
 			});
 			ChannelFuture channelFuture = bootstrap.connect().sync();
-			
-			String line = "AAA \r\n BBB \r\n CCC \r\n EEE \r\n";
-			channelFuture.channel().writeAndFlush(Unpooled.copiedBuffer(line,CharsetUtil.UTF_8));
+
+			// String line = "AAA \r\n BBB \r\n CCC \r\n EEE \r\n";
+			String line = "AAA " + System.getProperty("line.separator") + " BBB " + System.getProperty("line.separator")
+					+ " CCC " + System.getProperty("line.separator") + " EEE" + System.getProperty("line.separator");
+			channelFuture.channel().writeAndFlush(Unpooled.copiedBuffer(line, CharsetUtil.UTF_8));
 			TimeUnit.SECONDS.sleep(1);
-			
+
 			channelFuture.channel().closeFuture().sync();
-			
+
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} finally {
