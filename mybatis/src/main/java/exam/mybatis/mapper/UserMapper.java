@@ -27,4 +27,8 @@ public interface UserMapper {
 	public List<User> paramsToBean(User params);
 
 	public List<User> selectToWhere(User params);
+	
+	public User selectByCriteria(User user);
+	
+	public List<User> selectByIdIn(List<Integer> idGroup);
 }

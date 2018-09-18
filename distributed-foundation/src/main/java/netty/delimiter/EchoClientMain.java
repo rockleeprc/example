@@ -43,9 +43,8 @@ public class EchoClientMain {
 			});
 			ChannelFuture channelFuture = bootstrap.connect().sync();
 
-			// String line = "AAA \r\n BBB \r\n CCC \r\n EEE \r\n";
-			String line = "AAA " + System.getProperty("line.separator") + " BBB " + System.getProperty("line.separator")
-					+ " CCC " + System.getProperty("line.separator") + " EEE" + System.getProperty("line.separator");
+			String line = "aaa " + System.getProperty("line.separator") + " 222 " + System.getProperty("line.separator")
+					+ " 333 " + System.getProperty("line.separator") + "444" + System.getProperty("line.separator");
 			channelFuture.channel().writeAndFlush(Unpooled.copiedBuffer(line, CharsetUtil.UTF_8));
 			TimeUnit.SECONDS.sleep(1);
 
@@ -64,6 +63,13 @@ public class EchoClientMain {
 	}
 
 	private static class EchoClientHandler extends SimpleChannelInboundHandler<String> {
+		
+		@Override
+		public void channelActive(ChannelHandlerContext ctx) throws Exception {
+			String line = "AAA " + System.getProperty("line.separator") + " BBB " + System.getProperty("line.separator")
+			+ " CCC " + System.getProperty("line.separator") + " EEE" + System.getProperty("line.separator");
+			ctx.writeAndFlush(Unpooled.copiedBuffer(line, CharsetUtil.UTF_8));
+		}
 
 		@Override
 		public void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {

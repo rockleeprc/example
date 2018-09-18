@@ -71,7 +71,7 @@ public class UserCRUCTest {
 		User u = new User();
 		u.setId(1);
 		u.setName("孙艺珍");
-		u.setAge("40");
+		u.setAge(40);
 		u.setAddress("韩国");
 		SqlSession session = null;
 		try {
@@ -92,7 +92,7 @@ public class UserCRUCTest {
 	public void insert() {
 		User u = new User();
 		u.setName("C");
-		u.setAge("21");
+		u.setAge(21);
 		u.setAddress("HK");
 		SqlSession session = null;
 		try {

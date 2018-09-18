@@ -1,5 +1,6 @@
 package exam.mybatis.mapper;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,30 @@ import exam.mybatis.model.User;
 import exam.mybatis.util.SqlSessionFactoryUtil;
 
 public class UserSelectTest {
+	
+	@Test
+	public void selectByIdIn() {
+		List<Integer> idGroup = Arrays.asList(1,2,3);
+		SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		List<User> users = mapper.selectByIdIn(idGroup);
+		System.out.println(users);
+	}
+	
+	@Test
+	public void selectByCriteria() {
+		SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		User pojo = new User();
+		pojo.setId(1);
+		pojo.setAge(40);
+		pojo.setName("孙艺珍");
+		pojo.setAddress("韩国");
+		User user = mapper.selectByCriteria(pojo);
+		System.out.println(user);
+	}
+	
+	
 	@Test
 	public void updateById() {
 		SqlSession session = null;
@@ -18,10 +43,10 @@ public class UserSelectTest {
 			session = SqlSessionFactoryUtil.openSqlSession();
 			UserMapper userMapper = session.getMapper(UserMapper.class);
 			User u = new User();
-			u.setId(4);
-			u.setSex(1);
+			u.setId(1);
+//			u.setSex(1);
 //			u.setName("tom");
-			u.setAddress("NY");
+//			u.setAddress("NY");
 			int result = userMapper.updateById(u);
 			System.out.println(result);
 			session.commit();

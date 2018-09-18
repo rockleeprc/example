@@ -17,11 +17,12 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.util.CharsetUtil;
+import io.netty.util.ReferenceCountUtil;
 
 public class EchoServerMain {
-	
-	private static final ByteBuf DELIMITER = Unpooled.copiedBuffer("$E$",CharsetUtil.UTF_8);
-	
+
+	private static final ByteBuf DELIMITER = Unpooled.copiedBuffer("$E$", CharsetUtil.UTF_8);
+
 	public static void main(String[] args) {
 		EventLoopGroup boss = new NioEventLoopGroup();
 		EventLoopGroup worker = new NioEventLoopGroup();
@@ -39,10 +40,9 @@ public class EchoServerMain {
 					 * 分隔符需要使用ByteBuf类型声明，超出maxFrameLength会抛异常
 					 */
 					ch.pipeline()
-//					.addLast(new DelimiterBasedFrameDecoder(1024, DELIMITER))
-					.addLast(new LineBasedFrameDecoder(1024))
-					.addLast(new StringDecoder(Charset.forName("UTF-8")))
-					.addLast(new EchoServerHandler());
+							// .addLast(new DelimiterBasedFrameDecoder(1024, DELIMITER))
+							.addLast(new LineBasedFrameDecoder(1024))
+							.addLast(new StringDecoder(Charset.forName("UTF-8"))).addLast(new EchoServerHandler());
 				}
 			});
 			ChannelFuture channelFuture = bootstrap.bind().sync();
@@ -61,12 +61,17 @@ public class EchoServerMain {
 	}
 
 	private static class EchoServerHandler extends ChannelInboundHandlerAdapter {
-		
+
 		@Override
 		public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-			String message = msg.toString();
-			System.out.println("server recieved : " + message);
-			ctx.writeAndFlush(Unpooled.copiedBuffer(message+"$E$",CharsetUtil.UTF_8));
+			try {
+				String message = msg.toString();
+				System.out.println("server recieved : " + message);
+				ctx.writeAndFlush(
+						Unpooled.copiedBuffer(message + System.getProperty("line.separator"), CharsetUtil.UTF_8));
+			} finally {
+				ReferenceCountUtil.release(msg);
+			}
 		}
 
 		@Override
