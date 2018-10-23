@@ -14,6 +14,15 @@ import org.junit.Test;
 public class SingletonTest {
 
 	ExecutorService threadPool = Executors.newFixedThreadPool(10);
+	
+	@Test
+	public void testEnumSingleton() {
+		EnumSingleton singleton1 = EnumSingleton.INSTANCE;
+		EnumSingleton singleton2 = EnumSingleton.INSTANCE;
+		System.out.println(singleton1.info());
+		System.out.println(singleton1.hashCode());
+		System.out.println(singleton2.hashCode());
+	}
 
 	/**
 	 * 单例对象反序列化时，要在单例对象内重写readResolve()，不然反序列化时会重新new一个对象
@@ -77,10 +86,9 @@ public class SingletonTest {
 				public void run() {
 					try {
 						latch.await();
-						// LazySingleton instance = LazySingleton.getInstance();
-						// HungrySingleton instance =
-						// HungrySingleton.getInstance();
-						InnerSingleton instance = InnerSingleton.getInstace();
+						 LazySingleton instance = LazySingleton.getInstance();
+//						 HungrySingleton instance =HungrySingleton.getInstance();
+//						InnerSingleton instance = InnerSingleton.getInstace();
 						System.out.println(instance);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
