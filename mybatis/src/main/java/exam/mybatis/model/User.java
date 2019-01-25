@@ -5,17 +5,17 @@ import org.apache.ibatis.type.Alias;
 @Alias("user")
 public class User {
 
-	private int id;
+	private Integer id;
 	private String name;
-	private String age;
+	private Integer age;
 	private String address;
-	private int sex;
+	private Integer sex;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -27,14 +27,6 @@ public class User {
 		this.name = name;
 	}
 
-	public String getAge() {
-		return age;
-	}
-
-	public void setAge(String age) {
-		this.age = age;
-	}
-
 	public String getAddress() {
 		return address;
 	}
@@ -43,11 +35,19 @@ public class User {
 		this.address = address;
 	}
 
-	public int getSex() {
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public Integer getSex() {
 		return sex;
 	}
 
-	public void setSex(int sex) {
+	public void setSex(Integer sex) {
 		this.sex = sex;
 	}
 
