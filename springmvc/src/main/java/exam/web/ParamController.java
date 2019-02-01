@@ -20,7 +20,8 @@ import exam.domain.User;
 public class ParamController {
 
 	@RequestMapping(value = "/param")
-	public String param() {
+	public String param(HttpServletRequest request) {
+		request.getParameterMap();
 		return "param/param";
 	}
 

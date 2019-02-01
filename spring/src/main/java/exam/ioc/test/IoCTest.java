@@ -15,6 +15,7 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -43,9 +44,21 @@ public class IoCTest {
 		System.out.println(p);
 
 	}
-	
+
+	@SuppressWarnings("resource")
 	@Test
-	public void testXmlBeanFactory(){
+	public void testClassPathXmlApplicationContext() {
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
+				"classpath:ioc/applicationContext-beanFactory.xml");
+		DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) applicationContext.getAutowireCapableBeanFactory();
+		System.out.println(defaultListableBeanFactory);
+		Person p = (Person) applicationContext.getBean("person");
+		System.out.println(p);
+
+	}
+
+	@Test
+	public void testXmlBeanFactory() {
 		// 配置文件被抽象为Resource
 		ClassPathResource res = new ClassPathResource("ioc/applicationContext-beanFactory.xml");
 		XmlBeanFactory factory = new XmlBeanFactory(res);
