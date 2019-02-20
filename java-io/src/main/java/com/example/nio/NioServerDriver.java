@@ -87,6 +87,10 @@ public class NioServerDriver {
         private void read(ByteBuffer buffer, SelectionKey key) throws IOException {
             SocketChannel channel = (SocketChannel) key.channel();
             int length = channel.read(buffer);//blocking
+            if(length==-1){
+                channel.close();
+                key.cancel();
+            }
             buffer.flip();
             byte[] bytes = new byte[length];
             buffer.get(bytes);
