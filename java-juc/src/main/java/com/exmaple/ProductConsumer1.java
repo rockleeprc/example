@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-public class ProductConsumer {
+public class ProductConsumer1 {
     private static final Integer capacity = 5;
 
     private static final LinkedBlockingQueue queue = new LinkedBlockingQueue(capacity);
