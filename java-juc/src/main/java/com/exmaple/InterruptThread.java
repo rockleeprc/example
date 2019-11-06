@@ -1,5 +1,7 @@
 package com.exmaple;
 
+import java.util.concurrent.TimeUnit;
+
 public class InterruptThread {
     public static void main(String[] args) throws InterruptedException {
         Thread t1 = new Thread(()->{
@@ -7,7 +9,8 @@ public class InterruptThread {
         });
 
         t1.start();
-        t1.interrupt();
+        TimeUnit.SECONDS.sleep(2);
+        t1.interrupt();// 清除中断标志
 
         Thread.currentThread().interrupt();
 

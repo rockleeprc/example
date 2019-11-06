@@ -14,7 +14,7 @@ public class Counter2 {
                 System.out.println("t2 start");
                 if (list.size() != 5) {
                     try {
-                        lock.wait();// 释放锁
+                        lock.wait();// 释放锁 让t1运行
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -37,7 +37,7 @@ public class Counter2 {
                     list.add(i);
                     System.out.println(i);
                     if (i == 5) {
-                        lock.notify();
+                        lock.notify(); // 通知t2
 
                         try {
                             lock.wait();// 释放锁 让t2运行
@@ -45,7 +45,6 @@ public class Counter2 {
                             e.printStackTrace();
                         }
                     }
-
 
                     try {
                         TimeUnit.SECONDS.sleep(1);
