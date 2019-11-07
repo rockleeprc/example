@@ -12,6 +12,7 @@ public class Mutex implements Lock, java.io.Serializable {
     // Our internal helper class
     private static class Sync extends AbstractQueuedSynchronizer {
         // Reports whether in locked state
+        /* 当前锁是否被独占 */
         protected boolean isHeldExclusively() {
             return getState() == 1;
         }
@@ -82,5 +83,45 @@ public class Mutex implements Lock, java.io.Serializable {
     public boolean tryLock(long timeout, TimeUnit unit)
             throws InterruptedException {
         return sync.tryAcquireNanos(1, unit.toNanos(timeout));
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        Mutex lock = new Mutex();
+        new Thread(() -> {
+            lock.lock();
+            try {
+                TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            } finally {
+                lock.unlock();
+            }
+        }, "t1").start();
+
+        new Thread(() -> {
+            lock.lock();
+            try {
+                TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            } finally {
+                lock.unlock();
+            }
+        }, "t2").start();
+
+        TimeUnit.SECONDS.sleep(2);
+
+        new Thread(() -> {
+            lock.lock();
+            try {
+                TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            } finally {
+                lock.unlock();
+            }
+        }, "t3").start();
+
+
     }
 }
