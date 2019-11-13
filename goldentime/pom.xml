@@ -9,7 +9,7 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<jackson.version>2.9.0.pr4</jackson.version>
+		<jackson.version>2.10.1</jackson.version>
 		<servlet.version>2.5</servlet.version>
 		<jsp.version>2.0</jsp.version>
 		<junit.version>4.9</junit.version>
