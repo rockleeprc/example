@@ -1,5 +1,7 @@
 package com.exmaple;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 /*
 int i = 10;
 i = i++;
@@ -11,9 +13,7 @@ i=temp; 写
  */
 public class AtomicExample {
     public static void main(String[] args) {
-        int i=10;
-        int j=i;
-        i=20;
-        System.out.println(j);
+        AtomicLong atomicLong = new AtomicLong(0);
+        System.out.println(atomicLong.getAndIncrement());
     }
 }
