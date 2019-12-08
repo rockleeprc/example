@@ -10,6 +10,18 @@ public class Fib {
         System.out.println(fib2(164));
     }
 
+    private static int fib3(int n) {
+        if (n <= 1) return n;
+        int first = 0;
+        int second = 1;
+
+        for (int i = 0; i < n - 1; i++) {
+            second = first + second;
+            first = second - first;
+        }
+        return second;
+    }
+
     private static int fib2(int n) {
         if (n <= 1) return n;
         int first = 0;
