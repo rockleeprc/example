@@ -16,7 +16,7 @@ public class ArrayList {
         list.add(5);
         list.add(6);
         System.out.println(list);
-        int old = list.remove(4);
+        int old = list.remove(5);
         System.out.println(old);
         System.out.println(list);
     }
