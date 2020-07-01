@@ -27,7 +27,7 @@
 		<jsp.version>2.0</jsp.version>
 		<cglib.version>3.2.4</cglib.version>
 		<junit.version>4.9</junit.version>
-		<logging-log4j.version>2.4</logging-log4j.version>
+		<logging-log4j.version>2.13.2</logging-log4j.version>
 		<log4j.version>1.2.17</log4j.version>
 		<logging.version>1.2</logging.version>
 	</properties>
