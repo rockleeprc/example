@@ -22,7 +22,7 @@
 		<javassist.version>3.22.0-CR2</javassist.version>
 		<cglib.version>3.2.5</cglib.version>
 		<!-- connection/pool -->
-		<mysql.version>5.1.42</mysql.version>
+		<mysql.version>8.0.16</mysql.version>
 		<druid.version>1.0.12</druid.version>
 		<!-- servlet/jsp -->
 		<servlet.version>2.5</servlet.version>
