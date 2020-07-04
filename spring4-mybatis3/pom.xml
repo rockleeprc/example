@@ -36,7 +36,7 @@
 		<commons-io.version>2.4</commons-io.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<commons-email.version>1.4</commons-email.version>
-		<commons-beanutils.version>1.9.3</commons-beanutils.version>
+		<commons-beanutils.version>1.9.4</commons-beanutils.version>
 		<jackson.version>2.9.0.pr4</jackson.version>
 		<httpclient.version>4.5.3</httpclient.version>
 		<!-- test -->
