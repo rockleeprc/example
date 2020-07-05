@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import exam.aop.aspect.target.Seller;
-import exam.aop.aspect.target.Watier;
+import exam.aop.interfaces.IWaiter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:aop/applicationContext-advisor.xml")
@@ -16,7 +14,7 @@ public class AspectAOPTest {
 
 	@Autowired
 	@Qualifier("waiterRegexp")
-	Watier waiterRegexp;
+	IWaiter waiterRegexp;
 
 	/**
 	 * 正则匹配切面
@@ -30,11 +28,11 @@ public class AspectAOPTest {
 
 	@Autowired
 	@Qualifier("waiterProxy")
-	Watier waiter;
+	IWaiter waiter;
 
 	@Autowired
-	@Qualifier("sellerProxy")
-	Seller seller;
+	@Qualifier("waiterProxy")
+	IWaiter seller;
 
 	/**
 	 * 静态普通方法签名匹配切面

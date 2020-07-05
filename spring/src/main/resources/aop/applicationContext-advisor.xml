@@ -26,8 +26,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 		p:target-ref="watier"></bean>
 
 	<!-- target对象 -->
-	<bean id="seller" class="exam.aop.aspect.target.Seller"></bean>
-	<bean id="watier" class="exam.aop.aspect.target.Watier"></bean>
+	<bean id="watier" class="exam.aop.interfaces.impl.NaiveWaiter"></bean>
 
 	<!-- advice -->
 	<bean id="greetingAdvice" class="exam.aop.aspect.advice.GreetingBeforeAdvice"></bean>
@@ -41,7 +40,6 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 		class="org.springframework.aop.framework.ProxyFactoryBean"
 		p:interceptorNames="greetingAdvisor" p:proxyTargetClass="true"></bean>
 
-	<bean id="sellerProxy" parent="parent" p:target-ref="seller"></bean>
 	<bean id="waiterProxy" parent="parent" p:target-ref="watier"></bean>
 
 </beans>

@@ -4,13 +4,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import exam.aop.aspect.target.Seller;
-import exam.aop.aspect.target.Watier;
+import exam.aop.interfaces.IWaiter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:aop/applicationContext-advisor-autoproxy.xml")
@@ -18,7 +14,7 @@ public class AspectAutoProxyAOPTest {
 
 	@Qualifier("watier")
 	@Autowired
-	Watier waiterAutoProxy;
+	IWaiter waiterAutoProxy;
 
 	/**
 	 * 根据配置文件定义两种自动代理
