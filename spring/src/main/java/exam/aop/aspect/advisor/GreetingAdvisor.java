@@ -3,7 +3,7 @@ package exam.aop.aspect.advisor;
 import java.lang.reflect.Method;
 import org.springframework.aop.ClassFilter;
 import org.springframework.aop.support.StaticMethodMatcherPointcutAdvisor;
-import exam.aop.aspect.target.Watier;
+import exam.aop.interfaces.IWaiter;
 
 /**
  * 
@@ -32,7 +32,7 @@ public class GreetingAdvisor extends StaticMethodMatcherPointcutAdvisor {
 			 */
 			@Override
 			public boolean matches(Class<?> clazz) {
-				return Watier.class.isAssignableFrom(clazz);
+				return IWaiter.class.isAssignableFrom(clazz);
 			}
 		};
 		return classFilter;
