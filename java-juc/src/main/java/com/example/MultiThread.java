@@ -1,10 +1,8 @@
-package com.exmaple;
+package com.example;
 
 import java.lang.management.ManagementFactory;
-import java.lang.management.MemoryPoolMXBean;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
-import java.util.List;
 
 public class MultiThread {
     public static void main(String[] args) {

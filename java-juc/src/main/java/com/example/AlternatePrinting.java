@@ -1,4 +1,4 @@
-package com.exmaple;
+package com.example;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
