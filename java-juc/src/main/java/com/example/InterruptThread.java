@@ -4,6 +4,10 @@ import java.util.concurrent.TimeUnit;
 
 public class InterruptThread {
     public static void main(String[] args) throws InterruptedException {
+        t1();
+    }
+
+    public static void t4() throws InterruptedException {
         Object obj = new Object();
         Thread t1 = new Thread(() -> {
             synchronized (obj) {
@@ -23,7 +27,6 @@ public class InterruptThread {
         TimeUnit.SECONDS.sleep(1);
         t1.interrupt();
         System.out.println("main " + t1.isInterrupted());
-
     }
 
     /**
@@ -34,9 +37,9 @@ public class InterruptThread {
     public static void t3() throws InterruptedException {
         Thread t1 = new Thread(() -> {
             while (true) {
-                System.out.println(Thread.currentThread().isInterrupted());
+                System.out.println("1 " + Thread.currentThread().isInterrupted());
                 if (Thread.currentThread().isInterrupted()) {
-                    System.out.println(Thread.currentThread().isInterrupted());
+                    System.out.println("2 " + Thread.currentThread().isInterrupted());
                     break;
                 }
             }
@@ -57,9 +60,9 @@ public class InterruptThread {
         Thread t1 = new Thread(() -> {
             while (true) {
                 boolean flag = Thread.interrupted();
-                System.out.println(flag);
+                System.out.println("1 "+flag);
                 if (flag) {
-                    System.out.println(flag + "--" + Thread.interrupted());
+                    System.out.println("2 " + Thread.interrupted());
                     break;
                 }
             }
@@ -80,7 +83,7 @@ public class InterruptThread {
         TimeUnit.SECONDS.sleep(1);
         t1.interrupt();// 清除中断标志
 
-        Thread.currentThread().interrupt();
+//        Thread.currentThread().interrupt();
 
         System.out.println(t1.isInterrupted());//true
         System.out.println(t1.interrupted());// false
