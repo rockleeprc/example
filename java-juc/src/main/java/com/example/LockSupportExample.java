@@ -11,7 +11,7 @@ public class LockSupportExample {
     }
 
     public static void main(String[] args) throws InterruptedException {
-
+    t1();
     }
 
     /**
@@ -48,7 +48,7 @@ public class LockSupportExample {
         LockSupport.unpark(mainThread);
         TimeUnit.SECONDS.sleep(1);
         System.out.println("park");
-        LockSupport.park(); // 先执行unpark，马上获得许可
+        LockSupport.park(); // 先执行unpark后，马上获得许可
         System.out.println("ending");
     }
 
@@ -68,7 +68,7 @@ public class LockSupportExample {
 
         t.start();
         TimeUnit.SECONDS.sleep(1);
-        t.interrupt(); // 打算 t中的park
+        t.interrupt(); // main 线程中打断t中的park()
         System.out.println("t1.interrupt in main thread");
     }
 }
