@@ -5,14 +5,25 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
 public class LockSupportExample {
-    public static void main(String[] args) throws InterruptedException {
+
+    public void park() {
+        LockSupport.park(this);
     }
 
+    public static void main(String[] args) throws InterruptedException {
+
+    }
+
+    /**
+     * park(对象)
+     *
+     * @throws InterruptedException
+     */
     public static void t3() throws InterruptedException {
         Thread mainThread = Thread.currentThread();
         Thread t = new Thread(() -> {
             System.out.println("park");
-            LockSupport.park(mainThread); // jstack 可以看到park的线程
+            LockSupport.park(mainThread); // jstack 可以看到park的线程 与不使用LockSupport.park()一样
         });
         t.start();
         TimeUnit.SECONDS.sleep(Long.MAX_VALUE);
@@ -20,6 +31,10 @@ public class LockSupportExample {
         LockSupport.unpark(mainThread);
 
         System.out.println("ending");
+
+        // jstack 能看到结果：- parking to wait for  <0x000000076b4804e0> (a com.example.LockSupportExample)
+        LockSupportExample lock = new LockSupportExample();
+        lock.park();
     }
 
     /**
