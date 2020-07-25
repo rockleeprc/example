@@ -5,13 +5,42 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class AqsCondition {
+public class ConditionExample {
     private static final ReentrantLock lock = new ReentrantLock();
     private static final Condition condition = lock.newCondition();
 
     public static void main(String[] args) throws InterruptedException {
+        t2();
+    }
 
-        Thread t1 = new Thread(()->{
+    public static void t2() throws InterruptedException {
+        Thread t = new Thread(() -> {
+            lock.lock();
+            try {
+                System.out.println("await()");
+                condition.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                lock.unlock();
+            }
+
+        }, "t1");
+        t.start();
+        TimeUnit.SECONDS.sleep(1);
+
+        lock.lock();
+        try {
+            System.out.println("signal");
+            condition.signal();
+        } finally {
+            lock.unlock();
+        }
+        System.out.println("ending");
+    }
+
+    public static void t1() throws InterruptedException {
+        Thread t1 = new Thread(() -> {
             lock.lock();
             try {
                 System.out.println("a1 condition await before");
@@ -24,7 +53,7 @@ public class AqsCondition {
             }
         });
 
-        Thread t2= new Thread(()->{
+        Thread t2 = new Thread(() -> {
             lock.lock();
             try {
                 System.out.println("a2 condition signal before");
@@ -44,7 +73,6 @@ public class AqsCondition {
         t2.join();
 
         System.out.println("ending");
-
     }
 
 }
