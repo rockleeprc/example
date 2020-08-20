@@ -1,17 +1,29 @@
 package com.example;
 
 public class ThreadLocalExample {
+    public static void main(String[] args) throws InterruptedException {
+        t3();
+    }
 
-
-    public static void main(String[] args) {
-        t2();
+    /**
+     * 无法复现npe
+     */
+    public static void t3() throws InterruptedException {
+        ThreadLocal<Long> threadLocal = new ThreadLocal<>();
+        new Thread(() -> {
+            threadLocal.set(1L);
+            System.out.println(threadLocal.get());
+        }).start();
+        // 目的就是为了让子线程先运行完
+        Thread.sleep(100);
+        System.out.println(threadLocal.get());
     }
 
     /**
      * ThreadLocal内存泄漏
      */
     public static void t2() {
-        // 断点看此时的threadLocals.Entry数组刚设置的referent是指向Local的，referent就是Entry中的key只是被WeakReference包装了一下
+        // TODO 断点看此时的threadLocals.Entry数组刚设置的referent是指向Local的，referent就是Entry中的key只是被WeakReference包装了一下
         Thread mainThread = Thread.currentThread();
         ThreadLocal<String> threadLocal = new ThreadLocal<>();
         threadLocal.set("当前线程名称：" + Thread.currentThread().getName());
