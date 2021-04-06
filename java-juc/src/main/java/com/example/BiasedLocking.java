@@ -11,7 +11,6 @@ import java.util.concurrent.TimeUnit;
  * 1. 偏向锁（101）
  * 2. 无锁（001）
  * 3. 轻量级锁（000）
- * 4. 无锁（001）
  */
 public class BiasedLocking {
     public static void main(String[] args) throws InterruptedException {

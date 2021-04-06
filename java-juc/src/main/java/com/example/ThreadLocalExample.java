@@ -1,8 +1,18 @@
 package com.example;
 
 public class ThreadLocalExample {
+    static ThreadLocal<String> local1 = new ThreadLocal<>();
+    static ThreadLocal<String> local2 = new ThreadLocal<>();
+
     public static void main(String[] args) throws InterruptedException {
-        t3();
+        Thread t = new Thread(() -> {
+            local1.set("A");
+            local2.set("B");
+            local1.set("C");
+        },"t1");
+
+        t.start();
+        while (Thread.activeCount() > 0) ;
     }
 
     /**
