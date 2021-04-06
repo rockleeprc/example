@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 /*
@@ -15,5 +17,7 @@ public class AtomicExample {
     public static void main(String[] args) {
         AtomicLong atomicLong = new AtomicLong(0);
         System.out.println(atomicLong.getAndIncrement());
+        List list = new ArrayList();
+        list.add(1);
     }
 }
