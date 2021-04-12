@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
  * 3. 轻量级锁（000）
  */
 public class BiasedLocking {
+
     public static void main(String[] args) throws InterruptedException {
         TimeUnit.SECONDS.sleep(5);
         Dog dog = new Dog();

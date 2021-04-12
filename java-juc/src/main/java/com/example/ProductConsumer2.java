@@ -11,8 +11,8 @@ public class ProductConsumer2 {
     private static Condition full = lock.newCondition();
     private static Condition empty = lock.newCondition();
 
-    private static int capcity = 5;
-    private static final LinkedBlockingQueue<Long> queue = new LinkedBlockingQueue<>(capcity);
+    private static int capacity = 5;
+    private static final LinkedBlockingQueue<Long> queue = new LinkedBlockingQueue<>(capacity);
 
     public static void main(String[] args) throws InterruptedException {
         CP cp = new CP();
@@ -65,7 +65,7 @@ public class ProductConsumer2 {
         public void produce() {
             lock.lock();
             try {
-                while (queue.size() == capcity) {
+                while (queue.size() == capacity) {
                     full.await();
                 }
                 long product = System.currentTimeMillis();
