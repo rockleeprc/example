@@ -22,7 +22,7 @@
 		<aopalliance.version>1.0</aopalliance.version>
 		<aspectjweaver.version>1.8.10</aspectjweaver.version>
 		<dbcp.version>1.2.2</dbcp.version>
-		<mysql.version>5.1.42</mysql.version>
+		<mysql.version>8.0.16</mysql.version>
 		<servlet.version>2.5</servlet.version>
 		<jsp.version>2.0</jsp.version>
 		<cglib.version>3.2.4</cglib.version>
@@ -180,7 +180,7 @@
 					<dependency>
 						<groupId>mysql</groupId>
 						<artifactId>mysql-connector-java</artifactId>
-						<version>5.1.38</version>
+						<version>8.0.16</version>
 					</dependency>
 					<dependency>
 						<groupId>org.mybatis.generator</groupId>
