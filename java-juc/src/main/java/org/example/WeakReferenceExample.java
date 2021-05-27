@@ -1,46 +1,60 @@
 package org.example;
 
+import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WeakReferenceExample {
 
+    private static final int _4MB_LENGTH = 1024 * 1024 * 4;
+
     public static void main(String[] args) {
-        A a = new A();
-        B b = new B(a);
-        a = null;
-        System.gc();
-
-        System.out.println(a);
-        System.out.println(b.weakA());// null
-        System.out.println(b.getA()); // 在b中引用a所以没有被回收
+        // -Xmx20M -XX:+PrintGCDetails -verbose:gc
+        soft();
     }
 
-    static class A {
+    public static void strong() {
+        List<byte[]> list = new ArrayList<>();
 
-    }
-
-    static class B {
-        // 即只要对象被除WeakReference对象之外所有的对象解除引用后，该对象便可以被GC回收
-        private WeakReference<A> weakA;
-        private A a;
-
-        public B(A a) {
-            weakA = new WeakReference<>(a);
-            this.a = a;
-        }
-
-        public A weakA() {
-            return weakA.get();
-        }
-
-        public A getA() {
-            return a;
-        }
-
-        public void setA(A a) {
-            this.a = a;
+        for (int i = 0; i <= 5; i++) {
+            list.add(new byte[_4MB_LENGTH]);
+            System.out.println("loop i=" + i);
         }
 
     }
+
+    public static void soft() {
+        List<SoftReference<byte[]>> list = new ArrayList<>();
+
+        for (int i = 0; i <= 5; i++) {
+            list.add( new SoftReference<>(new byte[_4MB_LENGTH]));
+            for (SoftReference ref : list) {
+                System.out.print(ref.get() + "|");
+            }
+            System.out.println();
+        }
+        System.out.println("list.size=" + list.size());
+        for (SoftReference<byte[]> ref : list) {
+            System.out.println("ref=" + ref + ",ref.get()=" + ref.get() + " | ");
+        }
+    }
+
+    public static void weak() {
+        List<WeakReference<byte[]>> list = new ArrayList<>();
+
+        for (int i = 0; i <= 5; i++) {
+            list.add(new WeakReference<>(new byte[_4MB_LENGTH]));
+            for (WeakReference ref : list) {
+                System.out.print(ref.get() + "|");
+            }
+            System.out.println();
+        }
+        System.out.println("list.size=" + list.size());
+        for (WeakReference<byte[]> ref : list) {
+            System.out.println("ref=" + ref + ",ref.get()=" + ref.get() + " | ");
+        }
+    }
+
 }
 
