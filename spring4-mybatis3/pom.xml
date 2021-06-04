@@ -38,7 +38,7 @@
 		<commons-email.version>1.4</commons-email.version>
 		<commons-beanutils.version>1.9.3</commons-beanutils.version>
 		<jackson.version>2.9.0.pr4</jackson.version>
-		<httpclient.version>4.5.3</httpclient.version>
+		<httpclient.version>4.5.13</httpclient.version>
 		<!-- test -->
 		<junit.version>4.9</junit.version>
 	</properties>
