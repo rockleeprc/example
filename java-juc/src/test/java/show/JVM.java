@@ -1,7 +1,9 @@
 package show;
 
 import sun.misc.Launcher;
+import sun.misc.ProxyGenerator;
 
+import java.io.FileOutputStream;
 import java.lang.ref.SoftReference;
 import java.net.URL;
 import java.util.ArrayList;
@@ -12,37 +14,38 @@ import java.util.concurrent.TimeUnit;
  *
  */
 public class JVM {
+    static int i = 0;
 
-    static final Object obj = new Object();
-    public static void main(String[] args) throws InterruptedException {
-
-        Thread t1 = new Thread(()->{
-            synchronized (obj){
-                try {
-                    TimeUnit.SECONDS.sleep(Long.MAX_VALUE);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        },"t1");
-        t1.start();
-
-        TimeUnit.MILLISECONDS.sleep(500);
-
-        Thread t2 = new Thread(()->{
-            synchronized (obj){
-                System.out.println("get lock");
-            }
-            System.out.println("over thread t2");
-        },"t2");
-        t2.start();
-
-        TimeUnit.MILLISECONDS.sleep(500);
-        System.out.println("main thread will interrupt");
-        t2.interrupt();
+    static {
+        i = 10;
+//        System.out.println(j);
+        j = 10;
     }
 
-    public void t15(boolean flag){
+    static int j;
+
+    static final Object obj = new Object();
+
+    public static void main(String[] args) throws InterruptedException {
+        t16();
+    }
+
+
+    /**
+     * 生成代理类
+     */
+    public static void t16(){
+        byte[] classFile = ProxyGenerator.generateProxyClass("$DataInputImplProxy0", DataInputImpl.class.getInterfaces());
+        String path = "/Users/admin/WorkSpace/github/prc/learning-c/DataInputImplProxy.class";
+        try(FileOutputStream fos = new FileOutputStream(path)) {
+            fos.write(classFile);
+            fos.flush();
+            System.out.println("代理类class文件写入成功");
+        } catch (Exception e) {
+            System.out.println("写文件错误");
+        }
+    }
+    public void t15(boolean flag) {
         System.out.println(flag);
     }
 
